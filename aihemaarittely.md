@@ -1,7 +1,7 @@
 #Aihemäärittely
 
 
-**Aihe: **Tetris peli toteutetaan javalla. Pelissä on neljästä ruudusta koostuvia geometrisiä muotoja jotka tippuvat kohti pohjaa. Jos ruudulle muodostuu täysi rivi ilman aukkoja, rivi katoaa ja kaikki yläpuolella olevat rivit tippuvat yhden alemmas.
+**Aihe:**Tetris peli toteutetaan javalla. Pelissä on neljästä ruudusta koostuvia geometrisiä muotoja jotka tippuvat kohti pohjaa. Jos ruudulle muodostuu täysi rivi ilman aukkoja, rivi katoaa ja kaikki yläpuolella olevat rivit tippuvat yhden alemmas.
 
 
 Logiikka ja graafinen käyttöliittymä pyritään eriyttämään mahdollisimman selkeästi.
@@ -9,6 +9,7 @@ Logiikka ja graafinen käyttöliittymä pyritään eriyttämään mahdollisimman
 Graafinen käyttöliittymä perustuu javan valmiiseen Swing kirjastoon.
 
 **Käyttäjät:** Pelaajat
+
 **Pelaajien toiminnot:**
 - pelin aloitus
 - palikan siirtäminen horisontaaliakselilla
