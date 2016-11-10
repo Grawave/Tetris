@@ -1,4 +1,0 @@
-isjani@da5-cs-bk107-12:~$ cd Tetris
-isjani@da5-cs-bk107-12:~/Tetris$ cd 
-!isjani@da5-cs-bk107-12:~$ rm -rf .m 
-isjani@da5-cs-bk107-12:~$ rm -rf .m2/
