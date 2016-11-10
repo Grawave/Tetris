@@ -1,0 +1,5 @@
+isjani@da5-cs-bk107-12:~$ cd Tetris
+isjani@da5-cs-bk107-12:~/Tetris$ cd 
+isjani@da5-cs-bk107-12:~$ rm -rf .m
+.m2/     .matlab/ 
+isjani@da5-cs-bk107-12:~$ rm -rf .m2/
