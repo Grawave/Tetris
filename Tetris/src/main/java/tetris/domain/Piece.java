@@ -25,4 +25,8 @@ public class Piece {
             b.move(dir);
         }
     }
+    public List<Block> getBlocks(){
+        return this.blocks;
+    }
+    
 }

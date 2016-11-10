@@ -31,28 +31,33 @@ public class BlockTest {
     @Test
     public void moveDown1() {
         int y = b.getY();
-        b.move(Direction.DOWN);
+        liikuta(1, Direction.DOWN);
         assertEquals(b.getY(), y + 1);
     }
 
     @Test
     public void moveRight1() {
         int x = b.getX();
-        b.move(Direction.RIGHT);
+        liikuta(1, Direction.RIGHT);
         assertEquals(b.getX(), x + 1);
     }
-    
+
     @Test
     public void moveLeft1() {
         int x = b.getX();
-        b.move(Direction.LEFT);
-        assertEquals(b.getX(), x -1);
+        liikuta(1, Direction.LEFT);
+        assertEquals(b.getX(), x - 1);
     }
 
     @After
     public void tearDown() {
     }
 
+    private void liikuta(int monta, Direction dir) {
+        for (int i = 0; i < monta; i++) {
+            b.move(dir);
+        }
+    }
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
     //

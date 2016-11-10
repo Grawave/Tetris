@@ -10,7 +10,7 @@ package tetris.domain;
  * @author isjani
  */
 public enum Formation {
-    O(new int[]{0,1,1,0}, new int[]{0,0,1,1}),  //(0,0) is top left of the square
+    O(new int[]{0,-1,-1,0}, new int[]{0,0,-1,-1}),  //(0,0) is top left of the square
     L(new int[]{0,1,0,0}, new int[]{0,0,-1,-2}), //(0,0) is bottom left of standing L
     T(new int[]{0,0,1,-1}, new int[]{0,1,1,1}), //(0,0) is the top piece of T lying down on its long back
     S(new int[]{0,-1,1,0}, new int[]{0,0,-1,-1}),//(0,0) is the bottom right of S
