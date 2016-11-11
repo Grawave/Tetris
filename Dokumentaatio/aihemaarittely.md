@@ -16,4 +16,6 @@ Graafinen käyttöliittymä perustuu javan valmiiseen Swing kirjastoon.
 - palikan kääntäminen 90 astetta
 - palikan kiihdytys
 
+
+##Luokkakaavio
 ![Luokkakaavio](/Dokumentaatio/LuokkaKaavio.png)
