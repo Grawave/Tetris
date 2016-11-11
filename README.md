@@ -1,15 +1,8 @@
 # Tetris
 Java labra
 
-Muokkaus !2
-UUsi muokkaus. tämän ei tulisi näkyä varjorepossa
+##Tiivistelma
 
+Tehdään kopio Tetris pelistä. Pelissä syntyy satunnainen neljästä palikasta muodostunut kuvio, jota pelaaja siirtää ja kääntää. Kun kentällä oleva rivi on täynnä palikoita, se katoaa. Kentän ollessa tyhjä peli päättyy pelaajan voittoon. Mikäli kenttä täyttyy, pelaaja häviää.
 
-Ongelma: Git & Netbeans: 
-input: git status
-output ei sisällä tiedostoa .gitignore.
-
-Mitä tein? Tuli error index file smaller than expected. Korjasin sen seuraavasti (stackoverflow):
-isjani@da5-cs-bk107-23:~/Tetris$ rm .git/index
-isjani@da5-cs-bk107-23:~/Tetris$ git add .
-
+##[aiheen kuvaus](dokumentaatio/aiheenKuvausJaRakenne.md)
