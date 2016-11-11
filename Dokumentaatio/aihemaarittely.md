@@ -15,3 +15,5 @@ Graafinen käyttöliittymä perustuu javan valmiiseen Swing kirjastoon.
 - palikan siirtäminen horisontaaliakselilla
 - palikan kääntäminen 90 astetta
 - palikan kiihdytys
+
+![Luokkakaavio](/LuokkaKaavio.png)
