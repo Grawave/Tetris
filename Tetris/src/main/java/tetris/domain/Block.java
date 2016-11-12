@@ -10,23 +10,25 @@ package tetris.domain;
  * @author isjani
  */
 public class Block {
+
     private int x;
     private int y;
-    
-    public Block(int x, int y){
-        this.x=x;
-        this.y=y;
+
+    public Block(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
-    
-    public void move(Direction dir){
+
+    public void move(Direction dir) {
         this.x += dir.x;
         this.y += dir.y;
     }
-    
-    public int getX(){
+
+    public int getX() {
         return x;
     }
-    public int getY(){
+
+    public int getY() {
         return y;
     }
 }

@@ -14,13 +14,13 @@ import org.junit.Test;
 /**
  *
  * @author isjani
- * 
- * 
+ *
+ *
  */
 /*
 GENERAL NOTES TO ADVANCE: Refactor so that no copypaste. Create takes argument of Formation, from where 
 it creates the piece, the same is true for HasMoved etc!
-*/
+ */
 public class PieceTest {
 
     private Piece p;
@@ -39,7 +39,6 @@ public class PieceTest {
     public void testL() {
         assertTrue(createL());
     }
-
 
     private int[] CreateLocationsY(Formation f) {
         int[] lY = f.yVal;
@@ -60,6 +59,7 @@ public class PieceTest {
         return loc;
 
     }
+
     private boolean createL() {
         p = new Piece(alkuX, alkuY, Formation.L);
         int[] creationLocationX = CreateLocationsX(Formation.L);
@@ -118,8 +118,6 @@ public class PieceTest {
             p.move(dir);
         }
     }
-
-
 
     private int[] oCreateLocationsY() {
         int[] oY = Formation.O.yVal;

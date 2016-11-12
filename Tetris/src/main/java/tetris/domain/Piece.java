@@ -13,20 +13,24 @@ import java.util.List;
  * @author isjani
  */
 public class Piece {
+
     private List<Block> blocks;
-    public Piece(int x, int y, Formation f){
-        this.blocks=new ArrayList<>();
+
+    public Piece(int x, int y, Formation f) {
+        this.blocks = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
-            blocks.add(new Block(x+f.xVal[i],y+f.yVal[i]));
+            blocks.add(new Block(x + f.xVal[i], y + f.yVal[i]));
         }
     }
-    public void move(Direction dir){
+
+    public void move(Direction dir) {
         for (Block b : blocks) {
             b.move(dir);
         }
     }
-    public List<Block> getBlocks(){
+
+    public List<Block> getBlocks() {
         return this.blocks;
     }
-    
+
 }
