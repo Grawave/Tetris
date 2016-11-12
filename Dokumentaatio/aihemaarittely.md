@@ -19,3 +19,4 @@ Graafinen käyttöliittymä perustuu javan valmiiseen Swing kirjastoon.
 
 ##Luokkakaavio
 ![Luokkakaavio](/Dokumentaatio/LuokkaKaavio.png)
+GameSituation tietää luokat Field ja Piece. Sillä on metodi jonka avulla palasta voidaan liikuttaa kentässä.
