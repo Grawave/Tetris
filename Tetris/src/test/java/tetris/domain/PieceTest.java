@@ -18,8 +18,6 @@ import org.junit.Test;
  *
  */
 /*
-GENERAL NOTES TO ADVANCE: Refactor so that no copypaste. Create takes argument of Formation, from where 
-it creates the piece, the same is true for HasMoved etc!
  */
 public class PieceTest {
 
@@ -37,7 +35,100 @@ public class PieceTest {
 
     @Test
     public void testL() {
-        assertTrue(createL());
+        assertTrue(create(Formation.L));
+        int amount = 3;
+        movePiece(amount, Direction.DOWN);
+        assertTrue(HasMovedFromCreation(amount, Direction.DOWN,Formation.L));
+        movePiece(amount, Direction.UP);
+        assertTrue(HasMovedFromCreation(0, Direction.DOWN,Formation.L));
+        movePiece(amount, Direction.LEFT);
+        assertTrue(HasMovedFromCreation(amount, Direction.LEFT,Formation.L));
+        movePiece(amount, Direction.RIGHT);
+        assertTrue(HasMovedFromCreation(0, Direction.LEFT,Formation.L));
+    }
+    
+    @Test
+    public void testO() {
+        assertTrue(create(Formation.O));
+        int amount = 3;
+        movePiece(amount, Direction.DOWN);
+        assertTrue(HasMovedFromCreation(amount, Direction.DOWN,Formation.O));
+        movePiece(amount, Direction.UP);
+        assertTrue(HasMovedFromCreation(0, Direction.DOWN,Formation.O));
+        movePiece(amount, Direction.LEFT);
+        assertTrue(HasMovedFromCreation(amount, Direction.LEFT,Formation.O));
+        movePiece(amount, Direction.RIGHT);
+        assertTrue(HasMovedFromCreation(0, Direction.LEFT,Formation.O));
+    }
+    
+    @Test
+    public void testI() {
+        assertTrue(create(Formation.I));
+        int amount = 3;
+        movePiece(amount, Direction.DOWN);
+        assertTrue(HasMovedFromCreation(amount, Direction.DOWN,Formation.I));
+        movePiece(amount, Direction.UP);
+        assertTrue(HasMovedFromCreation(0, Direction.DOWN,Formation.I));
+        movePiece(amount, Direction.LEFT);
+        assertTrue(HasMovedFromCreation(amount, Direction.LEFT,Formation.I));
+        movePiece(amount, Direction.RIGHT);
+        assertTrue(HasMovedFromCreation(0, Direction.LEFT,Formation.I));
+    }
+    
+    @Test
+    public void testT() {
+        assertTrue(create(Formation.T));
+        int amount = 3;
+        movePiece(amount, Direction.DOWN);
+        assertTrue(HasMovedFromCreation(amount, Direction.DOWN,Formation.T));
+        movePiece(amount, Direction.UP);
+        assertTrue(HasMovedFromCreation(0, Direction.DOWN,Formation.T));
+        movePiece(amount, Direction.LEFT);
+        assertTrue(HasMovedFromCreation(amount, Direction.LEFT,Formation.T));
+        movePiece(amount, Direction.RIGHT);
+        assertTrue(HasMovedFromCreation(0, Direction.LEFT,Formation.T));
+    }
+    
+    @Test
+    public void testS() {
+        assertTrue(create(Formation.S));
+        int amount = 3;
+        movePiece(amount, Direction.DOWN);
+        assertTrue(HasMovedFromCreation(amount, Direction.DOWN,Formation.S));
+        movePiece(amount, Direction.UP);
+        assertTrue(HasMovedFromCreation(0, Direction.DOWN,Formation.S));
+        movePiece(amount, Direction.LEFT);
+        assertTrue(HasMovedFromCreation(amount, Direction.LEFT,Formation.S));
+        movePiece(amount, Direction.RIGHT);
+        assertTrue(HasMovedFromCreation(0, Direction.LEFT,Formation.S));
+    }
+    
+    @Test
+    public void testZ() {
+        assertTrue(create(Formation.Z));
+        int amount = 3;
+        movePiece(amount, Direction.DOWN);
+        assertTrue(HasMovedFromCreation(amount, Direction.DOWN,Formation.Z));
+        movePiece(amount, Direction.UP);
+        assertTrue(HasMovedFromCreation(0, Direction.DOWN,Formation.Z));
+        movePiece(amount, Direction.LEFT);
+        assertTrue(HasMovedFromCreation(amount, Direction.LEFT,Formation.Z));
+        movePiece(amount, Direction.RIGHT);
+        assertTrue(HasMovedFromCreation(0, Direction.LEFT,Formation.Z));
+    }
+    
+    @Test
+    public void testJ() {
+        assertTrue(create(Formation.J));
+        int amount = 3;
+        movePiece(amount, Direction.DOWN);
+        assertTrue(HasMovedFromCreation(amount, Direction.DOWN,Formation.J));
+        movePiece(amount, Direction.UP);
+        assertTrue(HasMovedFromCreation(0, Direction.DOWN,Formation.J));
+        movePiece(amount, Direction.LEFT);
+        assertTrue(HasMovedFromCreation(amount, Direction.LEFT,Formation.J));
+        movePiece(amount, Direction.RIGHT);
+        assertTrue(HasMovedFromCreation(0, Direction.LEFT,Formation.J));
     }
 
     private int[] CreateLocationsY(Formation f) {
@@ -57,13 +148,12 @@ public class PieceTest {
             loc[i] = alkuX + lY[i];
         }
         return loc;
-
     }
 
-    private boolean createL() {
-        p = new Piece(alkuX, alkuY, Formation.L);
-        int[] creationLocationX = CreateLocationsX(Formation.L);
-        int[] creationLocationY = CreateLocationsY(Formation.L);
+    private boolean create(Formation form) {
+        p = new Piece(alkuX, alkuY, form);
+        int[] creationLocationX = CreateLocationsX(form);
+        int[] creationLocationY = CreateLocationsY(form);
         List<Block> list = p.getBlocks();
         int hits = 0;
         for (int i = 0; i < 4; i++) {
@@ -80,23 +170,9 @@ public class PieceTest {
         return (hits == 4);
     }
 
-    @Test
-    public void testO() {
-        assertTrue(createO());
-        int amount = 3;
-        movePiece(amount, Direction.DOWN);
-        assertTrue(oHasMovedFromCreation(amount, Direction.DOWN));
-        movePiece(amount, Direction.UP);
-        assertTrue(oHasMovedFromCreation(0, Direction.DOWN));
-        movePiece(amount, Direction.LEFT);
-        assertTrue(oHasMovedFromCreation(amount, Direction.LEFT));
-        movePiece(amount, Direction.RIGHT);
-        assertTrue(oHasMovedFromCreation(0, Direction.LEFT));
-    }
-
-    private boolean oHasMovedFromCreation(int many, Direction dir) {
-        int[] creationLocationX = CreateLocationsX(Formation.O);
-        int[] creationLocationY = CreateLocationsY(Formation.O);
+    private boolean HasMovedFromCreation(int many, Direction dir,Formation form) {
+        int[] creationLocationX = CreateLocationsX(form);
+        int[] creationLocationY = CreateLocationsY(form);
         List<Block> list = p.getBlocks();
         int hits = 0;
         for (int i = 0; i < 4; i++) {
