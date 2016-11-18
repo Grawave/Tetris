@@ -19,4 +19,9 @@ Graafinen käyttöliittymä perustuu javan valmiiseen Swing kirjastoon.
 
 ##Luokkakaavio
 ![Luokkakaavio](/Dokumentaatio/LuokkaKaavio.png)
+
 GameSituation tietää luokat Field ja Piece. Sillä on metodi jonka avulla palasta voidaan liikuttaa kentässä.
+
+Engine on luokka jonka avulla peli käynnistetään, ja GameSituationia muutetaan.
+
+Seuraavaksi hahmotellaan eri threadeja. Luokka joka kuuntelee käyttäjän painalluksia ja luokka joka välittää siirtokäskyn alaspäin sekunnin välein. Luokat toimivat todennäköisesti luokan Engine kautta.
