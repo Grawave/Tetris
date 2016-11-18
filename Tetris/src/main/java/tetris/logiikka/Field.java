@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tetris.domain;
+package tetris.logiikka;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -79,11 +79,14 @@ public class Field {
     public Block[][] getFrozenBlocks() {
         return this.frozenBlocks;
     }
+    public boolean spotIsVacant(int x, int y){
+        return frozenBlocks[x][y]==null;
+    }
 
     //input row is given as bottom =0
     public int getNumberOfBlocksOnRow(int row) {
         int i = 0;
-        row=width-row-1;
+        row=height-row-1;
         for (int x = 0; x < width; x++) {
             if (frozenBlocks[x][row] != null) {
                 i++;

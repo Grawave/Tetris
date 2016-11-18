@@ -1,5 +1,5 @@
 
-import tetris.domain.Direction;
+import tetris.logiikka.Direction;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

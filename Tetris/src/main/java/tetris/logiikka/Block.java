@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tetris.domain;
+package tetris.logiikka;
 
 /**
  *
@@ -30,5 +30,10 @@ public class Block {
 
     public int getY() {
         return y;
+    }
+
+    public void setCoordinates(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 }
