@@ -10,14 +10,14 @@ package tetris.logiikka;
  * @author isjani
  */
 public enum Rotation {
-    LEFT(new int[]{0,1},new int[]{-1,0}),
-    RIGHT(new int[]{0,-1},new int[]{1,0});
-    
+    LEFT(new int[]{0, 1}, new int[]{-1, 0}),
+    RIGHT(new int[]{0, -1}, new int[]{1, 0});
+
     public int[] xMultiplier;
     public int[] yMultiplier;
-    
+
     private Rotation(int[] a, int[] b) {
-        xMultiplier=a;
-        yMultiplier=b;
+        xMultiplier = a;
+        yMultiplier = b;
     }
 }

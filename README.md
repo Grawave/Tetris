@@ -8,3 +8,5 @@ Tehdään kopio Tetris pelistä. Pelissä syntyy satunnainen neljästä palikast
 ##Dokumentaatio
 -	[Aiheen kuvaus ja määritelmä](Dokumentaatio/aihemaarittely.md)
 -	[Tuntikirjanpito](Dokumentaatio/tuntikirjanpito.md)
+-	[CheckStyle] (https://htmlpreview.github.io/?https://github.com/Grawave/Tetris/blob/master/Dokumentaatio/Checkstyle/checkstyle.html)
+-	[Pit] ()

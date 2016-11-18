@@ -41,36 +41,22 @@ public class PieceTest {
     @Test
     public void rotateT() {
         create(Formation.T);
-//        new int[]{0, 0, 1, -1}, new int[]{0, -1, -1, -1},1
         int[] rotX = new int[]{alkuX - 1, alkuX, alkuX, alkuX};
         int[] rotY = new int[]{alkuY + 1, alkuY, alkuY + 2, alkuY + 1};
         List<Block> list = p.getBlocks();
-        for (int i = 0; i < 4; i++) {
-//            System.out.print(rotX[i]+" ");
-//            System.out.println(rotY[i]);
-            System.out.print(list.get(i).getX() + "*****");
-            System.out.println(list.get(i).getY());
-        }
         assertTrue(p.rotate(Rotation.LEFT));
         assertEquals(4, checkRotationHits(rotX, rotY));
         assertTrue(p.rotate(Rotation.RIGHT));
         assertTrue(hasNotMoved(Formation.T));
-
     }
 
     @Test
     public void rotateS() {
         create(Formation.S);
-        //new int[]{0, -1, 1, 0}, new int[]{0, 0, -1, -1},3)
         int[] rotX = new int[]{alkuX + 1, alkuX + 1, alkuX, alkuX};
         int[] rotY = new int[]{alkuY + -1, alkuY, alkuY - 2, alkuY - 1};
         List<Block> list = p.getBlocks();
-        for (int i = 0; i < 4; i++) {
-//            System.out.print(rotX[i]+" ");
-//            System.out.println(rotY[i]);
-            System.out.print(list.get(i).getX() + "*****");
-            System.out.println(list.get(i).getY());
-        }
+        
         assertTrue(p.rotate(Rotation.LEFT));
         assertEquals(4, checkRotationHits(rotX, rotY));
         assertTrue(p.rotate(Rotation.RIGHT));
@@ -80,16 +66,10 @@ public class PieceTest {
     @Test
     public void rotateI() {
         create(Formation.I);
-        //new int[]{0, -1, 1, 2}, new int[]{0, 0, 0, 0},0),
         int[] rotX = new int[]{alkuX, alkuX, alkuX, alkuX};
         int[] rotY = new int[]{alkuY, alkuY + 1, alkuY - 1, alkuY - 2};
         List<Block> list = p.getBlocks();
-        for (int i = 0; i < 4; i++) {
-//            System.out.print(rotX[i]+" ");
-//            System.out.println(rotY[i]);
-            System.out.print(list.get(i).getX() + "*****");
-            System.out.println(list.get(i).getY());
-        }
+        
         assertTrue(p.rotate(Rotation.LEFT));
         assertEquals(4, checkRotationHits(rotX, rotY));
         assertTrue(p.rotate(Rotation.RIGHT));
@@ -99,17 +79,10 @@ public class PieceTest {
     @Test
     public void rotateZ() {
         create(Formation.Z);
-        //new int[]{0, 0, -1, 1}, new int[]{0, -1, -1, 0},1),
         int[] rotX = new int[]{alkuX + 1, alkuX, alkuX, alkuX + 1};
         int[] rotY = new int[]{alkuY - 1, alkuY - 1, alkuY, alkuY - 2};
         List<Block> list = p.getBlocks();
-        for (int i = 0; i < 4; i++) {
-//            System.out.print(rotX[i]+" ");
-//            System.out.println(rotY[i]);//            System.out.print(rotX[i]+" ");
-
-            System.out.print(list.get(i).getX() + "*****");
-            System.out.println(list.get(i).getY());
-        }
+        
         assertTrue(p.rotate(Rotation.LEFT));
         assertEquals(4, checkRotationHits(rotX, rotY));
         assertTrue(p.rotate(Rotation.RIGHT));
@@ -119,17 +92,9 @@ public class PieceTest {
     @Test
     public void rotateJ() {
         create(Formation.J);
-        //new int[]{0, -1, 0, 0}, new int[]{0, 0, -1, -2},2);
         int[] rotX = new int[]{alkuX + 1, alkuX - 1, alkuX, alkuX + 1};
         int[] rotY = new int[]{alkuY - 1, alkuY - 1, alkuY - 1, alkuY};
         List<Block> list = p.getBlocks();
-        for (int i = 0; i < 4; i++) {
-//            System.out.print(rotX[i]+" ");
-//            System.out.println(rotY[i]);//            System.out.print(rotX[i]+" ");
-
-            System.out.print(list.get(i).getX() + "*****");
-            System.out.println(list.get(i).getY());
-        }
         assertTrue(p.rotate(Rotation.LEFT));
         assertEquals(4, checkRotationHits(rotX, rotY));
         assertTrue(p.rotate(Rotation.RIGHT));
@@ -150,12 +115,6 @@ public class PieceTest {
                     rotY[j] = -9;
                 }
             }
-        }
-        for (int i = 0; i < 4; i++) {
-//            System.out.print(rotX[i]+" ");
-//            System.out.println(rotY[i]);
-            System.out.print(list.get(i).getX() + "****");
-            System.out.println(list.get(i).getY());
         }
         return hits;
     }
@@ -185,16 +144,9 @@ public class PieceTest {
     @Test
     public void rotateL() {
         create(Formation.L);
-        //new int[]{0, 1, 0, 0}, new int[]{0, 0, -1, -2},2)
         int[] rotX = new int[]{alkuX, alkuX + 1, alkuX + 1, alkuX - 1};
         int[] rotY = new int[]{alkuY - 1, alkuY - 2, alkuY - 1, alkuY - 1};
         List<Block> list = p.getBlocks();
-        for (int i = 0; i < 4; i++) {
-//            System.out.print(rotX[i]+" ");
-//            System.out.println(rotY[i]);
-            System.out.print(list.get(i).getX() + "*****");
-            System.out.println(list.get(i).getY());
-        }
         assertTrue(p.rotate(Rotation.LEFT));
         assertEquals(4, checkRotationHits(rotX, rotY));
         assertTrue(p.rotate(Rotation.RIGHT));

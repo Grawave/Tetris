@@ -33,6 +33,18 @@
             <groupId>org.pitest</groupId>
             <artifactId>pitest-maven</artifactId>
             <version>1.1.8</version>
+            <configuration>
+                <targetClasses>
+                    <param>tetris.logiikka.Block</param>
+                    <param>tetris.logiikka.Field</param>
+                    <!--<param>tetris.logiikka.Piece</param>-->
+                </targetClasses>
+                <targetTests>
+                    <param>tetris.logiikka.BLockTest</param>
+                    <param>tetris.logiikka.FieldTest</param>
+                    <!--<param>tetris.logiikka.PieceTest</param>-->
+                </targetTests>
+            </configuration>
         </plugin>
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>

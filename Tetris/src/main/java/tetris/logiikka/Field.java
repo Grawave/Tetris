@@ -25,19 +25,21 @@ public class Field {
         this.height = height;
     }
 
-    public void freezePiece(Piece p) {
+    public boolean freezePiece(Piece p) {
         List<Block> blocks = p.getBlocks();
         List<Integer> yValues = new ArrayList<>();
         for (Block block : blocks) {
             int x = block.getX();
             int y = block.getY();
             yValues.add(y);
-            if (frozenBlocks[x][y] != null) {
-                throw new IllegalArgumentException("Field spot already reserved, can't freeze here " + x + " " + y);
+            /* game ends with these conditions */
+            if (y < 0 || frozenBlocks[x][y] != null) {
+                return false;
             }
             frozenBlocks[x][y] = block;
         }
         checkRows(yValues);
+        return true;
     }
 
     public void checkRows(List<Integer> list) {
@@ -79,14 +81,15 @@ public class Field {
     public Block[][] getFrozenBlocks() {
         return this.frozenBlocks;
     }
-    public boolean spotIsVacant(int x, int y){
-        return frozenBlocks[x][y]==null;
+
+    public boolean spotIsVacant(int x, int y) {
+        return frozenBlocks[x][y] == null;
     }
 
     //input row is given as bottom =0
     public int getNumberOfBlocksOnRow(int row) {
         int i = 0;
-        row=height-row-1;
+        row = height - row - 1;
         for (int x = 0; x < width; x++) {
             if (frozenBlocks[x][row] != null) {
                 i++;
@@ -94,4 +97,16 @@ public class Field {
         }
         return i;
     }
+
+    public boolean isEmpty() {
+        for (int row = height - 1; row >= 0; row--) {
+            for (int col = 0; col < width; col++) {
+                if (frozenBlocks[row][col] != null) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
 }
