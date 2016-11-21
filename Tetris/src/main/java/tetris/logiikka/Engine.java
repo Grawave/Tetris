@@ -26,19 +26,15 @@ public class Engine {
     public void start() {
         initialize();
         while (true) {
-            boolean[] situ = gs.movePiece(Direction.DOWN);
-            boolean pieceFrozen = !situ[0];
-            if (pieceFrozen) {
-                boolean gameLost = !situ[1];
-                boolean gameWon = gs.fieldIsEmpty();
-                if (gameLost) {
-                    defeat();
-                    break;
-                } else if (gameWon) {
-                    victory();
-                } else {
-                    gs.setActivePiece(createActivePiece());
-                }
+            MoveResult moveResult = gs.movePiece(Direction.DOWN);
+            if(moveResult.pieceWasMoved) {
+                continue;
+            } else if (moveResult.gameWon) {
+                victory();
+            } else if (moveResult.gameLost) {
+                defeat();
+            } else if (moveResult.pieceWasFrozen) {
+                gs.setActivePiece(createActivePiece());
             }
         }
     }
@@ -52,15 +48,12 @@ public class Engine {
     }
 
     public void initialize() {
-        gs = new GameSituation(width, height);
+        gs = new GameSituation(new Field(width,height));
         gs.setActivePiece(createActivePiece());
     }
 
     public Piece createActivePiece() {
-        List<Formation> forms = new ArrayList<>();
-        Collections.addAll(forms, Formation.values());
-        Collections.shuffle(forms);
-        Piece randomPiece = new Piece(width / 2, 0, forms.get(0));
+        Piece randomPiece = new Piece(width / 2, 0, Formation.getRandom());
         return randomPiece;
     }
 

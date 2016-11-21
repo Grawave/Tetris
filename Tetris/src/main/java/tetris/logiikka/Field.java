@@ -16,64 +16,59 @@ import java.util.List;
 public class Field {
 
     private Block[][] frozenBlocks;
-    private int width;
-    private int height;
+    private final int width;
+    private final int height;
 
     public Field(int width, int height) {
-        this.frozenBlocks = new Block[width][height];
+        this.frozenBlocks = new Block[height][width];
         this.width = width;
         this.height = height;
     }
 
-    public boolean freezePiece(Piece p) {
+    public MoveResult freezePiece(Piece p) {
+        MoveResult moveResult = new MoveResult();
         List<Block> blocks = p.getBlocks();
-        List<Integer> yValues = new ArrayList<>();
+
         for (Block block : blocks) {
             int x = block.getX();
             int y = block.getY();
-            yValues.add(y);
             /* game ends with these conditions */
-            if (y < 0 || frozenBlocks[x][y] != null) {
-                return false;
+            if (y < 0 || frozenBlocks[y][x] != null) {
+                moveResult.gameLost = true;
+                return moveResult;
             }
-            frozenBlocks[x][y] = block;
+            frozenBlocks[y][x] = block;
         }
-        checkRows(yValues);
-        return true;
+        // checks the rows where insertions where made. Drops rows above
+        // if any rows were filled
+        dropRows();
+
+        if (this.isEmpty()) {
+            moveResult.gameWon = true;
+        }
+        moveResult.pieceWasFrozen = true;
+        return moveResult;
     }
 
-    public void checkRows(List<Integer> list) {
-        Collections.sort(list);
-        List<Integer> deleted = new ArrayList<>();
-        for (Integer y : list) {
-            boolean full = true;
-            for (int x = 0; x < width; x++) {
-                if (frozenBlocks[x][y] == null) {
-                    full = false;
-                    break;
-                }
-                if (full) {
-                    deleteRow(y);
-                    deleted.add(y);
-                }
+    private void dropRows() {
+        for (int y = 0; y < height; y++) {
+            if (getNumberOfBlocksOnRow(y) == width) {
+                deleteRow(y);
+                dropRowsAbove(y);
             }
-        }
-        Collections.sort(deleted);
-        for (Integer y : deleted) {
-            dropRows(y);
         }
     }
 
-    public void deleteRow(int y) {
+    private void deleteRow(int y) {
         for (int x = 0; x < width; x++) {
-            frozenBlocks[x][y] = null;
+            frozenBlocks[y][x] = null;
         }
     }
 
-    public void dropRows(int y) {
+    private void dropRowsAbove(int y) {
         for (int h = y; h > 0; h--) {
             for (int x = 0; x < width; x++) {
-                frozenBlocks[x][y] = frozenBlocks[x][y - 1];
+                frozenBlocks[y][x] = frozenBlocks[y - 1][x];
             }
         }
     }
@@ -83,15 +78,21 @@ public class Field {
     }
 
     public boolean spotIsVacant(int x, int y) {
-        return frozenBlocks[x][y] == null;
+        // if y<0, or coordinates point towards a vacant spot in the field, the spot is considered to be vacan. 
+        if (y < 0) {
+            return true;
+        } else if (x < 0 || x >= width) {
+            return false;
+        } else if (y >= height) {
+            return false;
+        }
+            return frozenBlocks[y][x] == null;
     }
 
-    //input row is given as bottom =0
     public int getNumberOfBlocksOnRow(int row) {
         int i = 0;
-        row = height - row - 1;
         for (int x = 0; x < width; x++) {
-            if (frozenBlocks[x][row] != null) {
+            if (frozenBlocks[row][x] != null) {
                 i++;
             }
         }

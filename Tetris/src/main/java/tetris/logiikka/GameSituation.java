@@ -15,16 +15,12 @@ import java.util.List;
  */
 public class GameSituation {
 
-    private int width;
-    private int height;
-
     private Field field;
     private Piece activePiece;
+    private final int BLOCK_COUNT=4;
 
-    public GameSituation(int width, int height) {
-        this.width = width;
-        this.height = height;
-        field = new Field(width, height);
+    public GameSituation(Field field) {
+        this.field = field;
     }
 
     /*
@@ -36,39 +32,29 @@ public class GameSituation {
     Returns false, true if piece was frozen and game continues  --- requires new piece
     Returns false false if piece wasn't moved and game doesn't continue --- requires game to stop
      */
-    public boolean[] movePiece(Direction dir) {
+    public MoveResult movePiece(Direction dir) {
+        /* moveResult is initialised with values: moved=false, frozen=false, gameWon =false, gameLost=false*/
+        MoveResult moveResult = new MoveResult();
         /* Checking if the piece can be moved to the direction */
         List<Block> blocks = activePiece.getBlocks();
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < BLOCK_COUNT; i++) {
             Block b = blocks.get(i);
             if (!field.spotIsVacant(b.getX() + dir.x, b.getY() + dir.y)) {
                 if (dir == Direction.DOWN) {
-                    if (!field.freezePiece(activePiece)) {
-                        return new boolean[]{false, false};
-                    } else {
-                        return new boolean[]{false, true};
-                    }
+                    return field.freezePiece(activePiece);
                 }
-                return new boolean[]{true, true};
+                return moveResult; //wasn't moved or frozen.
             }
         }
         /* Checking done, the piece can move */
         activePiece.move(dir);
-        return new boolean[]{true, true};
+        moveResult.pieceWasMoved=true;
+        return moveResult;
     }
 
     public void setActivePiece(Piece p) {
         this.activePiece = p;
     }
-//
-//    public void createActivePiece() {
-//        List<Formation> forms = new ArrayList<>();
-//        Collections.addAll(forms, Formation.values());
-//        Collections.shuffle(forms);
-//        Piece randomPiece= new Piece();
-//        this.activePiece =
-//    }
-
     public boolean rotatePiece(Rotation rot) {
         this.activePiece.rotate(rot);
         return true;

@@ -5,6 +5,10 @@
  */
 package tetris.logiikka;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  *
  * @author isjani
@@ -26,5 +30,11 @@ public enum Formation {
         this.xVal = x;
         this.yVal = y;
         this.pivotIndex = p;
+    }
+    public static Formation getRandom() {
+        List<Formation> forms = new ArrayList<>();
+        Collections.addAll(forms, Formation.values());
+        Collections.shuffle(forms);
+        return forms.get(0);    
     }
 }
