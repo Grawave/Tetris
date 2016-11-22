@@ -8,3 +8,4 @@ Päivä | Tunnit | Kuvaus
 16.11.2016| 2 | GameSituation hiottu, Rotaatio luotu
 18.11.2016| 3 | Rotaatio rakennettu ja testattu kaikille paloille. Debug Formations
 18.11.2016| 4 | Testausta, raportointia, Engine luokka
+21.11.2016| 1 | Koodikatselmoinnin palautteen analysointia ja koodin siistimistä.

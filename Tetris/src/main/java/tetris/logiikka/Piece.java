@@ -26,6 +26,9 @@ public class Piece {
                 pivot = b;
             }
         }
+        if (f == Formation.O) {
+            pivot = null;
+        }
     }
 
     public boolean rotate(Rotation rot) {

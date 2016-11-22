@@ -86,7 +86,7 @@ public class Field {
         } else if (y >= height) {
             return false;
         }
-            return frozenBlocks[y][x] == null;
+        return frozenBlocks[y][x] == null;
     }
 
     public int getNumberOfBlocksOnRow(int row) {
@@ -108,6 +108,10 @@ public class Field {
             }
         }
         return true;
+    }
+
+    public int getWidth() {
+        return this.width;
     }
 
 }

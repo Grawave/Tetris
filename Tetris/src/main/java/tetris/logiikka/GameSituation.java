@@ -5,8 +5,6 @@
  */
 package tetris.logiikka;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -17,7 +15,7 @@ public class GameSituation {
 
     private Field field;
     private Piece activePiece;
-    private final int BLOCK_COUNT=4;
+    private final int BLOCK_COUNT = 4;
 
     public GameSituation(Field field) {
         this.field = field;
@@ -48,19 +46,35 @@ public class GameSituation {
         }
         /* Checking done, the piece can move */
         activePiece.move(dir);
-        moveResult.pieceWasMoved=true;
+        moveResult.pieceWasMoved = true;
         return moveResult;
     }
 
     public void setActivePiece(Piece p) {
         this.activePiece = p;
     }
+
     public boolean rotatePiece(Rotation rot) {
         this.activePiece.rotate(rot);
         return true;
     }
 
+    public void createActivePiece() {
+        Piece randomPiece = new Piece(field.getWidth() / 2, 0, Formation.getRandom());
+        setActivePiece(randomPiece);
+    }
+
     public boolean fieldIsEmpty() {
         return this.field.isEmpty();
+    }
+
+    public Block[][] getFieldAndPieceBlocks() {
+        Block[][] blocks = field.getFrozenBlocks().clone();
+        List<Block> pieceBlocks = activePiece.getBlocks();
+        for (int i = 0; i < BLOCK_COUNT; i++) {
+            Block b = pieceBlocks.get(i);
+            blocks[b.getY()][b.getX()] = b;
+        }
+        return blocks;
     }
 }

@@ -124,7 +124,7 @@ public class PieceTest {
         create(Formation.O);
         int[] creationLocationX = CreateLocationsX(Formation.O);
         int[] creationLocationY = CreateLocationsY(Formation.O);
-        assertTrue(!p.rotate(Rotation.LEFT));
+        assertTrue(p.rotate(Rotation.LEFT));
         List<Block> list = p.getBlocks();
         int hits = 0;
         for (int i = 0; i < 4; i++) {
