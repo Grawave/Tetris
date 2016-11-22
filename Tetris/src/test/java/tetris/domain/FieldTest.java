@@ -3,11 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tetris.logiikka;
+package tetris.domain;
 
-import tetris.logiikka.Piece;
-import tetris.logiikka.Formation;
-import tetris.logiikka.Field;
+import tetris.domain.MoveResult;
+import tetris.domain.Block;
+import tetris.domain.Piece;
+import tetris.domain.Formation;
+import tetris.domain.Field;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

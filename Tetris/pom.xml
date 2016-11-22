@@ -35,14 +35,14 @@
             <version>1.1.8</version>
             <configuration>
                 <targetClasses>
-                    <param>tetris.logiikka.Block</param>
-                    <param>tetris.logiikka.Field</param>
-                    <!--<param>tetris.logiikka.Piece</param>-->
+                    <param>tetris.domain.Block</param>
+                    <param>tetris.domain.Field</param>
+                    <param>tetris.domain.Piece</param>
                 </targetClasses>
                 <targetTests>
-                    <param>tetris.logiikka.BLockTest</param>
-                    <param>tetris.logiikka.FieldTest</param>
-                    <!--<param>tetris.logiikka.PieceTest</param>-->
+                    <param>tetris.domain.BLockTest</param>
+                    <param>tetris.domain.FieldTest</param>
+                    <param>tetris.domain.PieceTest</param>
                 </targetTests>
             </configuration>
         </plugin>

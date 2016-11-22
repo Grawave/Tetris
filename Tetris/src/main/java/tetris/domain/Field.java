@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tetris.logiikka;
+package tetris.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,7 +18,6 @@ public class Field {
     private Block[][] frozenBlocks;
     private final int width;
     private final int height;
-
     public Field(int width, int height) {
         this.frozenBlocks = new Block[height][width];
         this.width = width;

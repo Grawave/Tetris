@@ -3,10 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tetris.logiikka;
+package tetris.domain;
 
+import tetris.domain.Formation;
+import tetris.domain.Block;
 import java.util.ArrayList;
 import java.util.List;
+import tetris.logiikka.Direction;
+import tetris.logiikka.Rotation;
 
 /**
  *
@@ -20,7 +24,7 @@ public class Piece {
     public Piece(int x, int y, Formation f) {
         this.blocks = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
-            Block b = new Block(x + f.xVal[i], y + f.yVal[i]);
+            Block b = new Block(x + f.xVal[i], y + f.yVal[i],f.color);
             blocks.add(b);
             if (i == f.pivotIndex) {
                 pivot = b;

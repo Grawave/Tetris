@@ -5,6 +5,12 @@
  */
 package tetris.logiikka;
 
+import java.awt.Color;
+import tetris.domain.Block;
+import tetris.domain.MoveResult;
+import tetris.domain.GameSituation;
+import tetris.gui.TetrisFrame;
+
 /**
  *
  * @author isjani
@@ -13,43 +19,73 @@ package tetris.logiikka;
 This class receives messages from threads, acts upon GameSituation (based on 
 messages). After every communication, asks to draw the gui again.
  */
-public class CommunicationPlatform {
+public class CommunicationPlatform implements Communicator {
 
     private GameSituation gs;
+    private TetrisFrame frame;
 
     public CommunicationPlatform(GameSituation gs) {
         this.gs = gs;
     }
 
-    /* this method can be called by timer thread (drops piece every 1 sec) and the keyListener thread */
-    public void movePiece(Direction direction) {
+    /* this method can be called by pieceDropper thread (drops every 1 sec) 
+    and the gui's keyListener */
+    public synchronized void movePiece(Direction direction) {
         MoveResult moveResult = gs.movePiece(direction);
         actBasedOnResult(moveResult);
     }
 
-    /* this method can be called by the keyListener thread */
-    public void rotatePiece(Rotation rotation) {
+    /* this method can be called by the keyListener */
+    public synchronized void rotatePiece(Rotation rotation) {
         gs.rotatePiece(rotation);
+        Color[][] colorTable = blockTableToColorTable(gs.getFieldAndPieceBlocks());
+        frame.rePaintSituation(colorTable);
     }
 
-    public void actBasedOnResult(MoveResult moveResult) {
+    private Color[][] blockTableToColorTable(Block[][] blocks) {
+        int rowCount = blocks.length;
+        int columnCount = blocks[1].length;
+        Color[][] colorTable = new Color[rowCount][columnCount];
+        for (int row = 0; row < rowCount; row++) {
+            for (int column = 0; column < columnCount; column++) {
+                Block block = blocks[row][column];
+                if (block == null) {
+                    colorTable[row][column] = Color.BLACK;
+                } else {
+                    colorTable[row][column] = block.getColor();
+                }
+            }
+        }
+        return colorTable;
+    }
+
+    private void actBasedOnResult(MoveResult moveResult) {
         if (moveResult.pieceWasMoved) {
-            // do nothing
+            frame.rePaintSituation(blockTableToColorTable(gs.getFieldAndPieceBlocks()));
         } else if (moveResult.gameWon) {
             victory();
         } else if (moveResult.gameLost) {
             defeat();
         } else if (moveResult.pieceWasFrozen) {
             gs.createActivePiece();
+            frame.rePaintSituation(blockTableToColorTable(gs.getFieldAndPieceBlocks()));
         }
     }
 
-    public void defeat() {
-
+    private void defeat() {
+        gs.gameIsActive = false;
     }
 
-    public void victory() {
+    private void victory() {
+        gs.gameIsActive = false;
+    }
 
+    public synchronized boolean gameIsActive() {
+        return gs.gameIsActive;
+    }
+    
+    public void setFrame(TetrisFrame frame){
+        this.frame=frame;
     }
 
 }

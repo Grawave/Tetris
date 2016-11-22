@@ -5,49 +5,27 @@
  */
 package tetris.logiikka;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import tetris.domain.Piece;
+import tetris.domain.Formation;
+import tetris.domain.Field;
+import tetris.domain.GameSituation;
+import tetris.gui.TetrisFrame;
 
 /**
  *
  * @author isjani
  */
 public class Engine {
-
-    private GameSituation gs;
     private final int width = 10;
     private final int height = 10;
 
     public Engine() {
-
     }
 
     public void start() {
         initialize();
     }
 
-    /* this method can be called by timer thread (drops piece every 1 sec) and the keyListener thread */
-    public void movePiece(Direction direction) {
-        MoveResult moveResult = gs.movePiece(direction);
-        actBasedOnResult(moveResult);
-    }
-    /* this method can be called by the keyListener thread */
-    public void rotatePiece(Rotation rotation) {
-        gs.rotatePiece(rotation);
-    }
-
-    public void actBasedOnResult(MoveResult moveResult) {
-        if (moveResult.pieceWasMoved) {
-                // do nothing
-            } else if (moveResult.gameWon) {
-                victory();
-            } else if (moveResult.gameLost) {
-                defeat();
-            } else if (moveResult.pieceWasFrozen) {
-                gs.setActivePiece(createActivePiece());
-            }
-    }
 
     public void defeat() {
 
@@ -58,8 +36,20 @@ public class Engine {
     }
 
     public void initialize() {
-        gs = new GameSituation(new Field(width, height));
-        gs.setActivePiece(createActivePiece());
+        Field field = new Field(width, height);
+        GameSituation gs = new GameSituation(field);
+        gs.createActivePiece();
+        
+        Communicator cP= new CommunicationPlatform(gs);
+        
+        TetrisFrame frame = new TetrisFrame(cP,width,height);
+        cP.setFrame(frame);
+
+        // cP.setGui(gui)
+        // gui.setCommunicationPlatform(cP)
+        
+        Thread pieceDropper = new PieceDropper(cP);
+        pieceDropper.run();
     }
 
     public Piece createActivePiece() {

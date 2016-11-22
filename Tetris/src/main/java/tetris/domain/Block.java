@@ -3,7 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tetris.logiikka;
+package tetris.domain;
+
+import java.awt.Color;
+import tetris.logiikka.Direction;
 
 /**
  *
@@ -13,8 +16,9 @@ public class Block {
 
     private int x;
     private int y;
+    private Color color;
 
-    public Block(int x, int y) {
+    public Block(int x, int y, Color color) {
         this.x = x;
         this.y = y;
     }
@@ -31,7 +35,10 @@ public class Block {
     public int getY() {
         return y;
     }
-
+    
+    public Color getColor() {
+        return this.color;
+    }
     public void setCoordinates(int x, int y) {
         this.x = x;
         this.y = y;

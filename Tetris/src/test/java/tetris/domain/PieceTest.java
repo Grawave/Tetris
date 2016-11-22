@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tetris.logiikka;
+package tetris.domain;
 
-import tetris.logiikka.Piece;
-import tetris.logiikka.Formation;
-import tetris.logiikka.Block;
+import tetris.domain.Piece;
+import tetris.domain.Formation;
+import tetris.domain.Block;
 import tetris.logiikka.Direction;
 import java.util.List;
 import org.junit.After;
@@ -15,6 +15,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
+import tetris.logiikka.Direction;
+import tetris.logiikka.Rotation;
 
 /**
  *

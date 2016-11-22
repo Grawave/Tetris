@@ -3,9 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tetris.logiikka;
+package tetris.domain;
 
 import java.util.List;
+import tetris.logiikka.Direction;
+import tetris.logiikka.Rotation;
+import static tetris.logiikka.Rotation.reverseRotation;
 
 /**
  *
@@ -15,10 +18,12 @@ public class GameSituation {
 
     private Field field;
     private Piece activePiece;
+    public boolean gameIsActive;
     private final int BLOCK_COUNT = 4;
 
     public GameSituation(Field field) {
         this.field = field;
+        gameIsActive=true;
     }
 
     /*
@@ -56,6 +61,14 @@ public class GameSituation {
 
     public boolean rotatePiece(Rotation rot) {
         this.activePiece.rotate(rot);
+        List<Block> blocks = activePiece.getBlocks();
+        for (int i = 0; i < BLOCK_COUNT; i++) {
+            Block b = blocks.get(i);
+            if(!field.spotIsVacant(b.getX(), b.getY())) {
+                activePiece.rotate(reverseRotation(rot));
+                return false;
+            }
+        }
         return true;
     }
 

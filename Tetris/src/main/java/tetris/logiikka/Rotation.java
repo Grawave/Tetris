@@ -20,4 +20,11 @@ public enum Rotation {
         xMultiplier = a;
         yMultiplier = b;
     }
+
+    public static Rotation reverseRotation(Rotation rot) {
+        if (rot == Rotation.LEFT) {
+            return Rotation.RIGHT;
+        }
+        return Rotation.LEFT;
+    }
 }

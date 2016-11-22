@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tetris.logiikka;
+package tetris.domain;
 
-import tetris.logiikka.Block;
+import java.awt.Color;
+import tetris.domain.Block;
 import tetris.logiikka.Direction;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import tetris.logiikka.Direction;
 import static org.junit.Assert.*;
 
 /**
@@ -27,7 +29,7 @@ public class BlockTest {
 
     @Before
     public void setUp() {
-        b = new Block(alkuX, alkuY);
+        b = new Block(alkuX, alkuY, Color.BLACK);
     }
 
     @Test
