@@ -13,62 +13,89 @@ import tetris.logiikka.Direction;
 import tetris.logiikka.Rotation;
 
 /**
- *
+ * Piece consists of four blocks.
  * @author isjani
  */
 public class Piece {
 
+    private final int BLOCK_COUNT=4;
     private List<Block> blocks;
     private Block pivot;
-
-    public Piece(int x, int y, Formation f) {
+    
+    /**
+     * Creates a piece of a given formation. The starting coordinates are
+     * determined by the input integers and the formation.
+     * @param x creation location on x-axis
+     * @param y creation location on y-axis
+     * @param formation that determines how the blocks of the piece are positioned in relationship with each other.
+     * @see tetris.domain.Block
+     * @see tetris.domain.Formation
+     */
+    public Piece(int x, int y, Formation formation) {
         this.blocks = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            Block b = new Block(x + f.xVal[i], y + f.yVal[i],f.color);
+        for (int i = 0; i < BLOCK_COUNT; i++) {
+            Block b = new Block(x + formation.xVal[i], y + formation.yVal[i],formation.color);
             blocks.add(b);
-            if (i == f.pivotIndex) {
+            if (i == formation.pivotIndex) {
                 pivot = b;
             }
         }
-        if (f == Formation.O) {
+        if (formation == Formation.O) {
             pivot = null;
         }
     }
 
-    public boolean rotate(Rotation rot) {
+    /**
+     * Rotates the piece to according to given rotation
+     * @param rotation direction to be rotating.
+     * @return true if the rotation was successful.
+     */
+    public boolean rotate(Rotation rotation) {
         if (pivot == null) {
             return true;
         }
         for (Block block : blocks) {
-            rotateBlock(block, rot);
+            rotateBlock(block, rotation);
         }
         return true;
     }
+    
+    /**
+     * Rotates a given block according to the given rotational direction around the pivot.
+     * @param block to be rotated
+     * @param rotation direction to be rotated
+     */
+    public void rotateBlock(Block block, Rotation rotation) {
+        int xPivot = pivot.getX();
+        int yPivot = pivot.getY();
+        int xBlock = block.getX();
+        int yBlock = block.getY();
 
-    public void rotateBlock(Block b, Rotation rot) {
-        int xp = pivot.getX();
-        int yp = pivot.getY();
-        int x = b.getX();
-        int y = b.getY();
+        int relativeX = xBlock - xPivot;
+        int relativeY = yBlock - yPivot;
 
-        int relX = x - xp;
-        int relY = y - yp;
+        int newRelativeX = (rotation.xMultiplier[0] * relativeX + rotation.xMultiplier[1] * relativeY);
+        int newRelativeY = (rotation.yMultiplier[0] * relativeX + rotation.yMultiplier[1] * relativeY);
 
-        int newRelX = (rot.xMultiplier[0] * relX + rot.xMultiplier[1] * relY);
-        int newRelY = (rot.yMultiplier[0] * relX + rot.yMultiplier[1] * relY);
+        int newX = newRelativeX + xPivot;
+        int newY = newRelativeY + yPivot;
 
-        int newX = newRelX + xp;
-        int newY = newRelY + yp;
-
-        b.setCoordinates(newX, newY);
+        block.setCoordinates(newX, newY);
     }
 
-    public void move(Direction dir) {
-        for (Block b : blocks) {
-            b.move(dir);
+    /**
+     * Moves the piece to given direction.
+     * @param direction of movement
+     */
+    public void move(Direction direction) {
+        for (Block block : blocks) {
+            block.move(direction);
         }
     }
 
+    /**
+     * @return a list of blocks that the piece consists of. 
+     */
     public List<Block> getBlocks() {
         return this.blocks;
     }

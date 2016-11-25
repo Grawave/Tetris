@@ -6,15 +6,30 @@
 package tetris.domain;
 
 /**
- *
+ * Objects of this class contain the results of movePiece method call.
  * @author isjani
  */
 public class MoveResult {
+    /**
+     * false on creation.
+     */
     public boolean gameLost;
+    /**
+     * false on creation.
+     */
     public boolean gameWon;
+    /**
+     * false on creation.
+     */
     public boolean pieceWasFrozen;
+    /**
+     * false on creation.
+     */
     public boolean pieceWasMoved;
     
+    /**
+     * Creates a moveResult object with all conditions equalling false.
+     */
     public MoveResult() {
         this.gameLost=false;
         this.gameWon=false;

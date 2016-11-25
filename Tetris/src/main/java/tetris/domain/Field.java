@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- *
+ * Knows all the frozen blocks in the Tetris-field.
  * @author isjani
  */
 public class Field {
@@ -18,15 +18,29 @@ public class Field {
     private Block[][] frozenBlocks;
     private final int width;
     private final int height;
+    
+    /**
+     * Constructs a field with given width and height. Coordinates start from 0.
+     * @param width
+     * @param height 
+     */
     public Field(int width, int height) {
         this.frozenBlocks = new Block[height][width];
         this.width = width;
         this.height = height;
     }
-
-    public MoveResult freezePiece(Piece p) {
+    
+    /**
+     * Attempts to freeze the given piece to where it is. 
+     * 
+     * The piece can be frozen and the game can be lost or won. 
+     * @param piece to be frozen.
+     * @return MoveResult object is returned to indicate the result.
+     * @see tetris.domain.moveResult
+     */
+    public MoveResult freezePiece(Piece piece) {
         MoveResult moveResult = new MoveResult();
-        List<Block> blocks = p.getBlocks();
+        List<Block> blocks = piece.getBlocks();
 
         for (Block block : blocks) {
             int x = block.getX();
@@ -71,11 +85,22 @@ public class Field {
             }
         }
     }
-
+    
+    /**
+     * @return two-dimensional array that contains all the frozen blocks in the field. 
+     */
     public Block[][] getFrozenBlocks() {
         return this.frozenBlocks;
     }
 
+    /**
+     * Checks whether or not the spot of the input coordinates is vacant.
+     * @param x - coordinate or column number
+     * @param y - coordinate or row number
+     * @return  True if coordinates are above the field in y-axis.
+     * True if coordinates exist in the limits of the field and the spot is vacant.
+     * False if coordinates exist and spot is not vacant. False if coordinates are over the sides or under the bottom of the field.
+     */
     public boolean spotIsVacant(int x, int y) {
         // if y<0, or coordinates point towards a vacant spot in the field, the spot is considered to be vacan. 
         if (y < 0) {
@@ -88,6 +113,11 @@ public class Field {
         return frozenBlocks[y][x] == null;
     }
 
+    /**
+     * 
+     * @param row
+     * @return 
+     */
     public int getNumberOfBlocksOnRow(int row) {
         int i = 0;
         for (int x = 0; x < width; x++) {
@@ -98,6 +128,10 @@ public class Field {
         return i;
     }
 
+    /**
+     * 
+     * @return True if there are no frozen pieces.
+     */
     public boolean isEmpty() {
         for (int row = height - 1; row >= 0; row--) {
             for (int col = 0; col < width; col++) {
@@ -109,6 +143,9 @@ public class Field {
         return true;
     }
 
+    /**
+     * @return width of the field.
+     */
     public int getWidth() {
         return this.width;
     }

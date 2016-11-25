@@ -11,13 +11,16 @@ import tetris.logiikka.Rotation;
 import static tetris.logiikka.Rotation.reverseRotation;
 
 /**
- *
+ * GameSituation knows the active piece and the field that it's in.
  * @author isjani
  */
 public class GameSituation {
 
     private Field field;
     private Piece activePiece;
+    /**
+     * True indicates that game is active and has not ended.
+     */
     public boolean gameIsActive;
     private final int BLOCK_COUNT = 4;
 
@@ -25,62 +28,71 @@ public class GameSituation {
         this.field = field;
         gameIsActive=true;
     }
-
-    /*
-    Moves the piece to the given direction if the required spots are vacant in the field.
-    If there is no vacancy and the direction is down, the piece will be frozen to the field.
-    If there is no vacancy and the direction is not down, the piece will not move.
-    
-    Returns true,true if the piece was moved and game continues, or piece wasn't allowed to move and game continues.
-    Returns false, true if piece was frozen and game continues  --- requires new piece
-    Returns false false if piece wasn't moved and game doesn't continue --- requires game to stop
+    /**
+     * Attempts to move the piece to the given direction. Piece can be moved, it can stay still or be frozen.
+     * Being frozen can result in the end of the game.
+     * @param direction
+     * @return A MoveResult object that indicates the outcome.
+     * @see tetris.domain.MoveResult
      */
-    public MoveResult movePiece(Direction dir) {
+    public MoveResult movePiece(Direction direction) {
         /* moveResult is initialised with values: moved=false, frozen=false, gameWon =false, gameLost=false*/
         MoveResult moveResult = new MoveResult();
         /* Checking if the piece can be moved to the direction */
         List<Block> blocks = activePiece.getBlocks();
         for (int i = 0; i < BLOCK_COUNT; i++) {
             Block b = blocks.get(i);
-            if (!field.spotIsVacant(b.getX() + dir.x, b.getY() + dir.y)) {
-                if (dir == Direction.DOWN) {
+            if (!field.spotIsVacant(b.getX() + direction.x, b.getY() + direction.y)) {
+                if (direction == Direction.DOWN) {
                     return field.freezePiece(activePiece);
                 }
                 return moveResult; //wasn't moved or frozen.
             }
         }
         /* Checking done, the piece can move */
-        activePiece.move(dir);
+        activePiece.move(direction);
         moveResult.pieceWasMoved = true;
         return moveResult;
     }
+    
 
-    public void setActivePiece(Piece p) {
-        this.activePiece = p;
-    }
-
-    public boolean rotatePiece(Rotation rot) {
-        this.activePiece.rotate(rot);
+    /**
+     * Attempts to rotate the active piece according to given rotation.
+     * @param rotation direction of rotation.
+     * @return True if the active piece was rotated. False if piece wasn't rotated.
+     */
+    public boolean rotatePiece(Rotation rotation) {
+        this.activePiece.rotate(rotation);
         List<Block> blocks = activePiece.getBlocks();
         for (int i = 0; i < BLOCK_COUNT; i++) {
             Block b = blocks.get(i);
             if(!field.spotIsVacant(b.getX(), b.getY())) {
-                activePiece.rotate(reverseRotation(rot));
+                activePiece.rotate(reverseRotation(rotation));
                 return false;
             }
         }
         return true;
     }
-
+    
+    /**
+     * Sets the active piece to a new piece of a random formation. 
+     * Location of the new piece is in the middle of x-axis, on top of y-axis.
+     */
     public void createActivePiece() {
         Piece randomPiece = new Piece(field.getWidth() / 2, 0, Formation.getRandom());
-        setActivePiece(randomPiece);
+        this.activePiece=randomPiece;
     }
 
+    /**
+     * @return True if the field is empty.
+     */
     public boolean fieldIsEmpty() {
         return this.field.isEmpty();
     }
 
+    /**
+     * @return A two-dimensional array that contains all the blocks in the game. Active and frozen.
+     */
     public Block[][] getFieldAndPieceBlocks() {
         Block[][] blocks = field.getFrozenBlocks().clone();
         List<Block> pieceBlocks = activePiece.getBlocks();
