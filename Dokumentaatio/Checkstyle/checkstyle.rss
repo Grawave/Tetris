@@ -25,8 +25,8 @@ under the License.
     <language>en-us</language>
     <copyright>&#169;2016</copyright>
     <item>
-      <title>File: 9,
-             Errors: 0,
+      <title>File: 15,
+             Errors: 4,
              Warnings: 0,
              Infos: 0
       </title>
@@ -46,7 +46,7 @@ under the License.
           <tbody>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#tetris.logiikka.Rotation.java">tetris/logiikka/Rotation.java</a>
+                  <a href="${project.url}/checkstyle.html#tetris.domain.Field.java">tetris/domain/Field.java</a>
                 </td>
                 <td>
                   0
@@ -60,7 +60,133 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#tetris.logiikka.GameSituation.java">tetris/logiikka/GameSituation.java</a>
+                  <a href="${project.url}/checkstyle.html#tetris.domain.Block.java">tetris/domain/Block.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#tetris.gui.GameSituationPanel.java">tetris/gui/GameSituationPanel.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  2
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#tetris.logiikka.PieceDropper.java">tetris/logiikka/PieceDropper.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#tetris.logiikka.Communicator.java">tetris/logiikka/Communicator.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#tetris.logiikka.CommunicationPlatform.java">tetris/logiikka/CommunicationPlatform.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#tetris.domain.MoveResult.java">tetris/domain/MoveResult.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#tetris.domain.GameSituation.java">tetris/domain/GameSituation.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  1
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#tetris.gui.TetrisFrame.java">tetris/gui/TetrisFrame.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#tetris.domain.Piece.java">tetris/domain/Piece.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  1
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="${project.url}/checkstyle.html#tetris.logiikka.Rotation.java">tetris/logiikka/Rotation.java</a>
                 </td>
                 <td>
                   0
@@ -88,7 +214,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="${project.url}/checkstyle.html#tetris.logiikka.Field.java">tetris/logiikka/Field.java</a>
+                  <a href="${project.url}/checkstyle.html#tetris.domain.Formation.java">tetris/domain/Formation.java</a>
                 </td>
                 <td>
                   0
@@ -117,48 +243,6 @@ under the License.
                           <tr>
                 <td>
                   <a href="${project.url}/checkstyle.html#tetris.logiikka.Engine.java">tetris/logiikka/Engine.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#tetris.logiikka.Block.java">tetris/logiikka/Block.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#tetris.logiikka.Piece.java">tetris/logiikka/Piece.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="${project.url}/checkstyle.html#tetris.logiikka.Formation.java">tetris/logiikka/Formation.java</a>
                 </td>
                 <td>
                   0
