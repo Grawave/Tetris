@@ -7,9 +7,11 @@ package tetris.domain;
 
 /**
  * Objects of this class contain the results of movePiece method call.
+ *
  * @author isjani
  */
 public class MoveResult {
+
     /**
      * false on creation.
      */
@@ -26,14 +28,14 @@ public class MoveResult {
      * false on creation.
      */
     public boolean pieceWasMoved;
-    
+
     /**
      * Creates a moveResult object with all conditions equalling false.
      */
     public MoveResult() {
-        this.gameLost=false;
-        this.gameWon=false;
-        this.pieceWasFrozen=false;
-        this.pieceWasMoved=false;
+        this.gameLost = false;
+        this.gameWon = false;
+        this.pieceWasFrozen = false;
+        this.pieceWasMoved = false;
     }
 }

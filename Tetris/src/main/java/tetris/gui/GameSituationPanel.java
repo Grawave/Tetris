@@ -7,7 +7,9 @@ package tetris.gui;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.GridLayout;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -22,6 +24,7 @@ public class GameSituationPanel extends JPanel {
     private int width;
     private int height;
     private final Color BACKGROUND_COLOR = Color.BLACK;
+    private final Color BORDER_COLOR = Color.GREEN;
     private GridLayout layout;
 
     public GameSituationPanel(int width, int height) {
@@ -33,12 +36,11 @@ public class GameSituationPanel extends JPanel {
     public void rePaintSituation(Color[][] colorTable) {
         for (int row = 0; row < height; row++) {
             for (int column = 0; column < width; column++) {
-//                JLabel label = components[row][column];
-//                label.setBackground(colorTable[row][column]);
+                Component label = components[row][column];
+                label.setBackground(colorTable[row][column]);
             }
         }
     }
-
 
     public void createLayout() {
         layout = new GridLayout(height, width);
@@ -49,10 +51,14 @@ public class GameSituationPanel extends JPanel {
         createLayout();
         for (int row = 0; row < height; row++) {
             for (int column = 0; column < width; column++) {
-                JLabel label = new JLabel("row " +Integer.toString(row)+" column "+Integer.toString(column));
+                JLabel label = new JLabel("row " + Integer.toString(row) + " column " + Integer.toString(column));
                 label.setBackground(BACKGROUND_COLOR);
                 label.setOpaque(true);
+                label.setBorder(BorderFactory.createLineBorder(BORDER_COLOR));
                 components[row][column] = label;
+                label.setPreferredSize(new Dimension(5, 100));
+                label.setMinimumSize(new Dimension(5, 100));
+                label.setMaximumSize(new Dimension(5, 100));
                 add(label);
             }
         }

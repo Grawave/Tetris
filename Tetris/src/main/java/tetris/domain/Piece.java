@@ -14,27 +14,30 @@ import tetris.logiikka.Rotation;
 
 /**
  * Piece consists of four blocks.
+ *
  * @author isjani
  */
 public class Piece {
 
-    private final int BLOCK_COUNT=4;
+    private final int BLOCK_COUNT = 4;
     private List<Block> blocks;
     private Block pivot;
-    
+
     /**
      * Creates a piece of a given formation. The starting coordinates are
      * determined by the input integers and the formation.
+     *
      * @param x creation location on x-axis
      * @param y creation location on y-axis
-     * @param formation that determines how the blocks of the piece are positioned in relationship with each other.
+     * @param formation that determines how the blocks of the piece are
+     * positioned in relationship with each other.
      * @see tetris.domain.Block
      * @see tetris.domain.Formation
      */
     public Piece(int x, int y, Formation formation) {
         this.blocks = new ArrayList<>();
         for (int i = 0; i < BLOCK_COUNT; i++) {
-            Block b = new Block(x + formation.xVal[i], y + formation.yVal[i],formation.color);
+            Block b = new Block(x + formation.xVal[i], y + formation.yVal[i], formation.color);
             blocks.add(b);
             if (i == formation.pivotIndex) {
                 pivot = b;
@@ -47,6 +50,7 @@ public class Piece {
 
     /**
      * Rotates the piece to according to given rotation
+     *
      * @param rotation direction to be rotating.
      * @return true if the rotation was successful.
      */
@@ -59,9 +63,11 @@ public class Piece {
         }
         return true;
     }
-    
+
     /**
-     * Rotates a given block according to the given rotational direction around the pivot.
+     * Rotates a given block according to the given rotational direction around
+     * the pivot.
+     *
      * @param block to be rotated
      * @param rotation direction to be rotated
      */
@@ -85,6 +91,7 @@ public class Piece {
 
     /**
      * Moves the piece to given direction.
+     *
      * @param direction of movement
      */
     public void move(Direction direction) {
@@ -94,7 +101,7 @@ public class Piece {
     }
 
     /**
-     * @return a list of blocks that the piece consists of. 
+     * @return a list of blocks that the piece consists of.
      */
     public List<Block> getBlocks() {
         return this.blocks;

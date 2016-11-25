@@ -16,6 +16,7 @@ import tetris.gui.TetrisFrame;
  * @author isjani
  */
 public class Engine {
+
     private final int width = 10;
     private final int height = 20;
 
@@ -39,14 +40,13 @@ public class Engine {
         Field field = new Field(width, height);
         GameSituation gs = new GameSituation(field);
         gs.createActivePiece();
-        
-        Communicator cP= new CommunicationPlatform();
+
+        Communicator cP = new CommunicationPlatform();
         cP.setGameSituation(gs);
-        
-        TetrisFrame frame = new TetrisFrame(cP,width,height);
+
+        TetrisFrame frame = new TetrisFrame(cP, width, height);
         cP.setFrame(frame);
 
-        
         Thread pieceDropper = new PieceDropper(cP);
 //        
         frame.run();

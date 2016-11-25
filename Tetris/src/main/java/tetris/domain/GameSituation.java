@@ -12,6 +12,7 @@ import static tetris.logiikka.Rotation.reverseRotation;
 
 /**
  * GameSituation knows the active piece and the field that it's in.
+ *
  * @author isjani
  */
 public class GameSituation {
@@ -26,11 +27,14 @@ public class GameSituation {
 
     public GameSituation(Field field) {
         this.field = field;
-        gameIsActive=true;
+        gameIsActive = true;
     }
+
     /**
-     * Attempts to move the piece to the given direction. Piece can be moved, it can stay still or be frozen.
-     * Being frozen can result in the end of the game.
+     * Attempts to move the piece to the given direction. Piece can be moved, it
+     * can stay still or be frozen. Being frozen can result in the end of the
+     * game.
+     *
      * @param direction of movement
      * @return A MoveResult object that indicates the outcome.
      * @see tetris.domain.MoveResult
@@ -54,33 +58,34 @@ public class GameSituation {
         moveResult.pieceWasMoved = true;
         return moveResult;
     }
-    
 
     /**
      * Attempts to rotate the active piece according to given rotation.
+     *
      * @param rotation direction of rotation.
-     * @return True if the active piece was rotated. False if piece wasn't rotated.
+     * @return True if the active piece was rotated. False if piece wasn't
+     * rotated.
      */
     public boolean rotatePiece(Rotation rotation) {
         this.activePiece.rotate(rotation);
         List<Block> blocks = activePiece.getBlocks();
         for (int i = 0; i < BLOCK_COUNT; i++) {
             Block b = blocks.get(i);
-            if(!field.spotIsVacant(b.getX(), b.getY())) {
+            if (!field.spotIsVacant(b.getX(), b.getY())) {
                 activePiece.rotate(reverseRotation(rotation));
                 return false;
             }
         }
         return true;
     }
-    
+
     /**
-     * Sets the active piece to a new piece of a random formation. 
-     * Location of the new piece is in the middle of x-axis, on top of y-axis.
+     * Sets the active piece to a new piece of a random formation. Location of
+     * the new piece is in the middle of x-axis, on top of y-axis.
      */
     public void createActivePiece() {
         Piece randomPiece = new Piece(field.getWidth() / 2, 0, Formation.getRandom());
-        this.activePiece=randomPiece;
+        this.activePiece = randomPiece;
     }
 
     /**
@@ -91,7 +96,8 @@ public class GameSituation {
     }
 
     /**
-     * @return A two-dimensional array that contains all the blocks in the game. Active and frozen.
+     * @return A two-dimensional array that contains all the blocks in the game.
+     * Active and frozen.
      */
     public Block[][] getFieldAndPieceBlocks() {
         Block[][] blocks = field.getFrozenBlocks().clone();

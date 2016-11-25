@@ -11,25 +11,27 @@ import java.util.logging.Logger;
 /**
  * PieceDropper is a separate thread. It tells the Communicator to move the
  * piece down once a second for as long as the game is active.
+ *
  * @author isjani
  */
-public class PieceDropper extends Thread{
+public class PieceDropper extends Thread {
+
     private Communicator cP;
-    
+
     public PieceDropper(Communicator cP) {
         super();
-        this.cP=cP;
+        this.cP = cP;
     }
-    
+
     @Override
     public void run() {
-        while(cP.gameIsActive()) {
+        while (cP.gameIsActive()) {
             try {
                 wait(1000);
             } catch (InterruptedException ex) {
                 System.out.println("pieceDropper was interrupted");
             }
-            if(!cP.gameIsActive()) {
+            if (!cP.gameIsActive()) {
                 break;
             }
             cP.movePiece(Direction.DOWN);

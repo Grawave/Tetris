@@ -100,6 +100,7 @@ public class CommunicationPlatform implements Communicator {
     public void setFrame(TetrisFrame frame) {
         this.frame = frame;
     }
+
     /**
      * {@inheritDoc}
      */

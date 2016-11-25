@@ -17,44 +17,49 @@ import tetris.logiikka.Communicator;
  *
  * @author isjani
  */
-public class TetrisFrame implements Runnable{
+public class TetrisFrame implements Runnable {
+
     private JFrame frame;
     private Communicator communicator;
     private GameSituationPanel gameSituationPanel;
     private int gridWidth;
     private int gridHeight;
-    
+
     public TetrisFrame(Communicator communicator, int width, int height) {
-        this.communicator=communicator;
-        this.gridWidth=width;
-        this.gridHeight=height;
+        this.communicator = communicator;
+        this.gridWidth = width;
+        this.gridHeight = height;
     }
 
     @Override
     public void run() {
-        frame= new JFrame("Tetris by Grawave");
-        frame.setPreferredSize(new Dimension(1400,1000));
+        frame = new JFrame("Tetris by Grawave");
+        frame.setPreferredSize(new Dimension(1400, 1000));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         createLayout();
-        
+
         createComponents(frame.getContentPane());
         frame.pack();
         frame.setVisible(true);
     }
-    
+
     public void createLayout() {
         BorderLayout layout = new BorderLayout();
-        frame.setLayout(layout);
+        frame.getContentPane().setLayout(layout);
     }
-   
+
     private void createComponents(Container container) {
-        this.gameSituationPanel=new GameSituationPanel(gridWidth,gridHeight);
-        this.gameSituationPanel.setPreferredSize(new Dimension(1000,800));
+        this.gameSituationPanel = new GameSituationPanel(gridWidth, gridHeight);
         this.gameSituationPanel.initialize();
+        this.gameSituationPanel.setPreferredSize(new Dimension(50, 100));
+        this.gameSituationPanel.setMinimumSize(new Dimension(50, 100));
+        this.gameSituationPanel.setMaximumSize(new Dimension(50, 100));
+
         container.add(gameSituationPanel, BorderLayout.CENTER);
     }
-    public void rePaintSituation(Color[][] colorTable){
+
+    public void rePaintSituation(Color[][] colorTable) {
         gameSituationPanel.rePaintSituation(colorTable);
     }
-    
+
 }
