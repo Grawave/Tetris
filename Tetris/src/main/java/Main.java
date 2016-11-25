@@ -1,5 +1,5 @@
 
-import tetris.logiikka.Direction;
+import tetris.logiikka.Engine;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -13,8 +13,7 @@ import tetris.logiikka.Direction;
  */
 public class Main {
     public static void main(String[] args) {
-        System.out.println("moi!");
-        Direction dir = Direction.UP;
-        System.out.println(dir.x);
+        Engine engine = new Engine();
+        engine.initialize();
     }
 }

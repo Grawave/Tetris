@@ -5,6 +5,7 @@
  */
 package tetris.gui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -34,15 +35,23 @@ public class TetrisFrame implements Runnable{
         frame= new JFrame("Tetris by Grawave");
         frame.setPreferredSize(new Dimension(1400,1000));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        createLayout();
         
         createComponents(frame.getContentPane());
         frame.pack();
         frame.setVisible(true);
     }
+    
+    public void createLayout() {
+        BorderLayout layout = new BorderLayout();
+        frame.setLayout(layout);
+    }
    
     private void createComponents(Container container) {
         this.gameSituationPanel=new GameSituationPanel(gridWidth,gridHeight);
-        container.add(gameSituationPanel);
+        this.gameSituationPanel.setPreferredSize(new Dimension(1000,800));
+        this.gameSituationPanel.initialize();
+        container.add(gameSituationPanel, BorderLayout.CENTER);
     }
     public void rePaintSituation(Color[][] colorTable){
         gameSituationPanel.rePaintSituation(colorTable);

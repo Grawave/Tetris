@@ -12,34 +12,41 @@ import tetris.domain.GameSituation;
 import tetris.gui.TetrisFrame;
 
 /**
+ * This class receives messages from threads and acts upon GameSituation (based
+ * on messages). After every communication, asks to draw the gui again.
  *
  * @author isjani
- */
-/*
-This class receives messages from threads, acts upon GameSituation (based on 
-messages). After every communication, asks to draw the gui again.
  */
 public class CommunicationPlatform implements Communicator {
 
     private GameSituation gs;
     private TetrisFrame frame;
 
-    public CommunicationPlatform(GameSituation gs) {
-        this.gs = gs;
+    public CommunicationPlatform() {
     }
 
-    /* this method can be called by pieceDropper thread (drops every 1 sec) 
-    and the gui's keyListener */
+    /**
+     * {@inheritDoc}
+     */
     public synchronized void movePiece(Direction direction) {
         MoveResult moveResult = gs.movePiece(direction);
         actBasedOnResult(moveResult);
     }
 
-    /* this method can be called by the keyListener */
+    /**
+     * {@inheritDoc}
+     */
+    public void setGameSituation(GameSituation gs) {
+        this.gs = gs;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public synchronized void rotatePiece(Rotation rotation) {
         gs.rotatePiece(rotation);
         Color[][] colorTable = blockTableToColorTable(gs.getFieldAndPieceBlocks());
-        frame.rePaintSituation(colorTable);
+        rePaintSituation(colorTable);
     }
 
     private Color[][] blockTableToColorTable(Block[][] blocks) {
@@ -61,14 +68,14 @@ public class CommunicationPlatform implements Communicator {
 
     private void actBasedOnResult(MoveResult moveResult) {
         if (moveResult.pieceWasMoved) {
-            frame.rePaintSituation(blockTableToColorTable(gs.getFieldAndPieceBlocks()));
+            rePaintSituation(blockTableToColorTable(gs.getFieldAndPieceBlocks()));
         } else if (moveResult.gameWon) {
             victory();
         } else if (moveResult.gameLost) {
             defeat();
         } else if (moveResult.pieceWasFrozen) {
             gs.createActivePiece();
-            frame.rePaintSituation(blockTableToColorTable(gs.getFieldAndPieceBlocks()));
+            rePaintSituation(blockTableToColorTable(gs.getFieldAndPieceBlocks()));
         }
     }
 
@@ -80,12 +87,24 @@ public class CommunicationPlatform implements Communicator {
         gs.gameIsActive = false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public synchronized boolean gameIsActive() {
         return gs.gameIsActive;
     }
-    
-    public void setFrame(TetrisFrame frame){
-        this.frame=frame;
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setFrame(TetrisFrame frame) {
+        this.frame = frame;
+    }
+    /**
+     * {@inheritDoc}
+     */
+    public void rePaintSituation(Color[][] colorTable) {
+        frame.rePaintSituation(colorTable);
     }
 
 }

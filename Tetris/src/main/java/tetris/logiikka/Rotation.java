@@ -6,7 +6,7 @@
 package tetris.logiikka;
 
 /**
- *
+ * Rotation has constants needed to rotate a piece.
  * @author isjani
  */
 public enum Rotation {

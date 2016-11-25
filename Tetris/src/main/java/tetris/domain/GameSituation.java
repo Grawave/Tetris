@@ -31,7 +31,7 @@ public class GameSituation {
     /**
      * Attempts to move the piece to the given direction. Piece can be moved, it can stay still or be frozen.
      * Being frozen can result in the end of the game.
-     * @param direction
+     * @param direction of movement
      * @return A MoveResult object that indicates the outcome.
      * @see tetris.domain.MoveResult
      */

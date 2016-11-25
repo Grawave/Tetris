@@ -9,7 +9,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * PieceDropper is a separate thread. It tells the Communicator to move the
+ * piece down once a second for as long as the game is active.
  * @author isjani
  */
 public class PieceDropper extends Thread{

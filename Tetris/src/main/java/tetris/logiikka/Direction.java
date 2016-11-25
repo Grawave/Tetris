@@ -6,11 +6,11 @@
 package tetris.logiikka;
 
 /**
- *
+ * Direction has constants needed to move blocks one step towards desired direction.
  * @author isjani
  */
 public enum Direction {
-
+    
     UP(0, -1),
     DOWN(0, 1),
     LEFT(-1, 0),

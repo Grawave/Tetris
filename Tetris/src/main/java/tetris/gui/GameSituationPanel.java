@@ -6,7 +6,9 @@
 package tetris.gui;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.GridLayout;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -16,36 +18,42 @@ import javax.swing.JPanel;
  */
 public class GameSituationPanel extends JPanel {
 
-    private JLabel[][] labels;
+    private Component[][] components;
     private int width;
     private int height;
+    private final Color BACKGROUND_COLOR = Color.BLACK;
+    private GridLayout layout;
 
     public GameSituationPanel(int width, int height) {
-        labels = new JLabel[height][width];
-        createLayout();
-        initialize();
+        components = new JLabel[height][width];
+        this.width = width;
+        this.height = height;
     }
 
     public void rePaintSituation(Color[][] colorTable) {
         for (int row = 0; row < height; row++) {
             for (int column = 0; column < width; column++) {
-                JLabel label = labels[row][column];
-                label.setBackground(colorTable[row][column]);
+//                JLabel label = components[row][column];
+//                label.setBackground(colorTable[row][column]);
             }
         }
     }
 
+
     public void createLayout() {
-        GridLayout layout = new GridLayout(height, width);
+        layout = new GridLayout(height, width);
         setLayout(layout);
     }
 
     public void initialize() {
+        createLayout();
         for (int row = 0; row < height; row++) {
             for (int column = 0; column < width; column++) {
-                JLabel label = new JLabel();
-                label.setBackground(Color.BLACK);
-                labels[row][column] = label;
+                JLabel label = new JLabel("row " +Integer.toString(row)+" column "+Integer.toString(column));
+                label.setBackground(BACKGROUND_COLOR);
+                label.setOpaque(true);
+                components[row][column] = label;
+                add(label);
             }
         }
     }

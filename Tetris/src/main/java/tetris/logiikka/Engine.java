@@ -17,15 +17,15 @@ import tetris.gui.TetrisFrame;
  */
 public class Engine {
     private final int width = 10;
-    private final int height = 10;
+    private final int height = 20;
 
     public Engine() {
     }
 
     public void start() {
         initialize();
-    }
 
+    }
 
     public void defeat() {
 
@@ -40,21 +40,16 @@ public class Engine {
         GameSituation gs = new GameSituation(field);
         gs.createActivePiece();
         
-        Communicator cP= new CommunicationPlatform(gs);
+        Communicator cP= new CommunicationPlatform();
+        cP.setGameSituation(gs);
         
         TetrisFrame frame = new TetrisFrame(cP,width,height);
         cP.setFrame(frame);
 
-        // cP.setGui(gui)
-        // gui.setCommunicationPlatform(cP)
         
         Thread pieceDropper = new PieceDropper(cP);
-        pieceDropper.run();
+//        
+        frame.run();
+//        pieceDropper.run();
     }
-
-    public Piece createActivePiece() {
-        Piece randomPiece = new Piece(width / 2, 0, Formation.getRandom());
-        return randomPiece;
-    }
-
 }

@@ -21,8 +21,8 @@ public class Field {
     
     /**
      * Constructs a field with given width and height. Coordinates start from 0.
-     * @param width
-     * @param height 
+     * @param width of the field.
+     * @param height of the field.
      */
     public Field(int width, int height) {
         this.frozenBlocks = new Block[height][width];
@@ -36,7 +36,7 @@ public class Field {
      * The piece can be frozen and the game can be lost or won. 
      * @param piece to be frozen.
      * @return MoveResult object is returned to indicate the result.
-     * @see tetris.domain.moveResult
+     * @see tetris.domain.MoveResult
      */
     public MoveResult freezePiece(Piece piece) {
         MoveResult moveResult = new MoveResult();
@@ -114,9 +114,8 @@ public class Field {
     }
 
     /**
-     * 
-     * @param row
-     * @return 
+     * @param row number
+     * @return number of blocks on the row
      */
     public int getNumberOfBlocksOnRow(int row) {
         int i = 0;
@@ -129,7 +128,6 @@ public class Field {
     }
 
     /**
-     * 
      * @return True if there are no frozen pieces.
      */
     public boolean isEmpty() {
