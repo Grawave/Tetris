@@ -10,3 +10,4 @@ Päivä | Tunnit | Kuvaus
 18.11.2016| 4 | Testausta, raportointia, Engine luokka
 21.11.2016| 1 | Koodikatselmoinnin palautteen analysointia ja koodin siistimistä.
 22.11.2016| 4 | Guin alkeet. CommunicationPlatform logiikan ja guin välille
+25.11.2016| 3 | Guin alustusta, dokumentaation luontia, erimielisyyksiä CheckStylen kanssa.

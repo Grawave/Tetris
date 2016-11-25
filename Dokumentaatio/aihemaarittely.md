@@ -24,4 +24,6 @@ GameSituation tietää luokat Field ja Piece. Sillä on metodi jonka avulla pala
 
 Engine on luokka jonka avulla peli käynnistetään, ja GameSituationia muutetaan.
 
-Seuraavaksi hahmotellaan eri threadeja. Luokka joka kuuntelee käyttäjän painalluksia ja luokka joka välittää siirtokäskyn alaspäin sekunnin välein. Luokat toimivat todennäköisesti luokan Engine kautta.
+CommunicationPlatform välittää komentoja GUIn ja logiikan välillä.
+
+Seuraavana ohjelmassa on graafisen käyttöliittymän luominen.
