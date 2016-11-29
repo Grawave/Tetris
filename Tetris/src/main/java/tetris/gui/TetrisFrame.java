@@ -5,16 +5,15 @@
  */
 package tetris.gui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import tetris.logiikka.Communicator;
 
 /**
- *
+ *The frame for all the content
  * @author isjani
  */
 public class TetrisFrame implements Runnable {
@@ -24,6 +23,8 @@ public class TetrisFrame implements Runnable {
     private GameSituationPanel gameSituationPanel;
     private int gridWidth;
     private int gridHeight;
+    private ContentPanel contentPanel;
+    
 
     public TetrisFrame(Communicator communicator, int width, int height) {
         this.communicator = communicator;
@@ -31,35 +32,46 @@ public class TetrisFrame implements Runnable {
         this.gridHeight = height;
     }
 
+    /**
+     * Creates a ContentPanel and adds components to it.Then sets the frame visible.
+     */
     @Override
     public void run() {
         frame = new JFrame("Tetris by Grawave");
         frame.setPreferredSize(new Dimension(1400, 1000));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        createLayout();
-
-        createComponents(frame.getContentPane());
+        createContentPane();
+        createComponents();
+        assemble();
         frame.pack();
         frame.setVisible(true);
     }
-
-    public void createLayout() {
-        BorderLayout layout = new BorderLayout();
-        frame.getContentPane().setLayout(layout);
+    
+    private void createContentPane() {
+        contentPanel = new ContentPanel();
+        frame.getContentPane().add(contentPanel);
     }
 
-    private void createComponents(Container container) {
+    private void createComponents() {
         this.gameSituationPanel = new GameSituationPanel(gridWidth, gridHeight);
         this.gameSituationPanel.initialize();
-        this.gameSituationPanel.setPreferredSize(new Dimension(50, 100));
-        this.gameSituationPanel.setMinimumSize(new Dimension(50, 100));
-        this.gameSituationPanel.setMaximumSize(new Dimension(50, 100));
-
-        container.add(gameSituationPanel, BorderLayout.CENTER);
+        frame.addKeyListener(new );
+//        this.gameSituationPanel.setPreferredSize(new Dimension(500, 500));
+//        this.gameSituationPanel.setMinimumSize(new Dimension(500, 500));
+//        this.gameSituationPanel.setMaximumSize(new Dimension(500, 500));
+    }
+    
+    private void assemble() {
+        contentPanel.addGS(this.gameSituationPanel);
     }
 
+    
     public void rePaintSituation(Color[][] colorTable) {
         gameSituationPanel.rePaintSituation(colorTable);
+    }
+    
+    public void close() {
+        frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
     }
 
 }

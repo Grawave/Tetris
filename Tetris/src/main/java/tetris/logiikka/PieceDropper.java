@@ -24,10 +24,10 @@ public class PieceDropper extends Thread {
     }
 
     @Override
-    public void run() {
+    public synchronized void run() {
         while (cP.gameIsActive()) {
             try {
-                wait(1000);
+                wait(100);
             } catch (InterruptedException ex) {
                 System.out.println("pieceDropper was interrupted");
             }

@@ -100,12 +100,25 @@ public class GameSituation {
      * Active and frozen.
      */
     public Block[][] getFieldAndPieceBlocks() {
-        Block[][] blocks = field.getFrozenBlocks().clone();
+        Block[][] blocks = copyBlocks(field.getFrozenBlocks(), field.getWidth(), field.getHeight());
         List<Block> pieceBlocks = activePiece.getBlocks();
         for (int i = 0; i < BLOCK_COUNT; i++) {
             Block b = pieceBlocks.get(i);
+            if (b.getY() < 0) {
+                continue;
+            }
             blocks[b.getY()][b.getX()] = b;
         }
         return blocks;
+    }
+    
+    private Block[][] copyBlocks(Block[][] original, int width, int height) {
+        Block[][] copy = new Block[height][width];
+        for (int row = 0; row < height; row++) {
+            for (int column = 0; column < width; column++) {
+                copy[row][column]= original[row][column];
+            }
+        }
+        return copy;
     }
 }

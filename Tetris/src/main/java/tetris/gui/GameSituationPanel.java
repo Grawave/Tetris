@@ -24,7 +24,8 @@ public class GameSituationPanel extends JPanel {
     private int width;
     private int height;
     private final Color BACKGROUND_COLOR = Color.BLACK;
-    private final Color BORDER_COLOR = Color.GREEN;
+    private final Color BORDER_COLOR = Color.GRAY;
+    
     private GridLayout layout;
 
     public GameSituationPanel(int width, int height) {
@@ -51,14 +52,12 @@ public class GameSituationPanel extends JPanel {
         createLayout();
         for (int row = 0; row < height; row++) {
             for (int column = 0; column < width; column++) {
-                JLabel label = new JLabel("row " + Integer.toString(row) + " column " + Integer.toString(column));
+//                JLabel label = new JLabel("row " + Integer.toString(row) + " column " + Integer.toString(column));
+                JLabel label = new JLabel();
                 label.setBackground(BACKGROUND_COLOR);
                 label.setOpaque(true);
                 label.setBorder(BorderFactory.createLineBorder(BORDER_COLOR));
                 components[row][column] = label;
-                label.setPreferredSize(new Dimension(5, 100));
-                label.setMinimumSize(new Dimension(5, 100));
-                label.setMaximumSize(new Dimension(5, 100));
                 add(label);
             }
         }

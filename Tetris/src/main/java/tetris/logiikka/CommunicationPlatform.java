@@ -81,6 +81,7 @@ public class CommunicationPlatform implements Communicator {
 
     private void defeat() {
         gs.gameIsActive = false;
+        frame.close();
     }
 
     private void victory() {

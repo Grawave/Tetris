@@ -50,6 +50,6 @@ public class Engine {
         Thread pieceDropper = new PieceDropper(cP);
 //        
         frame.run();
-//        pieceDropper.run();
+        pieceDropper.run();
     }
 }
