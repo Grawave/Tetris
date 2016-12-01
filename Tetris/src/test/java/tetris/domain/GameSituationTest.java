@@ -49,13 +49,14 @@ public class GameSituationTest {
         move(Direction.LEFT, 2);
         move(Direction.DOWN, 20);
 
+        assertTrue(gs.getScore()==0);
         gs.createActivePiece(Formation.O);
         move(Direction.LEFT, 5);
         move(Direction.DOWN, 20);
 
         assertEquals(0, field.getNumberOfBlocksOnRow(height - 1));
         assertTrue(field.isEmpty());
-
+        assertTrue(gs.getScore()>0);
     }
 
     private void move(Direction dir, int amount) {

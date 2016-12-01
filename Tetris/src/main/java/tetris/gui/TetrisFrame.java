@@ -69,5 +69,15 @@ public class TetrisFrame implements Runnable {
     public void close() {
         frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
     }
+    
+    public void updateScore() {
+        contentPanel.updateBoards();
+    }
+    public void setHighScore(int highScore) {
+        contentPanel.setHighScore(highScore);
+    }
+    public void setDistractionBoard(String[] quotes) {
+        
+    }
 
 }

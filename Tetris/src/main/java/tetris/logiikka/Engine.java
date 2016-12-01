@@ -50,7 +50,10 @@ public class Engine {
         PieceDropper pieceDropper = new PieceDropper(cP);
         cP.setPieceDropper(pieceDropper);
 //        
+
         frame.run();
+        cP.setHighScore();
+        cP.setDistractionBoard();
         pieceDropper.run();
     }
 }

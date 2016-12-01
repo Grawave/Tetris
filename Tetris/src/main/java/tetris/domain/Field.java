@@ -60,6 +60,7 @@ public class Field {
             moveResult.gameWon = true;
         }
         moveResult.pieceWasFrozen = true;
+        moveResult.pointsGained += 2;
         return moveResult;
     }
 

@@ -10,6 +10,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.util.Random;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
 import javax.swing.ImageIcon;
@@ -18,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 import tetris.logiikka.Communicator;
 import tetris.logiikka.Direction;
@@ -34,8 +36,12 @@ public class ContentPanel extends JPanel {
     private final Dimension GS_MAX = new Dimension(500, 1100);
     private Communicator communicator;
     private JLabel scoreLabel;
-    
-    private final String PIC_URL ="/home/jani/Tetris/Tetris/freeBackground.jpg"; //"~/Tetris/Tetris/freeBackgound.jpg"; // /home/jani/Tetris/Tetris/freeBackground.jpg
+    private JTextArea quoteArea;
+    private JLayeredPane leftLayeredPane;
+    private JLayeredPane rightLayeredPane;
+    private String[] quotes;
+
+    private final String PIC_URL = "freeBackground.jpg";
 
     private GridLayout layout;
 
@@ -48,26 +54,69 @@ public class ContentPanel extends JPanel {
         createKeyBindings();
     }
 
+    public void createDistractionBoard(String[] quotes) {
+        this.quotes = quotes;
+        quoteArea = new JTextArea(newRandomQuote());
+        quoteArea.setBounds(150, 250, 500, 500);
+
+        rightLayeredPane = new JLayeredPane();
+        rightLayeredPane.setLayout(null);
+        rightLayeredPane.setPreferredSize(GS_PREF);
+
+        rightLayeredPane.add(quoteArea);
+    }
+
+    private String newRandomQuote() {
+        Random random = new Random();
+        int index = random.nextInt(quotes.length - 1);
+        return quotes[index];
+    }
+
+    private void updateQuote() {
+        quoteArea = new JTextArea(newRandomQuote());
+        quoteArea.setBounds(150, 250, 500, 500);
+
+        rightLayeredPane.repaint();
+    }
+
     private void createScoreBoard() {
-        JLayeredPane lPane = new JLayeredPane();
-        lPane.setLayout(null);
-        lPane.setPreferredSize(GS_PREF);
-        
+        leftLayeredPane = new JLayeredPane();
+        leftLayeredPane.setLayout(null);
+        leftLayeredPane.setPreferredSize(GS_PREF);
+
         ImageIcon image = new ImageIcon(PIC_URL);
         JLabel imageHolder = new JLabel();
         imageHolder.setIcon(image);
-        imageHolder.setBounds(0,0,500,1000);
-        
-        lPane.add(imageHolder,0,0);
-        
-        JLabel scoreLabel = new JLabel("<html>SCORE<br>"+ communicator.getScore()+ "</html>");
+        imageHolder.setBounds(0, 0, 800, 1200);
+
+        leftLayeredPane.add(imageHolder, 0, 0);
+
+        scoreLabel = new JLabel("<html>SCORE<br>" + communicator.getScore() + "</html>");
         scoreLabel.setForeground(Color.WHITE);
-        scoreLabel.setFont(new Font("Serif", Font.PLAIN, 20));
-        scoreLabel.setBounds(300,300,100,100);
-        
-        lPane.add(scoreLabel,1,1);
-        
-        add(lPane);
+        scoreLabel.setFont(new Font("Serif", Font.PLAIN, 30));
+        scoreLabel.setBounds(100, 500, 300, 300);
+
+        leftLayeredPane.add(scoreLabel, 1, 1);
+
+        add(leftLayeredPane);
+    }
+
+    public void updateBoards() {
+        int score = communicator.getScore();
+        if (score == 0) {
+            return;
+        }
+        leftLayeredPane.remove(scoreLabel);
+        leftLayeredPane.repaint();
+
+        scoreLabel = new JLabel("<html>SCORE<br>" + score + "</html>");
+        scoreLabel.setForeground(Color.WHITE);
+        scoreLabel.setFont(new Font("Serif", Font.PLAIN, 30));
+        scoreLabel.setBounds(100, 500, 300, 300);
+
+        leftLayeredPane.add(scoreLabel, 1, 1);
+        leftLayeredPane.repaint();
+        updateQuote();
     }
 
     private void createKeyBindings() {
@@ -120,6 +169,14 @@ public class ContentPanel extends JPanel {
         gs.setPreferredSize(GS_PREF);
         gs.setMinimumSize(GS_MIN);
         gs.setMaximumSize(GS_MAX);
+    }
+
+    public void setHighScore(int highScore) {
+        JLabel highScoreLabel = new JLabel("<html>HIGHSCORE<br>" + highScore + "</html>");
+        highScoreLabel.setFont(new Font("Serif", Font.PLAIN, 30));
+        highScoreLabel.setForeground(Color.WHITE);
+        highScoreLabel.setBounds(100, 600, 300, 300);
+        leftLayeredPane.add(highScoreLabel, 3, 3);
     }
 
     private static class MoveAction extends AbstractAction {

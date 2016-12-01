@@ -6,8 +6,11 @@
 package tetris.logiikka;
 
 import java.awt.Color;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Scanner;
 import tetris.domain.Block;
 import tetris.domain.MoveResult;
 import tetris.domain.GameSituation;
@@ -25,6 +28,10 @@ public class CommunicationPlatform implements Communicator {
     private TetrisFrame frame;
     private PieceDropper pieceDropper;
     private boolean paused;
+    private final String HIGH_SCORE_FILEPATH = "highscore.txt";
+    private final String QUOTES_FILEPATH = "quotes.txt";
+    private int highScore;
+    // "/home/jani/Tetris/Tetris/freeBackground.jpg"
 
     public CommunicationPlatform() {
         paused = false;
@@ -39,6 +46,27 @@ public class CommunicationPlatform implements Communicator {
         }
         MoveResult moveResult = gs.movePiece(direction);
         actBasedOnResult(moveResult);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setHighScore() {
+        highScore = 0;
+        Scanner reader;
+        try {
+            reader = new Scanner(new File(HIGH_SCORE_FILEPATH));
+        } catch (Exception e) {
+            throw new IllegalArgumentException("no such filepath for High scores");
+        }
+        if (reader.hasNext()) {
+            try {
+                highScore = Integer.parseInt(reader.next());
+            } catch (Exception e) {
+                throw new IllegalArgumentException("highscore unreadable");
+            }
+        }
+        frame.setHighScore(highScore);
     }
 
     /**
@@ -90,12 +118,22 @@ public class CommunicationPlatform implements Communicator {
             defeat();
         } else if (moveResult.pieceWasFrozen) {
             gs.createActivePiece();
+            frame.updateScore();
             rePaintSituation(blockTableToColorTable(gs.getFieldAndPieceBlocks()));
         }
     }
 
     private void defeat() {
+        int score = gs.getScore();
+        boolean newHighScore = score > highScore;
         gs.gameIsActive = false;
+        try {
+            PrintWriter writer = new PrintWriter("highscore.txt", "UTF-8");
+            writer.println(score);
+            writer.close();
+        } catch (IOException e) {
+            throw new IllegalStateException("unable to write highscore.txt");
+        }
         frame.close();
     }
 
@@ -136,6 +174,25 @@ public class CommunicationPlatform implements Communicator {
     @Override
     public int getScore() {
         return gs.getScore();
+    }
+
+    @Override
+    public void setDistractionBoard() {
+        Scanner reader;
+        ArrayList<String> quoteList = new ArrayList<>();
+        try {
+            reader = new Scanner(new File(QUOTES_FILEPATH));
+        } catch (Exception e) {
+            throw new IllegalArgumentException("no such filepath for quotes");
+        }
+        while (reader.hasNext()) {
+            quoteList.add(reader.next());
+        }
+        String[] quotes = new String[quoteList.size()];
+        for (int i = 0; i < quotes.length; i++) {
+            quotes[i]=quoteList.get(i);
+        }
+        frame.setDistractionBoard(quotes);
     }
 
 }

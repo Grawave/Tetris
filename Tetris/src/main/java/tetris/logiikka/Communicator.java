@@ -16,7 +16,11 @@ import tetris.gui.TetrisFrame;
  * @author isjani
  */
 public interface Communicator {
-    
+    public void setDistractionBoard();
+    /**
+     * Retrieves highest score from text file, and gives it to the frame
+     */
+    public void setHighScore();
     /**
      * 
      * @return the current score
