@@ -56,12 +56,6 @@ public class TetrisFrame implements Runnable {
     private void createComponents() {
         this.gameSituationPanel = new GameSituationPanel(gridWidth, gridHeight);
         this.gameSituationPanel.initialize();
-        
-        
-//        frame.addKeyListener(new );
-//        this.gameSituationPanel.setPreferredSize(new Dimension(500, 500));
-//        this.gameSituationPanel.setMinimumSize(new Dimension(500, 500));
-//        this.gameSituationPanel.setMaximumSize(new Dimension(500, 500));
     }
 
     private void assemble() {

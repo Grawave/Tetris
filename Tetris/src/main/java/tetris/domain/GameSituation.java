@@ -19,6 +19,7 @@ public class GameSituation {
 
     private Field field;
     private Piece activePiece;
+    private int score;
     /**
      * True indicates that game is active and has not ended.
      */
@@ -28,11 +29,12 @@ public class GameSituation {
     public GameSituation(Field field) {
         this.field = field;
         gameIsActive = true;
+        score = 0;
     }
 
     /**
      * Attempts to move the piece to the given direction. Piece can be moved, it
-     * can stay still or be frozen. Being frozen can result in the end of the
+     * can stay still or be frozen. Being frozen can result in increase of score and the end of the
      * game.
      *
      * @param direction of movement
@@ -48,7 +50,9 @@ public class GameSituation {
             Block b = blocks.get(i);
             if (!field.spotIsVacant(b.getX() + direction.x, b.getY() + direction.y)) {
                 if (direction == Direction.DOWN) {
-                    return field.freezePiece(activePiece);
+                    moveResult = field.freezePiece(activePiece);
+                    score += moveResult.pointsGained;
+                    return moveResult;
                 }
                 return moveResult; //wasn't moved or frozen.
             }
@@ -124,5 +128,12 @@ public class GameSituation {
             }
         }
         return copy;
+    }
+    /**
+     * 
+     * @return the current score. 
+     */
+    public int getScore() {
+        return this.score;
     }
 }

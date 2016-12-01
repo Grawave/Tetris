@@ -6,6 +6,8 @@
 package tetris.logiikka;
 
 import java.awt.Color;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import tetris.domain.Block;
 import tetris.domain.MoveResult;
 import tetris.domain.GameSituation;
@@ -21,14 +23,20 @@ public class CommunicationPlatform implements Communicator {
 
     private GameSituation gs;
     private TetrisFrame frame;
+    private PieceDropper pieceDropper;
+    private boolean paused;
 
     public CommunicationPlatform() {
+        paused = false;
     }
 
     /**
      * {@inheritDoc}
      */
     public synchronized void movePiece(Direction direction) {
+        if (paused) {
+            return;
+        }
         MoveResult moveResult = gs.movePiece(direction);
         actBasedOnResult(moveResult);
     }
@@ -38,6 +46,13 @@ public class CommunicationPlatform implements Communicator {
      */
     public void setGameSituation(GameSituation gs) {
         this.gs = gs;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setPieceDropper(PieceDropper pieceDropper) {
+        this.pieceDropper = pieceDropper;
     }
 
     /**
@@ -107,6 +122,20 @@ public class CommunicationPlatform implements Communicator {
      */
     public void rePaintSituation(Color[][] colorTable) {
         frame.rePaintSituation(colorTable);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public synchronized void pauseGame() {
+        paused = !paused;
+
+    }
+
+    @Override
+    public int getScore() {
+        return gs.getScore();
     }
 
 }

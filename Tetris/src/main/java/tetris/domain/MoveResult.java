@@ -28,7 +28,11 @@ public class MoveResult {
      * false on creation.
      */
     public boolean pieceWasMoved;
-
+    
+    /**
+     * 0 on creation
+     */
+    public int pointsGained;
     /**
      * Creates a moveResult object with all conditions equalling false.
      */
@@ -37,5 +41,6 @@ public class MoveResult {
         this.gameWon = false;
         this.pieceWasFrozen = false;
         this.pieceWasMoved = false;
+        pointsGained=0;
     }
 }

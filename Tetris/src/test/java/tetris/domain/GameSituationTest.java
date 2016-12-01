@@ -35,24 +35,23 @@ public class GameSituationTest {
     public void fourIOneO() {
         gs.createActivePiece(Formation.I);
         move(Direction.RIGHT, 5);
-        move(Direction.DOWN, 19);
+        move(Direction.DOWN, 20);
 
         gs.createActivePiece(Formation.I);
-        gs.rotatePiece(Rotation.RIGHT);
         move(Direction.RIGHT, 5);
-        move(Direction.DOWN, 18);
+        move(Direction.DOWN, 20);
 
         gs.createActivePiece(Formation.I);
         move(Direction.LEFT, 2);
-        move(Direction.DOWN, 19);
+        move(Direction.DOWN, 20);
 
         gs.createActivePiece(Formation.I);
         move(Direction.LEFT, 2);
-        move(Direction.DOWN, 19);
+        move(Direction.DOWN, 20);
 
         gs.createActivePiece(Formation.O);
         move(Direction.LEFT, 5);
-        move(Direction.DOWN, 19);
+        move(Direction.DOWN, 20);
 
         assertEquals(0, field.getNumberOfBlocksOnRow(height - 1));
         assertTrue(field.isEmpty());

@@ -16,7 +16,12 @@ import tetris.gui.TetrisFrame;
  * @author isjani
  */
 public interface Communicator {
-
+    
+    /**
+     * 
+     * @return the current score
+     */
+    public int getScore();
     /**
      * Attempts to move the piece to given direction.
      *
@@ -51,7 +56,20 @@ public interface Communicator {
     public void setGameSituation(GameSituation gameSituation);
 
     /**
+     * Sets the PieceDropper with which the communication is to be done.
+     *
+     * @param gameSituation to communicate with
+     */
+    public void setPieceDropper(PieceDropper pieceDropper);
+
+    /**
      * Tells the frame to repaint itself.
      */
     public void rePaintSituation(Color[][] colorTable);
+
+    /**
+     * Tells the PieceDropper to stop when it is running, or continue if it's
+     * stopped
+     */
+    public void pauseGame();
 }

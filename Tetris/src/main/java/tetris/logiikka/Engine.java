@@ -47,7 +47,8 @@ public class Engine {
         TetrisFrame frame = new TetrisFrame(cP, width, height);
         cP.setFrame(frame);
 
-        Thread pieceDropper = new PieceDropper(cP);
+        PieceDropper pieceDropper = new PieceDropper(cP);
+        cP.setPieceDropper(pieceDropper);
 //        
         frame.run();
         pieceDropper.run();

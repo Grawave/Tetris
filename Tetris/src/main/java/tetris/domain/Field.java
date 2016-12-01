@@ -54,7 +54,7 @@ public class Field {
         }
         // checks the rows where insertions where made. Drops rows above
         // if any rows were filled
-        dropRows();
+        moveResult.pointsGained =dropRows();
 
         if (this.isEmpty()) {
             moveResult.gameWon = true;
@@ -63,13 +63,16 @@ public class Field {
         return moveResult;
     }
 
-    private void dropRows() {
+    private int dropRows() {
+        int points = 0;
         for (int y = 0; y < height; y++) {
             if (getNumberOfBlocksOnRow(y) == width) {
                 deleteRow(y);
                 dropRowsAbove(y);
+                points += width;
             }
         }
+        return points;
     }
 
     private void deleteRow(int y) {
@@ -80,8 +83,14 @@ public class Field {
 
     private void dropRowsAbove(int y) {
         for (int h = y; h >= 0; h--) {
+            if(h==0) {
+                for (int x = 0; x < width; x++) {
+                    frozenBlocks[h][x] = null;
+                }
+                continue;
+            }
             for (int x = 0; x < width; x++) {
-                frozenBlocks[y][x] = frozenBlocks[y - 1][x];
+                frozenBlocks[h][x] = frozenBlocks[h - 1][x];
             }
         }
     }
