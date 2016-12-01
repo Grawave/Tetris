@@ -13,7 +13,8 @@ import javax.swing.WindowConstants;
 import tetris.logiikka.Communicator;
 
 /**
- *The frame for all the content
+ * The frame for all the content
+ *
  * @author isjani
  */
 public class TetrisFrame implements Runnable {
@@ -24,7 +25,6 @@ public class TetrisFrame implements Runnable {
     private int gridWidth;
     private int gridHeight;
     private ContentPanel contentPanel;
-    
 
     public TetrisFrame(Communicator communicator, int width, int height) {
         this.communicator = communicator;
@@ -33,7 +33,8 @@ public class TetrisFrame implements Runnable {
     }
 
     /**
-     * Creates a ContentPanel and adds components to it.Then sets the frame visible.
+     * Creates a ContentPanel and adds components to it.Then sets the frame
+     * visible.
      */
     @Override
     public void run() {
@@ -46,30 +47,31 @@ public class TetrisFrame implements Runnable {
         frame.pack();
         frame.setVisible(true);
     }
-    
+
     private void createContentPane() {
-        contentPanel = new ContentPanel();
+        contentPanel = new ContentPanel(communicator);
         frame.getContentPane().add(contentPanel);
     }
 
     private void createComponents() {
         this.gameSituationPanel = new GameSituationPanel(gridWidth, gridHeight);
         this.gameSituationPanel.initialize();
-        frame.addKeyListener(new );
+        
+        
+//        frame.addKeyListener(new );
 //        this.gameSituationPanel.setPreferredSize(new Dimension(500, 500));
 //        this.gameSituationPanel.setMinimumSize(new Dimension(500, 500));
 //        this.gameSituationPanel.setMaximumSize(new Dimension(500, 500));
     }
-    
+
     private void assemble() {
         contentPanel.addGS(this.gameSituationPanel);
     }
 
-    
     public void rePaintSituation(Color[][] colorTable) {
         gameSituationPanel.rePaintSituation(colorTable);
     }
-    
+
     public void close() {
         frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
     }

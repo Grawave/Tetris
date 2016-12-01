@@ -79,7 +79,7 @@ public class Field {
     }
 
     private void dropRowsAbove(int y) {
-        for (int h = y; h > 0; h--) {
+        for (int h = y; h >= 0; h--) {
             for (int x = 0; x < width; x++) {
                 frozenBlocks[y][x] = frozenBlocks[y - 1][x];
             }

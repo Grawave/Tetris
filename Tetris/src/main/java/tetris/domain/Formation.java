@@ -38,11 +38,11 @@ public enum Formation {
     /**
      * Z-shape. Pivot is the top middle block of a Z
      */
-    Z(new int[]{0, 0, -1, 1}, new int[]{0, -1, -1, 0}, 1, Color.yellow), // (0,0) is the bottom left block
+    Z(new int[]{0, 0, -1, 1}, new int[]{0, -1, -1, 0}, 1, Color.YELLOW), // (0,0) is the bottom left block
     /**
      * J-shape. Pivot is the second highest block of a standing J.
      */
-    J(new int[]{0, -1, 0, 0}, new int[]{0, 0, -1, -2}, 2, Color.DARK_GRAY); // (0,0) is  is bottom right of standing J// (0,0) is  is bottom right of standing J
+    J(new int[]{0, -1, 0, 0}, new int[]{0, 0, -1, -2}, 2, Color.MAGENTA); // (0,0) is  is bottom right of standing J// (0,0) is  is bottom right of standing J
     
     /**
      * x values of block coordinates. x[i] corresponds to y[i]

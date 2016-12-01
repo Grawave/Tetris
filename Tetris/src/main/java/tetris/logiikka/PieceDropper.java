@@ -27,7 +27,7 @@ public class PieceDropper extends Thread {
     public synchronized void run() {
         while (cP.gameIsActive()) {
             try {
-                wait(100);
+                wait(500);
             } catch (InterruptedException ex) {
                 System.out.println("pieceDropper was interrupted");
             }

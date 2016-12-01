@@ -88,6 +88,10 @@ public class GameSituation {
         this.activePiece = randomPiece;
     }
 
+    public void createActivePiece(Formation form) {
+        this.activePiece = new Piece(field.getWidth() / 2, 0, form);
+    }
+
     /**
      * @return True if the field is empty.
      */
@@ -111,12 +115,12 @@ public class GameSituation {
         }
         return blocks;
     }
-    
+
     private Block[][] copyBlocks(Block[][] original, int width, int height) {
         Block[][] copy = new Block[height][width];
         for (int row = 0; row < height; row++) {
             for (int column = 0; column < width; column++) {
-                copy[row][column]= original[row][column];
+                copy[row][column] = original[row][column];
             }
         }
         return copy;
