@@ -14,6 +14,7 @@ import java.util.Scanner;
 import tetris.domain.Block;
 import tetris.domain.MoveResult;
 import tetris.domain.GameSituation;
+import tetris.gui.EndFrame;
 import tetris.gui.TetrisFrame;
 
 /**
@@ -31,6 +32,7 @@ public class CommunicationPlatform implements Communicator {
     private final String HIGH_SCORE_FILEPATH = "highscore.txt";
     private final String QUOTES_FILEPATH = "quotes.txt";
     private int highScore;
+    private Engine engine;
     // "/home/jani/Tetris/Tetris/freeBackground.jpg"
 
     public CommunicationPlatform() {
@@ -124,6 +126,16 @@ public class CommunicationPlatform implements Communicator {
     }
 
     private void defeat() {
+        scoreRecording();
+        EndFrame endFrame = new EndFrame(false, this);
+        endFrame.run();
+    }
+
+    private void victory() {
+        gs.gameIsActive = false;
+    }
+
+    private void scoreRecording() {
         int score = gs.getScore();
         boolean newHighScore = score > highScore;
         gs.gameIsActive = false;
@@ -136,11 +148,6 @@ public class CommunicationPlatform implements Communicator {
                 throw new IllegalStateException("unable to write highscore.txt");
             }
         }
-        frame.close();
-    }
-
-    private void victory() {
-        gs.gameIsActive = false;
     }
 
     /**
@@ -170,7 +177,6 @@ public class CommunicationPlatform implements Communicator {
     @Override
     public synchronized void pauseGame() {
         paused = !paused;
-
     }
 
     @Override
@@ -195,6 +201,19 @@ public class CommunicationPlatform implements Communicator {
             quotes[i] = quoteList.get(i);
         }
         frame.setDistractionBoard(quotes);
+    }
+    
+    @Override
+    public void newGame() {
+        frame.dispose();
+        engine.reStart();
+//    Engine engine = new Engine();
+//    engine.initialize();
+    }
+
+    @Override
+    public void setEngine(Engine engine) {
+        this.engine = engine;
     }
 
 }

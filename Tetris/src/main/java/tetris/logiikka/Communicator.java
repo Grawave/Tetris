@@ -16,6 +16,11 @@ import tetris.gui.TetrisFrame;
  * @author isjani
  */
 public interface Communicator {
+    public void newGame();
+    /**
+     * gives access to the engine that begins a game
+     */
+    public void setEngine(Engine engine);
     public void setDistractionBoard();
     /**
      * Retrieves highest score from text file, and gives it to the frame

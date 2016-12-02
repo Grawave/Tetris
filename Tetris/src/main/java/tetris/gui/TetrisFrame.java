@@ -79,5 +79,8 @@ public class TetrisFrame implements Runnable {
     public void setDistractionBoard(String[] quotes) {
         contentPanel.createDistractionBoard(quotes);
     }
+    public void dispose() {
+        frame.dispose();
+    }
 
 }

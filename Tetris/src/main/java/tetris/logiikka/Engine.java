@@ -19,6 +19,9 @@ public class Engine {
 
     private final int width = 10;
     private final int height = 20;
+    
+    private Communicator cP;
+    private PieceDropper pieceDropper;
 
     public Engine() {
     }
@@ -28,32 +31,29 @@ public class Engine {
 
     }
 
-    public void defeat() {
-
-    }
-
-    public void victory() {
-
-    }
-
     public void initialize() {
         Field field = new Field(width, height);
         GameSituation gs = new GameSituation(field);
         gs.createActivePiece();
 
-        Communicator cP = new CommunicationPlatform();
+        cP = new CommunicationPlatform();
         cP.setGameSituation(gs);
 
         TetrisFrame frame = new TetrisFrame(cP, width, height);
         cP.setFrame(frame);
 
-        PieceDropper pieceDropper = new PieceDropper(cP);
+        pieceDropper = new PieceDropper(cP);
         cP.setPieceDropper(pieceDropper);
 //        
 
         frame.run();
         cP.setHighScore();
         cP.setDistractionBoard();
+        cP.setEngine(this);
         pieceDropper.run();
+    }
+    public void reStart() {
+        pieceDropper.interrupt();
+        initialize();
     }
 }
