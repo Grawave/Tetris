@@ -25,3 +25,9 @@ GameSituation tietää luokat Field ja Piece. Sillä on metodi jonka avulla pala
 Engine on luokka jonka avulla peli käynnistetään
 
 CommunicationPlatform välittää komentoja GUIn ja logiikan välillä.
+
+##MovePiece, onnistunut palan siirtäminen.
+![MovePiece](/Dokumentaatio/Sekvenssikaaviot/movePiece.png)
+
+##MovePiece, palan siirtäminen joka johtaa palan jäädyttämiseen
+![FreezePiece](/Dokumentaatio/Sekvenssikaaviot/freezePiece.png)
