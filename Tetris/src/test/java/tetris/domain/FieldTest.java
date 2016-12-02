@@ -36,7 +36,18 @@ public class FieldTest {
         f = new Field(width, height);
         p = new Piece(width / 2, height - 2, Formation.O);
     }
-
+    @Test
+    public void spotIsVacantWorksWithEmptyField() {
+        assertTrue(f.spotIsVacant(5, 5));
+        assertTrue(!f.spotIsVacant(-1, 5));
+        assertTrue(!f.spotIsVacant(11, 5));
+        assertTrue(f.spotIsVacant(5, -4));
+        assertTrue(!f.spotIsVacant(5, 29));
+    }
+    @Test
+    public void isEmptyWorks() {
+        assertTrue(f.isEmpty());
+    }
     @Test
     public void freezePieceWorks() {
         assertEquals(0, f.getNumberOfBlocksOnRow(height - 1));
