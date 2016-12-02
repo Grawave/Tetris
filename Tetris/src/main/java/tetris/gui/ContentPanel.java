@@ -50,33 +50,70 @@ public class ContentPanel extends JPanel {
         this.communicator = communicator;
         createLayout();
         createScoreBoard();
-//        createEmptyLeftFiller();
         createKeyBindings();
+        rightLayeredPane = new JLayeredPane();
+        add(rightLayeredPane);
+//        createDistractionBoard(new String[]{"asd","k"});
+//        this.add(new JButton("SDF"));
     }
 
     public void createDistractionBoard(String[] quotes) {
-        this.quotes = quotes;
-        quoteArea = new JTextArea(newRandomQuote());
-        quoteArea.setBounds(150, 250, 500, 500);
-
-        rightLayeredPane = new JLayeredPane();
         rightLayeredPane.setLayout(null);
         rightLayeredPane.setPreferredSize(GS_PREF);
 
-        rightLayeredPane.add(quoteArea);
+        this.quotes = quotes;
+        quoteSettings();
+
+        ImageIcon image = new ImageIcon(PIC_URL);
+        JLabel imageHolder = new JLabel();
+        imageHolder.setIcon(image);
+        imageHolder.setBounds(0, 0, 800, 1200);
+
+        rightLayeredPane.add(imageHolder, 0, 0);
+        rightLayeredPane.add(quoteArea, 4, 4);
+
     }
 
     private String newRandomQuote() {
         Random random = new Random();
         int index = random.nextInt(quotes.length - 1);
-        return quotes[index];
+        String quote = quotes[index];
+        return modifyToLines(quote);
+    }
+
+    private String modifyToLines(String string) {
+        String modified = "Distractions for your mind.. \n  \n";
+        boolean lineChange = false;
+        int i = 0;
+        while (i < string.length()) {
+            char ch = string.charAt(i);
+            if (i % 30 == 0 && i != 0) {
+                lineChange = true;
+            }
+            if (lineChange && ch == ' ') {
+                lineChange = false;
+                modified += "\n";
+            }
+            modified += ch;
+            i++;
+        }
+        return modified;
     }
 
     private void updateQuote() {
-        quoteArea = new JTextArea(newRandomQuote());
-        quoteArea.setBounds(150, 250, 500, 500);
+        rightLayeredPane.remove(quoteArea);
+        quoteSettings();
 
+        rightLayeredPane.add(quoteArea, 1, 1);
         rightLayeredPane.repaint();
+    }
+
+    private void quoteSettings() {
+        quoteArea = new JTextArea(newRandomQuote());
+        quoteArea.setBounds(0, 0, 600, 1000);
+        quoteArea.setFont(new Font("Serif", Font.PLAIN, 18));
+        quoteArea.setOpaque(false);
+        quoteArea.setForeground(Color.white);
     }
 
     private void createScoreBoard() {
@@ -94,7 +131,7 @@ public class ContentPanel extends JPanel {
         scoreLabel = new JLabel("<html>SCORE<br>" + communicator.getScore() + "</html>");
         scoreLabel.setForeground(Color.WHITE);
         scoreLabel.setFont(new Font("Serif", Font.PLAIN, 30));
-        scoreLabel.setBounds(100, 500, 300, 300);
+        scoreLabel.setBounds(100, 10, 300, 300);
 
         leftLayeredPane.add(scoreLabel, 1, 1);
 
@@ -112,7 +149,7 @@ public class ContentPanel extends JPanel {
         scoreLabel = new JLabel("<html>SCORE<br>" + score + "</html>");
         scoreLabel.setForeground(Color.WHITE);
         scoreLabel.setFont(new Font("Serif", Font.PLAIN, 30));
-        scoreLabel.setBounds(100, 500, 300, 300);
+        scoreLabel.setBounds(100, 10, 300, 300);
 
         leftLayeredPane.add(scoreLabel, 1, 1);
         leftLayeredPane.repaint();
@@ -151,21 +188,12 @@ public class ContentPanel extends JPanel {
     }
 
     /**
-     * Fills the first column of the GridLayout with a filler, invisible button.
-     */
-    private void createEmptyLeftFiller() {
-        JButton button = new JButton();
-        button.setVisible(false);
-        add(button);
-    }
-
-    /**
      * Adds the GameSituationPanel to this ContentPanel. Sets it's dimensions
      *
      * @param gs GameSituationPanel to be added.
      */
     public void addGS(GameSituationPanel gs) {
-        add(gs);
+        add(gs, 1);
         gs.setPreferredSize(GS_PREF);
         gs.setMinimumSize(GS_MIN);
         gs.setMaximumSize(GS_MAX);
@@ -175,7 +203,7 @@ public class ContentPanel extends JPanel {
         JLabel highScoreLabel = new JLabel("<html>HIGHSCORE<br>" + highScore + "</html>");
         highScoreLabel.setFont(new Font("Serif", Font.PLAIN, 30));
         highScoreLabel.setForeground(Color.WHITE);
-        highScoreLabel.setBounds(100, 600, 300, 300);
+        highScoreLabel.setBounds(100, 100, 300, 300);
         leftLayeredPane.add(highScoreLabel, 3, 3);
     }
 

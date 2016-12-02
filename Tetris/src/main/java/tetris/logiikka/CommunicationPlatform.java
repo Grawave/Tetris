@@ -118,7 +118,7 @@ public class CommunicationPlatform implements Communicator {
             defeat();
         } else if (moveResult.pieceWasFrozen) {
             gs.createActivePiece();
-            frame.updateScore();
+            frame.updateBoards();
             rePaintSituation(blockTableToColorTable(gs.getFieldAndPieceBlocks()));
         }
     }
@@ -127,12 +127,14 @@ public class CommunicationPlatform implements Communicator {
         int score = gs.getScore();
         boolean newHighScore = score > highScore;
         gs.gameIsActive = false;
-        try {
-            PrintWriter writer = new PrintWriter("highscore.txt", "UTF-8");
-            writer.println(score);
-            writer.close();
-        } catch (IOException e) {
-            throw new IllegalStateException("unable to write highscore.txt");
+        if (newHighScore) {
+            try {
+                PrintWriter writer = new PrintWriter("highscore.txt", "UTF-8");
+                writer.println(score);
+                writer.close();
+            } catch (IOException e) {
+                throw new IllegalStateException("unable to write highscore.txt");
+            }
         }
         frame.close();
     }
@@ -186,11 +188,11 @@ public class CommunicationPlatform implements Communicator {
             throw new IllegalArgumentException("no such filepath for quotes");
         }
         while (reader.hasNext()) {
-            quoteList.add(reader.next());
+            quoteList.add(reader.nextLine());
         }
         String[] quotes = new String[quoteList.size()];
         for (int i = 0; i < quotes.length; i++) {
-            quotes[i]=quoteList.get(i);
+            quotes[i] = quoteList.get(i);
         }
         frame.setDistractionBoard(quotes);
     }
