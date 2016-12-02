@@ -62,6 +62,11 @@ public class TetrisFrame implements Runnable {
         contentPanel.addGS(this.gameSituationPanel);
     }
 
+    /**
+     * Passes the given colorTable to gameSituationpanel.
+     *
+     * @param colorTable the given colorTable
+     */
     public void rePaintSituation(Color[][] colorTable) {
         gameSituationPanel.rePaintSituation(colorTable);
     }
@@ -69,16 +74,35 @@ public class TetrisFrame implements Runnable {
     public void close() {
         frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
     }
-    
+
+    /**
+     * Tells the contentPanel to update its scoreboard and distraction board.
+     */
     public void updateBoards() {
         contentPanel.updateBoards();
     }
+
+    /**
+     * Passes the given highScore argument to contentPanel.
+     *
+     * @param highScore given highScore argument.
+     */
     public void setHighScore(int highScore) {
         contentPanel.setHighScore(highScore);
     }
+
+    /**
+     * Passes the given quotes to contentPanel.
+     *
+     * @param quotes given quotes.
+     */
     public void setDistractionBoard(String[] quotes) {
         contentPanel.createDistractionBoard(quotes);
     }
+
+    /**
+     * disposes the frame
+     */
     public void dispose() {
         frame.dispose();
     }

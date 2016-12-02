@@ -22,7 +22,9 @@ public class Block {
     private Color color;
 
     /**
-     * Constructs a block with color and coordinates of given x,y and color values.
+     * Constructs a block with color and coordinates of given x,y and color
+     * values.
+     *
      * @param x coordinate
      * @param y coordinate
      * @param color of block
@@ -35,7 +37,8 @@ public class Block {
 
     /**
      * Moves the block to the given direction
-     * @param direction of movement 
+     *
+     * @param direction of movement
      */
     public void move(Direction direction) {
         this.x += direction.x;
@@ -43,28 +46,29 @@ public class Block {
     }
 
     /**
-     *  @return the blocks location among the x-axis
+     * @return the blocks location among the x-axis
      */
     public int getX() {
         return x;
     }
-    
+
     /**
      * @return the blocks location among the y-axis
      */
     public int getY() {
         return y;
     }
-    
+
     /**
      * @return the color associated with this block.
      */
     public Color getColor() {
         return this.color;
     }
-    
+
     /**
      * Resets the block's coordinates to given x and y values.
+     *
      * @param x new x-coordinate for the block.
      * @param y new y-coordinate for the block.
      */

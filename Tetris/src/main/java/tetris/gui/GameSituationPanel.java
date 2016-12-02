@@ -25,7 +25,7 @@ public class GameSituationPanel extends JPanel {
     private int height;
     private final Color BACKGROUND_COLOR = Color.BLACK;
     private final Color BORDER_COLOR = Color.GRAY;
-    
+
     private GridLayout layout;
 
     public GameSituationPanel(int width, int height) {

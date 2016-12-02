@@ -16,21 +16,34 @@ import tetris.gui.TetrisFrame;
  * @author isjani
  */
 public interface Communicator {
+
     public void newGame();
+
     /**
-     * gives access to the engine that begins a game
+     * Sets the engine to communicate with. (for creation of a rematch
+     * purposes)
+     *
+     * @param engine engine to communicate with.
      */
     public void setEngine(Engine engine);
+
+    /**
+     * Reads quotes from a source and tells the frame to use them for a
+     * distraction board.
+     */
     public void setDistractionBoard();
+
     /**
      * Retrieves highest score from text file, and gives it to the frame
      */
     public void setHighScore();
+
     /**
-     * 
+     *
      * @return the current score
      */
     public int getScore();
+
     /**
      * Attempts to move the piece to given direction.
      *
@@ -67,13 +80,14 @@ public interface Communicator {
     /**
      * Sets the PieceDropper with which the communication is to be done.
      *
-     * @param gameSituation to communicate with
+     * @param pieceDropper to communicate with
      */
     public void setPieceDropper(PieceDropper pieceDropper);
 
-    /**
-     * Tells the frame to repaint itself.
-     */
+/**
+ * Tells the frame to repaint itself.
+ * @param colorTable to use for repainting.
+ */
     public void rePaintSituation(Color[][] colorTable);
 
     /**

@@ -12,6 +12,8 @@ import tetris.domain.GameSituation;
 import tetris.gui.TetrisFrame;
 
 /**
+ * This class is the heart of the application. Engine is the source from where
+ * everything is created and started.
  *
  * @author isjani
  */
@@ -19,7 +21,7 @@ public class Engine {
 
     private final int width = 10;
     private final int height = 20;
-    
+
     private Communicator cP;
     private PieceDropper pieceDropper;
 
@@ -31,6 +33,12 @@ public class Engine {
 
     }
 
+    /**
+     * Creates a field, gamesituation, PieceDropper thread, communicator and a
+     * frame. Gives communicator awareness of gamesituation and frame.
+     * Initializes and runs frame , giving it awareness of communicator. Starts
+     * PieceDropper and gives it awareness of Communicator.
+     */
     public void initialize() {
         Field field = new Field(width, height);
         GameSituation gs = new GameSituation(field);
@@ -52,6 +60,10 @@ public class Engine {
         cP.setEngine(this);
         pieceDropper.run();
     }
+
+    /**
+     * Attempts to restart and start a new game. Not working.
+     */
     public void reStart() {
         pieceDropper.interrupt();
         initialize();

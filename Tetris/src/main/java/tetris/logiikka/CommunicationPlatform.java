@@ -183,11 +183,17 @@ public class CommunicationPlatform implements Communicator {
         paused = !paused;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getScore() {
         return gs.getScore();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setDistractionBoard() {
         Scanner reader;
@@ -211,8 +217,6 @@ public class CommunicationPlatform implements Communicator {
     public void newGame() {
         frame.dispose();
         engine.reStart();
-//    Engine engine = new Engine();
-//    engine.initialize();
     }
 
     @Override

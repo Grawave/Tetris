@@ -11,6 +11,7 @@ import java.util.List;
 
 /**
  * Knows all the frozen blocks in the Tetris-field.
+ *
  * @author isjani
  */
 public class Field {
@@ -18,9 +19,10 @@ public class Field {
     private Block[][] frozenBlocks;
     private final int width;
     private final int height;
-    
+
     /**
      * Constructs a field with given width and height. Coordinates start from 0.
+     *
      * @param width of the field.
      * @param height of the field.
      */
@@ -29,11 +31,12 @@ public class Field {
         this.width = width;
         this.height = height;
     }
-    
+
     /**
-     * Attempts to freeze the given piece to where it is. 
-     * 
-     * The piece can be frozen and the game can be lost or won. 
+     * Attempts to freeze the given piece to where it is.
+     *
+     * The piece can be frozen and the game can be lost or won.
+     *
      * @param piece to be frozen.
      * @return MoveResult object is returned to indicate the result.
      * @see tetris.domain.MoveResult
@@ -54,7 +57,7 @@ public class Field {
         }
         // checks the rows where insertions where made. Drops rows above
         // if any rows were filled
-        moveResult.pointsGained =dropRows();
+        moveResult.pointsGained = dropRows();
 
         if (this.isEmpty()) {
             moveResult.gameWon = true;
@@ -84,7 +87,7 @@ public class Field {
 
     private void dropRowsAbove(int y) {
         for (int h = y; h >= 0; h--) {
-            if(h==0) {
+            if (h == 0) {
                 for (int x = 0; x < width; x++) {
                     frozenBlocks[h][x] = null;
                 }
@@ -95,9 +98,10 @@ public class Field {
             }
         }
     }
-    
+
     /**
-     * @return two-dimensional array that contains all the frozen blocks in the field. 
+     * @return two-dimensional array that contains all the frozen blocks in the
+     * field.
      */
     public Block[][] getFrozenBlocks() {
         return this.frozenBlocks;
@@ -105,11 +109,13 @@ public class Field {
 
     /**
      * Checks whether or not the spot of the input coordinates is vacant.
+     *
      * @param x - coordinate or column number
      * @param y - coordinate or row number
-     * @return  True if coordinates are above the field in y-axis.
-     * True if coordinates exist in the limits of the field and the spot is vacant.
-     * False if coordinates exist and spot is not vacant. False if coordinates are over the sides or under the bottom of the field.
+     * @return True if coordinates are above the field in y-axis. True if
+     * coordinates exist in the limits of the field and the spot is vacant.
+     * False if coordinates exist and spot is not vacant. False if coordinates
+     * are over the sides or under the bottom of the field.
      */
     public boolean spotIsVacant(int x, int y) {
         // if y<0, or coordinates point towards a vacant spot in the field, the spot is considered to be vacan. 
@@ -157,6 +163,7 @@ public class Field {
     public int getWidth() {
         return this.width;
     }
+
     public int getHeight() {
         return this.height;
     }

@@ -22,8 +22,6 @@ Graafinen käyttöliittymä perustuu javan valmiiseen Swing kirjastoon.
 
 GameSituation tietää luokat Field ja Piece. Sillä on metodi jonka avulla palasta voidaan liikuttaa kentässä.
 
-Engine on luokka jonka avulla peli käynnistetään, ja GameSituationia muutetaan.
+Engine on luokka jonka avulla peli käynnistetään
 
 CommunicationPlatform välittää komentoja GUIn ja logiikan välillä.
-
-Seuraavana ohjelmassa on graafisen käyttöliittymän luominen.

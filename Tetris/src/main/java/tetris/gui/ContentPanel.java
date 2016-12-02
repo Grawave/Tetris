@@ -26,6 +26,7 @@ import tetris.logiikka.Direction;
 import tetris.logiikka.Rotation;
 
 /**
+ * ContentPanel contains everything to be displayed in the TetrisFrame.
  *
  * @author isjani
  */
@@ -45,6 +46,11 @@ public class ContentPanel extends JPanel {
 
     private GridLayout layout;
 
+    /**
+     * Initializes the panel with a ScoreBoard and sets up keybindings.
+     *
+     * @param communicator to communicate with.
+     */
     public ContentPanel(Communicator communicator) {
         super();
         this.communicator = communicator;
@@ -53,10 +59,14 @@ public class ContentPanel extends JPanel {
         createKeyBindings();
         rightLayeredPane = new JLayeredPane();
         add(rightLayeredPane);
-//        createDistractionBoard(new String[]{"asd","k"});
-//        this.add(new JButton("SDF"));
     }
 
+    /**
+     * Creates a panel that contains a background image and distractive quotes.
+     * Because why not?
+     *
+     * @param quotes quotes to be displayed.
+     */
     public void createDistractionBoard(String[] quotes) {
         rightLayeredPane.setLayout(null);
         rightLayeredPane.setPreferredSize(GS_PREF);
@@ -138,6 +148,10 @@ public class ContentPanel extends JPanel {
         add(leftLayeredPane);
     }
 
+    /**
+     * Updates the score status and puts a new random quote on the distraction
+     * board.
+     */
     public void updateBoards() {
         int score = communicator.getScore();
         if (score == 0) {
@@ -199,6 +213,11 @@ public class ContentPanel extends JPanel {
         gs.setMaximumSize(GS_MAX);
     }
 
+    /**
+     * Sets the given highscore to be displayed on the scoreboard.
+     *
+     * @param highScore to be displayed.
+     */
     public void setHighScore(int highScore) {
         JLabel highScoreLabel = new JLabel("<html>HIGHSCORE<br>" + highScore + "</html>");
         highScoreLabel.setFont(new Font("Serif", Font.PLAIN, 30));

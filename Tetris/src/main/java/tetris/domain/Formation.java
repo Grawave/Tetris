@@ -11,7 +11,9 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Describes how the blocks of given formation should be in relationship to each other.
+ * Describes how the blocks of given formation should be in relationship to each
+ * other.
+ *
  * @author isjani
  */
 public enum Formation {
@@ -23,7 +25,7 @@ public enum Formation {
      * L-shape. Pivot is the second highest block of a standing L.
      */
     L(new int[]{0, 1, 0, 0}, new int[]{0, 0, -1, -2}, 2, Color.BLUE), //(0,0) is bottom left of standing L
-     /**
+    /**
      * T-shape. Pivot is top middle block of a standing T.
      */
     T(new int[]{0, 0, 1, -1}, new int[]{0, 1, 1, 1}, 1, Color.CYAN), //(0,0) is the top piece of T lying down on its long back
@@ -32,7 +34,8 @@ public enum Formation {
      */
     S(new int[]{0, -1, 1, 0}, new int[]{0, 0, -1, -1}, 3, Color.ORANGE), //(0,0) is the bottom right of S
     /**
-     * I-shape. Pivot is the second block from the left of I lying down (in the moment of creation).
+     * I-shape. Pivot is the second block from the left of I lying down (in the
+     * moment of creation).
      */
     I(new int[]{0, -1, 1, 2}, new int[]{0, 0, 0, 0}, 0, Color.WHITE), // (0,0)  is the second left piece of I lying down
     /**
@@ -43,7 +46,7 @@ public enum Formation {
      * J-shape. Pivot is the second highest block of a standing J.
      */
     J(new int[]{0, -1, 0, 0}, new int[]{0, 0, -1, -2}, 2, Color.MAGENTA); // (0,0) is  is bottom right of standing J// (0,0) is  is bottom right of standing J
-    
+
     /**
      * x values of block coordinates. x[i] corresponds to y[i]
      */
@@ -53,7 +56,8 @@ public enum Formation {
      */
     public int[] yVal;
     /**
-     * Starting coordinates of the pivot can be accessed by  x[pivotIndex], y[pivotIndex] 
+     * Starting coordinates of the pivot can be accessed by x[pivotIndex],
+     * y[pivotIndex]
      */
     public int pivotIndex;
     /**
@@ -67,9 +71,10 @@ public enum Formation {
         this.pivotIndex = p;
         this.color = color;
     }
-    
+
     /**
-     * @return A random Formation object from the pool of all possible formations. 
+     * @return A random Formation object from the pool of all possible
+     * formations.
      */
     public static Formation getRandom() {
         List<Formation> forms = new ArrayList<>();

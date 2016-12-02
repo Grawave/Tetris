@@ -74,7 +74,7 @@ public class Piece {
     public void rotateBlock(Block block, Rotation rotation) {
         int xPivot = pivot.getX();
         int yPivot = pivot.getY();
-        
+
         int xBlock = block.getX();
         int yBlock = block.getY();
 

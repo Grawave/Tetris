@@ -50,25 +50,27 @@ public class EndFrame implements Runnable {
             condition = "You lost the game.. Maybe next time!";
         }
         JButton button = new JButton(condition);
-        button.addActionListener(new NewGameListener(communicator,frame));
+        button.addActionListener(new NewGameListener(communicator, frame));
 
         frame.getContentPane()
                 .add(button);
     }
-    
+
     private class NewGameListener implements ActionListener {
+
         private Communicator communicator;
         private JFrame frame;
-        
+
         public NewGameListener(Communicator communicator, JFrame frame) {
-            this.communicator=communicator;
+            this.communicator = communicator;
             this.frame = frame;
         }
+
         @Override
         public void actionPerformed(ActionEvent e) {
             frame.dispose();
             communicator.newGame();
         }
-        
+
     }
 }

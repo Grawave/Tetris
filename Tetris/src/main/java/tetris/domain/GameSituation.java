@@ -34,8 +34,8 @@ public class GameSituation {
 
     /**
      * Attempts to move the piece to the given direction. Piece can be moved, it
-     * can stay still or be frozen. Being frozen can result in increase of score and the end of the
-     * game.
+     * can stay still or be frozen. Being frozen can result in increase of score
+     * and the end of the game.
      *
      * @param direction of movement
      * @return A MoveResult object that indicates the outcome.
@@ -129,9 +129,10 @@ public class GameSituation {
         }
         return copy;
     }
+
     /**
-     * 
-     * @return the current score. 
+     *
+     * @return the current score.
      */
     public int getScore() {
         return this.score;
