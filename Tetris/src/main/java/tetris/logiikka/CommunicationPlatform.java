@@ -126,6 +126,7 @@ public class CommunicationPlatform implements Communicator {
     }
 
     private void defeat() {
+        gs.gameIsActive = false;
         scoreRecording();
         EndFrame endFrame = new EndFrame(false, this);
         endFrame.run();
@@ -133,6 +134,9 @@ public class CommunicationPlatform implements Communicator {
 
     private void victory() {
         gs.gameIsActive = false;
+        scoreRecording();
+        EndFrame endFrame = new EndFrame(true, this);
+        endFrame.run();
     }
 
     private void scoreRecording() {
@@ -202,7 +206,7 @@ public class CommunicationPlatform implements Communicator {
         }
         frame.setDistractionBoard(quotes);
     }
-    
+
     @Override
     public void newGame() {
         frame.dispose();
