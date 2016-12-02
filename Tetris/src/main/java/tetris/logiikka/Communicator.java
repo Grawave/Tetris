@@ -16,12 +16,15 @@ import tetris.gui.TetrisFrame;
  * @author isjani
  */
 public interface Communicator {
-
+    
+    /**
+     * starts a new game.
+     */
     public void newGame();
 
     /**
      * Sets the engine to communicate with. (for creation of a rematch
-     * purposes)
+     * purposes).
      *
      * @param engine engine to communicate with.
      */
@@ -34,14 +37,11 @@ public interface Communicator {
     public void setDistractionBoard();
 
     /**
-     * Retrieves highest score from text file, and gives it to the frame
+     * Retrieves highest score from text file, and gives it to the frame.
      */
     public void setHighScore();
 
-    /**
-     *
-     * @return the current score
-     */
+
     public int getScore();
 
     /**
@@ -59,6 +59,7 @@ public interface Communicator {
     public void rotatePiece(Rotation rotation);
 
     /**
+     * Checks whether the game is active or not.
      * @return true if game is active
      */
     public boolean gameIsActive();
@@ -92,7 +93,7 @@ public interface Communicator {
 
     /**
      * Tells the PieceDropper to stop when it is running, or continue if it's
-     * stopped
+     * stopped.
      */
     public void pauseGame();
 }

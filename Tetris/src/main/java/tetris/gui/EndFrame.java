@@ -14,7 +14,7 @@ import javax.swing.WindowConstants;
 import tetris.logiikka.Communicator;
 
 /**
- *
+ * This frame is to be displayed as the game ends.
  * @author isjani
  */
 public class EndFrame implements Runnable {
@@ -23,6 +23,12 @@ public class EndFrame implements Runnable {
     private Communicator communicator;
     private boolean gameWon;
 
+    /**
+     * Creates a new instance of EndFrame. The end result varies according
+     * to gameWon status.
+     * @param gameWon indicates if the game was won.
+     * @param communicator is told to create a new game if the player wants to.
+     */
     public EndFrame(boolean gameWon, Communicator communicator) {
         this.communicator = communicator;
         this.gameWon = gameWon;
@@ -60,12 +66,22 @@ public class EndFrame implements Runnable {
 
         private Communicator communicator;
         private JFrame frame;
-
+        
+        /**
+         * Creates a listener that upon activation will ask the communicator
+         * to create a new game.
+         * @param communicator
+         * @param frame 
+         */
         public NewGameListener(Communicator communicator, JFrame frame) {
             this.communicator = communicator;
             this.frame = frame;
         }
-
+        
+        /**
+         * Asks the communicator to create a  new game upon activation.
+         * @param e actionEvent.
+         */
         @Override
         public void actionPerformed(ActionEvent e) {
             frame.dispose();

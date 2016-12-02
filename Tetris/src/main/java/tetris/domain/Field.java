@@ -100,8 +100,8 @@ public class Field {
     }
 
     /**
-     * @return two-dimensional array that contains all the frozen blocks in the
-     * field.
+     * two-dimensional array that contains all the frozen blocks in the field.
+     * @return two dimensional array of blocks
      */
     public Block[][] getFrozenBlocks() {
         return this.frozenBlocks;
@@ -130,6 +130,7 @@ public class Field {
     }
 
     /**
+     * Returns the number of blocks on the specified row.
      * @param row number
      * @return number of blocks on the row
      */
@@ -144,6 +145,7 @@ public class Field {
     }
 
     /**
+     * Checks whether the field contains no pieces.
      * @return True if there are no frozen pieces.
      */
     public boolean isEmpty() {
@@ -157,9 +159,6 @@ public class Field {
         return true;
     }
 
-    /**
-     * @return width of the field.
-     */
     public int getWidth() {
         return this.width;
     }

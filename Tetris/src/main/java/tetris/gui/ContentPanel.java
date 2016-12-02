@@ -193,9 +193,6 @@ public class ContentPanel extends JPanel {
         aCM.put("PAUSE", new PauseAction(communicator));
     }
 
-    /**
-     * creates a 1 row 3 column GridLayout
-     */
     private void createLayout() {
         layout = new GridLayout(0, 3);
         setLayout(layout);
@@ -226,51 +223,4 @@ public class ContentPanel extends JPanel {
         leftLayeredPane.add(highScoreLabel, 3, 3);
     }
 
-    private static class MoveAction extends AbstractAction {
-
-        private Direction dir;
-        private Communicator communicator;
-
-        public MoveAction(Direction dir, Communicator c) {
-            this.dir = dir;
-            this.communicator = c;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            communicator.movePiece(dir);
-        }
-
-    }
-
-    private static class RotateAction extends AbstractAction {
-
-        private Rotation rot;
-        private Communicator communicator;
-
-        public RotateAction(Rotation rot, Communicator c) {
-            this.rot = rot;
-            this.communicator = c;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            communicator.rotatePiece(rot);
-        }
-
-    }
-
-    private static class PauseAction extends AbstractAction {
-
-        private Communicator communicator;
-
-        public PauseAction(Communicator communicator) {
-            this.communicator = communicator;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            communicator.pauseGame();
-        }
-    }
 }

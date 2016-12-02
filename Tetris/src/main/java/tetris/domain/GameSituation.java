@@ -26,6 +26,11 @@ public class GameSituation {
     public boolean gameIsActive;
     private final int BLOCK_COUNT = 4;
 
+    /**
+     * Creates a new instance of game situation.
+     *
+     * @param field related to the game situation.
+     */
     public GameSituation(Field field) {
         this.field = field;
         gameIsActive = true;
@@ -37,7 +42,7 @@ public class GameSituation {
      * can stay still or be frozen. Being frozen can result in increase of score
      * and the end of the game.
      *
-     * @param direction of movement
+     * @param direction of movement.
      * @return A MoveResult object that indicates the outcome.
      * @see tetris.domain.MoveResult
      */
@@ -92,11 +97,18 @@ public class GameSituation {
         this.activePiece = randomPiece;
     }
 
+    /**
+     * Creates a new active piece of a given form.
+     *
+     * @param form shape of the new active piece.
+     */
     public void createActivePiece(Formation form) {
         this.activePiece = new Piece(field.getWidth() / 2, 0, form);
     }
 
     /**
+     * Checks whether or not the field is empty.
+     *
      * @return True if the field is empty.
      */
     public boolean fieldIsEmpty() {
@@ -104,8 +116,10 @@ public class GameSituation {
     }
 
     /**
-     * @return A two-dimensional array that contains all the blocks in the game.
-     * Active and frozen.
+     * Asks the field for it's array of blocks and adds active pieces blocks to
+     * the array. Returns this array.
+     *
+     * @return A two-dimensional array of blocks.
      */
     public Block[][] getFieldAndPieceBlocks() {
         Block[][] blocks = copyBlocks(field.getFrozenBlocks(), field.getWidth(), field.getHeight());
@@ -130,10 +144,6 @@ public class GameSituation {
         return copy;
     }
 
-    /**
-     *
-     * @return the current score.
-     */
     public int getScore() {
         return this.score;
     }

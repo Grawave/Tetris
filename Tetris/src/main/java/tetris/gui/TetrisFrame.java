@@ -13,7 +13,7 @@ import javax.swing.WindowConstants;
 import tetris.logiikka.Communicator;
 
 /**
- * The frame for all the content
+ * The frame for all the content displayed during the game.
  *
  * @author isjani
  */
@@ -25,7 +25,14 @@ public class TetrisFrame implements Runnable {
     private int gridWidth;
     private int gridHeight;
     private ContentPanel contentPanel;
-
+    
+    /**
+     * Creates a new instance of main game frame that communicates with the given
+     * communicator. 
+     * @param communicator to communicate with.
+     * @param width for the game grid.
+     * @param height for the game grid.
+     */
     public TetrisFrame(Communicator communicator, int width, int height) {
         this.communicator = communicator;
         this.gridWidth = width;
@@ -70,7 +77,10 @@ public class TetrisFrame implements Runnable {
     public void rePaintSituation(Color[][] colorTable) {
         gameSituationPanel.rePaintSituation(colorTable);
     }
-
+    
+    /**
+     * Closes this particular frame without shutting down the program.
+     */
     public void close() {
         frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
     }
@@ -101,7 +111,7 @@ public class TetrisFrame implements Runnable {
     }
 
     /**
-     * disposes the frame
+     * disposes the frame.
      */
     public void dispose() {
         frame.dispose();

@@ -36,7 +36,7 @@ public class Block {
     }
 
     /**
-     * Moves the block to the given direction
+     * Moves the block to the given direction.
      *
      * @param direction of movement
      */
@@ -45,23 +45,16 @@ public class Block {
         this.y += direction.y;
     }
 
-    /**
-     * @return the blocks location among the x-axis
-     */
     public int getX() {
         return x;
     }
 
-    /**
-     * @return the blocks location among the y-axis
-     */
+
     public int getY() {
         return y;
     }
 
-    /**
-     * @return the color associated with this block.
-     */
+
     public Color getColor() {
         return this.color;
     }

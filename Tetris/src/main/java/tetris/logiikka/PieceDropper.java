@@ -17,7 +17,12 @@ import java.util.logging.Logger;
 public class PieceDropper extends Thread {
 
     private Communicator cP;
-
+    
+    /**
+     * Creates a new instance of piece dropper, that communicates with the
+     * give communicator.
+     * @param cP the given communicator.
+     */
     public PieceDropper(Communicator cP) {
         super();
         this.cP = cP;

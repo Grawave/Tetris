@@ -34,7 +34,10 @@ public class CommunicationPlatform implements Communicator {
     private int highScore;
     private Engine engine;
     // "/home/jani/Tetris/Tetris/freeBackground.jpg"
-
+    
+    /**
+     * Creates a new communication platform.
+     */
     public CommunicationPlatform() {
         paused = false;
     }

@@ -57,7 +57,7 @@ public enum Formation {
     public int[] yVal;
     /**
      * Starting coordinates of the pivot can be accessed by x[pivotIndex],
-     * y[pivotIndex]
+     * y[pivotIndex].
      */
     public int pivotIndex;
     /**
@@ -73,8 +73,8 @@ public enum Formation {
     }
 
     /**
-     * @return A random Formation object from the pool of all possible
-     * formations.
+     * Generates and returns a random object from the pool of all possible formations.
+     * @return A random Formation
      */
     public static Formation getRandom() {
         List<Formation> forms = new ArrayList<>();

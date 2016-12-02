@@ -22,6 +22,11 @@ public enum Rotation {
         yMultiplier = b;
     }
 
+    /**
+     * Gives the direction opposite to the given rotation.
+     * @param rot given rotation.
+     * @return Rotation instance, reverse to input.
+     */
     public static Rotation reverseRotation(Rotation rot) {
         if (rot == Rotation.LEFT) {
             return Rotation.RIGHT;

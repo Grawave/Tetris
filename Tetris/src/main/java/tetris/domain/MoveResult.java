@@ -30,7 +30,7 @@ public class MoveResult {
     public boolean pieceWasMoved;
 
     /**
-     * 0 on creation
+     * 0 on creation.
      */
     public int pointsGained;
 

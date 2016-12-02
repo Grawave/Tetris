@@ -11,3 +11,5 @@ Päivä | Tunnit | Kuvaus
 21.11.2016| 1 | Koodikatselmoinnin palautteen analysointia ja koodin siistimistä.
 22.11.2016| 4 | Guin alkeet. CommunicationPlatform logiikan ja guin välille
 25.11.2016| 3 | Guin alustusta, dokumentaation luontia, erimielisyyksiä CheckStylen kanssa.
+1.12.2016 | 7 | Logiikan viimeiset debuggaukset. Gui käytännössä valmis.
+2.12.2016 | 6 | Guin hienosäätöä ja ylimääräisiä lisäyksiä. Dokumentointia.

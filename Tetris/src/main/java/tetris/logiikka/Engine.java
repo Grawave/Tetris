@@ -24,13 +24,18 @@ public class Engine {
 
     private Communicator cP;
     private PieceDropper pieceDropper;
-
+    
+    /**
+     * creates a new instance of engine.
+     */
     public Engine() {
     }
-
+    
+    /**
+     * Let the game begin!
+     */
     public void start() {
         initialize();
-
     }
 
     /**

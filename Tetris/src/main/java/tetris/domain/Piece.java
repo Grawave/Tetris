@@ -49,7 +49,7 @@ public class Piece {
     }
 
     /**
-     * Rotates the piece to according to given rotation
+     * Rotates the piece to according to given rotation.
      *
      * @param rotation direction to be rotating.
      * @return true if the rotation was successful.
@@ -101,9 +101,7 @@ public class Piece {
         }
     }
 
-    /**
-     * @return a list of blocks that the piece consists of.
-     */
+  
     public List<Block> getBlocks() {
         return this.blocks;
     }
