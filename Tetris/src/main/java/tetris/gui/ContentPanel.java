@@ -137,7 +137,17 @@ public class ContentPanel extends JPanel {
         imageHolder.setBounds(0, 0, 800, 1200);
 
         leftLayeredPane.add(imageHolder, 0, 0);
-
+        
+        JLabel manual = new JLabel("<html>Move Right - Right Arrow <br>"
+                +"Move Left   - Left Arrow <br>"+
+                "Rotate Right - C <br> " +
+                "Rotate Left  - Z <br> " +
+                "Pause        - P</html>");
+        manual.setForeground(Color.WHITE);
+        manual.setFont(new Font("Serif", Font.PLAIN, 20));
+        manual.setBounds(50,300,300,300);
+        leftLayeredPane.add(manual,4,4);
+        
         scoreLabel = new JLabel("<html>SCORE<br>" + communicator.getScore() + "</html>");
         scoreLabel.setForeground(Color.WHITE);
         scoreLabel.setFont(new Font("Serif", Font.PLAIN, 30));

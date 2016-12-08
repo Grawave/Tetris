@@ -218,8 +218,11 @@ public class CommunicationPlatform implements Communicator {
 
     @Override
     public void newGame() {
-        frame.dispose();
-        engine.reStart();
+        pieceDropper.interrupt();
+        gs.reset();
+        pieceDropper = new PieceDropper(this);
+        pieceDropper.notify();
+        pieceDropper.run();
     }
 
     @Override

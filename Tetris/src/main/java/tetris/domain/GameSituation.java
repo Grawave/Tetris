@@ -147,4 +147,11 @@ public class GameSituation {
     public int getScore() {
         return this.score;
     }
+
+    public void reset() {
+        this.score = 0;
+        field.reset();
+        createActivePiece();
+        this.gameIsActive=true;
+    }
 }
