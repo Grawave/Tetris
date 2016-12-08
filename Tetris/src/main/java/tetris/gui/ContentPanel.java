@@ -10,6 +10,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.net.URL;
 import java.util.Random;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
@@ -41,9 +42,10 @@ public class ContentPanel extends JPanel {
     private JLayeredPane leftLayeredPane;
     private JLayeredPane rightLayeredPane;
     private String[] quotes;
+    private JLabel highScoreLabel;
 
-    private final String PIC_URL = "freeBackground.jpg";
-
+//    private final String PIC_URL = "freeBackground.jpg";
+    private final URL PIC_URL =getClass().getClassLoader().getResource("freeBackground.jpg");
     private GridLayout layout;
 
     /**
@@ -53,12 +55,14 @@ public class ContentPanel extends JPanel {
      */
     public ContentPanel(Communicator communicator) {
         super();
+        System.out.println(PIC_URL.getPath());
         this.communicator = communicator;
         createLayout();
         createScoreBoard();
         createKeyBindings();
         rightLayeredPane = new JLayeredPane();
         add(rightLayeredPane);
+        
     }
 
     /**
@@ -137,17 +141,18 @@ public class ContentPanel extends JPanel {
         imageHolder.setBounds(0, 0, 800, 1200);
 
         leftLayeredPane.add(imageHolder, 0, 0);
-        
+
         JLabel manual = new JLabel("<html>Move Right - Right Arrow <br>"
-                +"Move Left   - Left Arrow <br>"+
-                "Rotate Right - C <br> " +
-                "Rotate Left  - Z <br> " +
-                "Pause        - P</html>");
+                + "Move Left   - Left Arrow <br>"
+                + "Rotate Right - C <br> "
+                + "Rotate Left  - Z <br> "
+                + "Pause        - P</html>");
         manual.setForeground(Color.WHITE);
         manual.setFont(new Font("Serif", Font.PLAIN, 20));
-        manual.setBounds(50,300,300,300);
-        leftLayeredPane.add(manual,4,4);
-        
+        manual.setBounds(50, 300, 300, 300);
+
+        leftLayeredPane.add(manual, 4, 4);
+
         scoreLabel = new JLabel("<html>SCORE<br>" + communicator.getScore() + "</html>");
         scoreLabel.setForeground(Color.WHITE);
         scoreLabel.setFont(new Font("Serif", Font.PLAIN, 30));
@@ -164,9 +169,7 @@ public class ContentPanel extends JPanel {
      */
     public void updateBoards() {
         int score = communicator.getScore();
-        if (score == 0) {
-            return;
-        }
+
         leftLayeredPane.remove(scoreLabel);
         leftLayeredPane.repaint();
 
@@ -226,11 +229,26 @@ public class ContentPanel extends JPanel {
      * @param highScore to be displayed.
      */
     public void setHighScore(int highScore) {
-        JLabel highScoreLabel = new JLabel("<html>HIGHSCORE<br>" + highScore + "</html>");
+        highScoreLabel = new JLabel("<html>HIGHSCORE<br>" + highScore + "</html>");
         highScoreLabel.setFont(new Font("Serif", Font.PLAIN, 30));
         highScoreLabel.setForeground(Color.WHITE);
         highScoreLabel.setBounds(100, 100, 300, 300);
         leftLayeredPane.add(highScoreLabel, 3, 3);
+    }
+    /**
+     * Updates the highscore to given value.
+     * @param highScore  new highscore.
+     */
+    public void updateHighScore(int highScore) {
+        leftLayeredPane.remove(highScoreLabel);
+        
+        highScoreLabel = new JLabel("<html>HIGHSCORE<br>" + highScore + "</html>");
+        highScoreLabel.setFont(new Font("Serif", Font.PLAIN, 30));
+        highScoreLabel.setForeground(Color.WHITE);
+        highScoreLabel.setBounds(100, 100, 300, 300);
+        
+        leftLayeredPane.add(highScoreLabel, 3, 3);
+        leftLayeredPane.repaint();
     }
 
 }

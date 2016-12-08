@@ -6,11 +6,8 @@
 package tetris.logiikka;
 
 import java.awt.Color;
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Scanner;
 import tetris.domain.Block;
 import tetris.domain.MoveResult;
 import tetris.domain.GameSituation;
@@ -29,12 +26,9 @@ public class CommunicationPlatform implements Communicator {
     private TetrisFrame frame;
     private PieceDropper pieceDropper;
     private boolean paused;
-    private final String HIGH_SCORE_FILEPATH = "highscore.txt";
-    private final String QUOTES_FILEPATH = "quotes.txt";
-    private int highScore;
     private Engine engine;
-    // "/home/jani/Tetris/Tetris/freeBackground.jpg"
-    
+    private ScoreRecorder scoreRecorder;
+
     /**
      * Creates a new communication platform.
      */
@@ -46,7 +40,7 @@ public class CommunicationPlatform implements Communicator {
      * {@inheritDoc}
      */
     public synchronized void movePiece(Direction direction) {
-        if (paused) {
+        if (paused || !gs.gameIsActive) {
             return;
         }
         MoveResult moveResult = gs.movePiece(direction);
@@ -57,21 +51,8 @@ public class CommunicationPlatform implements Communicator {
      * {@inheritDoc}
      */
     public void setHighScore() {
-        highScore = 0;
-        Scanner reader;
-        try {
-            reader = new Scanner(new File(HIGH_SCORE_FILEPATH));
-        } catch (Exception e) {
-            throw new IllegalArgumentException("no such filepath for High scores");
-        }
-        if (reader.hasNext()) {
-            try {
-                highScore = Integer.parseInt(reader.next());
-            } catch (Exception e) {
-                throw new IllegalArgumentException("highscore unreadable");
-            }
-        }
-        frame.setHighScore(highScore);
+        scoreRecorder = new ScoreRecorder();
+        frame.setHighScore(scoreRecorder.getHighScore());
     }
 
     /**
@@ -144,17 +125,7 @@ public class CommunicationPlatform implements Communicator {
 
     private void scoreRecording() {
         int score = gs.getScore();
-        boolean newHighScore = score > highScore;
-        gs.gameIsActive = false;
-        if (newHighScore) {
-            try {
-                PrintWriter writer = new PrintWriter("highscore.txt", "UTF-8");
-                writer.println(score);
-                writer.close();
-            } catch (IOException e) {
-                throw new IllegalStateException("unable to write highscore.txt");
-            }
-        }
+        scoreRecorder.update(score);
     }
 
     /**
@@ -199,35 +170,28 @@ public class CommunicationPlatform implements Communicator {
      */
     @Override
     public void setDistractionBoard() {
-        Scanner reader;
-        ArrayList<String> quoteList = new ArrayList<>();
-        try {
-            reader = new Scanner(new File(QUOTES_FILEPATH));
-        } catch (Exception e) {
-            throw new IllegalArgumentException("no such filepath for quotes");
-        }
-        while (reader.hasNext()) {
-            quoteList.add(reader.nextLine());
-        }
-        String[] quotes = new String[quoteList.size()];
-        for (int i = 0; i < quotes.length; i++) {
-            quotes[i] = quoteList.get(i);
-        }
-        frame.setDistractionBoard(quotes);
+        DistractionQuotes dQ = new DistractionQuotes();
+        frame.setDistractionBoard(dQ.getQuotes());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void newGame() {
         pieceDropper.interrupt();
         gs.reset();
         pieceDropper = new PieceDropper(this);
-        pieceDropper.notify();
-        pieceDropper.run();
+        pieceDropper.start();
+        frame.updateBoards();
+        frame.updateHighScore(this.scoreRecorder.getHighScore());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setEngine(Engine engine) {
         this.engine = engine;
     }
-
 }

@@ -63,7 +63,7 @@ public class Engine {
         cP.setHighScore();
         cP.setDistractionBoard();
         cP.setEngine(this);
-        pieceDropper.run();
+        pieceDropper.start();
     }
 
     /**

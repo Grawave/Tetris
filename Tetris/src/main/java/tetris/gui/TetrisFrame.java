@@ -116,5 +116,12 @@ public class TetrisFrame implements Runnable {
     public void dispose() {
         frame.dispose();
     }
+    
+    /**
+     * updates the highScore board.
+     */
+    public void updateHighScore(int newScore) {
+        contentPanel.updateHighScore(newScore);
+    }
 
 }
