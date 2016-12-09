@@ -152,6 +152,7 @@ public class ContentPanel extends JPanel {
 
         JLabel manual = new JLabel("<html>Move Right - Right Arrow <br>"
                 + "Move Left   - Left Arrow <br>"
+                + "Move Down   - Down Arrow <br>"
                 + "Rotate Right - C <br> "
                 + "Rotate Left  - Z <br> "
                 + "Pause        - P</html>");

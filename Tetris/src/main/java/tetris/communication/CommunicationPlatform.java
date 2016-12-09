@@ -124,6 +124,7 @@ public class CommunicationPlatform implements Communicator {
 
     private void victory() {
         gs.gameIsActive = false;
+        scoreRecorder.update(gs.getScore()+1000);
         scoreRecording();
         EndFrame endFrame = new EndFrame(true, this);
         endFrame.run();

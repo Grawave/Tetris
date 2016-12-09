@@ -27,20 +27,6 @@ public class ScoreRecorder {
     public ScoreRecorder() {
         this.highScore = readHighScore();
     }
-
-    private int readHighScoreWithUtil() {
-        String result = "0";
-        try {
-            result = IOUtils.toString(getClass().getClassLoader().getResourceAsStream(HIGH_SCORE_FILENAME));
-        } catch (IOException ex) {
-            Logger.getLogger(ScoreRecorder.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if (result.contains("\n")) {
-            result = result.substring(0, result.length() - 1);
-        }
-        System.out.println(result);
-        return Integer.parseInt(result);
-    }
     
     private int readHighScore() {
         int result = 0;
