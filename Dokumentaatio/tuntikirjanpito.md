@@ -13,3 +13,5 @@ Päivä | Tunnit | Kuvaus
 25.11.2016| 3 | Guin alustusta, dokumentaation luontia, erimielisyyksiä CheckStylen kanssa.
 1.12.2016 | 7 | Logiikan viimeiset debuggaukset. Gui käytännössä valmis.
 2.12.2016 | 6 | Guin hienosäätöä ja ylimääräisiä lisäyksiä. Dokumentointia.
+5.12.2016 | 5 | Toimivaa jaria ja kommunikointia tekstitiedostojen kanssa.
+9.12.2016 | 6 | Toimiva Jar ja dokumentoinnin päivitystä enimmäkseen.
