@@ -25,10 +25,11 @@ public class TetrisFrame implements Runnable {
     private int gridWidth;
     private int gridHeight;
     private ContentPanel contentPanel;
-    
+
     /**
-     * Creates a new instance of main game frame that communicates with the given
-     * communicator. 
+     * Creates a new instance of main game frame that communicates with the
+     * given communicator.
+     *
      * @param communicator to communicate with.
      * @param width for the game grid.
      * @param height for the game grid.
@@ -77,7 +78,7 @@ public class TetrisFrame implements Runnable {
     public void rePaintSituation(Color[][] colorTable) {
         gameSituationPanel.rePaintSituation(colorTable);
     }
-    
+
     /**
      * Closes this particular frame without shutting down the program.
      */
@@ -116,9 +117,11 @@ public class TetrisFrame implements Runnable {
     public void dispose() {
         frame.dispose();
     }
-    
+
     /**
      * updates the highScore board.
+     *
+     * @param newScore new highScore.
      */
     public void updateHighScore(int newScore) {
         contentPanel.updateHighScore(newScore);

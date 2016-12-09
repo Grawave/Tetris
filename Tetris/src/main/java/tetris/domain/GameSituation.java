@@ -134,6 +134,14 @@ public class GameSituation {
         return blocks;
     }
 
+    /**
+     * Copies the content of the first block matrix to a new matrix.
+     *
+     * @param original matrix to be copied
+     * @param width of matrix
+     * @param height of matrix
+     * @return copy of original matrix.
+     */
     public Block[][] copyBlocks(Block[][] original, int width, int height) {
         Block[][] copy = new Block[height][width];
         for (int row = 0; row < height; row++) {
@@ -148,10 +156,14 @@ public class GameSituation {
         return this.score;
     }
 
+    /**
+     * Resets the score to zero. Resets the field and creates a new active
+     * piece.
+     */
     public void reset() {
         this.score = 0;
         field.reset();
         createActivePiece();
-        this.gameIsActive=true;
+        this.gameIsActive = true;
     }
 }

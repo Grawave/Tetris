@@ -45,7 +45,10 @@ public interface Communicator {
      */
     public void setHighScore();
 
-
+    /**
+     * Retrieves the current score.
+     * @return the current score.
+     */
     public int getScore();
 
     /**

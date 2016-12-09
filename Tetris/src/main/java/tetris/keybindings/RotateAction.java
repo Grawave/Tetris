@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tetris.ḱeybindings;
+package tetris.keybindings;
 
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;

@@ -26,6 +26,9 @@ Engine on luokka jonka avulla peli käynnistetään
 
 CommunicationPlatform välittää komentoja GUIn ja logiikan välillä.
 
+##Piecedropper, onnistunut palan siirtäminen
+![PieceDropper] (/Dokumentaatio/Sekvenssikaaviot/PieceDropperDropsPieceSuccesfully.png)
+
 ##MovePiece, onnistunut palan siirtäminen.
 ![MovePiece](/Dokumentaatio/Sekvenssikaaviot/movePiece.png)
 

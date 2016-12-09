@@ -30,7 +30,7 @@
             <param>tetris.domain.GameSituation</param>
           </targetClasses>
           <targetTests>
-            <param>tetris.domain.BLockTest</param>
+            <param>tetris.domain.BlockTest</param>
             <param>tetris.domain.FieldTest</param>
             <param>tetris.domain.PieceTest</param>
             <param>tetris.domain.GameSituationTest</param>

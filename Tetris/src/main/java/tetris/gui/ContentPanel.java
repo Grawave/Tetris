@@ -5,9 +5,9 @@
  */
 package tetris.gui;
 
-import tetris.ḱeybindings.RotateAction;
-import tetris.ḱeybindings.PauseAction;
-import tetris.ḱeybindings.MoveAction;
+import tetris.keybindings.RotateAction;
+import tetris.keybindings.PauseAction;
+import tetris.keybindings.MoveAction;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -53,7 +53,7 @@ public class ContentPanel extends JPanel {
     private JLabel highScoreLabel;
 
 //    private final String PIC_URL = "freeBackground.jpg";
-    private final URL PIC_URL =getClass().getClassLoader().getResource("freeBackground.jpg");
+    private final URL PIC_URL = getClass().getClassLoader().getResource("freeBackground.jpg");
     private GridLayout layout;
 
     /**
@@ -70,7 +70,7 @@ public class ContentPanel extends JPanel {
         createKeyBindings();
         rightLayeredPane = new JLayeredPane();
         add(rightLayeredPane);
-        
+
     }
 
     /**
@@ -244,18 +244,20 @@ public class ContentPanel extends JPanel {
         highScoreLabel.setBounds(100, 100, 300, 300);
         leftLayeredPane.add(highScoreLabel, 3, 3);
     }
+
     /**
      * Updates the highscore to given value.
-     * @param highScore  new highscore.
+     *
+     * @param highScore new highscore.
      */
     public void updateHighScore(int highScore) {
         leftLayeredPane.remove(highScoreLabel);
-        
+
         highScoreLabel = new JLabel("<html>HIGHSCORE<br>" + highScore + "</html>");
         highScoreLabel.setFont(new Font("Serif", Font.PLAIN, 30));
         highScoreLabel.setForeground(Color.WHITE);
         highScoreLabel.setBounds(100, 100, 300, 300);
-        
+
         leftLayeredPane.add(highScoreLabel, 3, 3);
         leftLayeredPane.repaint();
     }

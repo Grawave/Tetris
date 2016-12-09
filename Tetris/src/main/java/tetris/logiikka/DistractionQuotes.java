@@ -5,21 +5,16 @@
  */
 package tetris.logiikka;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JTextArea;
-import org.apache.commons.io.IOUtils;
 
 /**
+ * This class contains the quotes to be displayed.
  *
  * @author isjani
  */
@@ -28,6 +23,10 @@ public class DistractionQuotes {
     private final String QUOTES_FILENAME = "quotes.txt";
     private final String[] quotes;
 
+    /**
+     * Creates a new instance of this class. Constructor loads in the quotes
+     * from a file.
+     */
     public DistractionQuotes() {
         quotes = readQuotes();
     }
@@ -57,6 +56,11 @@ public class DistractionQuotes {
         return result;
     }
 
+    /**
+     * Returns the quotes as a table.
+     *
+     * @return table of quotes.
+     */
     public String[] getQuotes() {
         return this.quotes;
     }

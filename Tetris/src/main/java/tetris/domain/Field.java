@@ -169,7 +169,10 @@ public class Field {
     public int getHeight() {
         return this.height;
     }
-
+    
+    /**
+     * Resets the field, so that all elements in matrix point to NULL.
+     */
     public void reset() {
         this.frozenBlocks = new Block[height][width];
     }

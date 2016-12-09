@@ -35,7 +35,7 @@ public class PieceDropper extends Thread {
      */
     @Override
     public synchronized void run() {
-        while (cP.gameIsActive()) {
+        while (true) {
             try {
                 wait(500);
             } catch (InterruptedException ex) {

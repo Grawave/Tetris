@@ -7,23 +7,23 @@ package tetris.logiikka;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.URL;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.apache.commons.io.IOUtils;
 
 /**
- *
+ * This class holds connection to highscore file and communicates with it.
  * @author isjani
  */
 public class ScoreRecorder {
 
     private int highScore;
     private final String HIGH_SCORE_FILENAME = "highscore.txt";
-
+    
+    /**
+     * Creates a new instance of this class. Loads the current highscore from the file.
+     */
     public ScoreRecorder() {
         this.highScore = readHighScore();
     }
@@ -39,10 +39,18 @@ public class ScoreRecorder {
         return result;
     }
 
+    /**
+     * Returns the current highscore.
+     * @return current highscore.
+     */
     public int getHighScore() {
         return this.highScore;
     }
 
+    /**
+     * If new Score is higher than current highscore, opens the highscore file and rewrites it. 
+     * @param newScore to be set as highscore.
+     */
     public void update(int newScore) {
         if (newScore > highScore) {
             try {

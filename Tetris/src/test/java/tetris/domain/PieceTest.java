@@ -5,10 +5,6 @@
  */
 package tetris.domain;
 
-import tetris.domain.Piece;
-import tetris.domain.Formation;
-import tetris.domain.Block;
-import tetris.logiikka.Direction;
 import java.util.List;
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
