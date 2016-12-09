@@ -27,23 +27,18 @@ public class ScoreRecorder {
 
     private int readHighScore() {
         int highS = 0;
-        Scanner reader=null;
-        try {
-//            reader = new Scanner(new File(HIGH_SCORE_URL.getPath()));
-            reader = new Scanner(HIGH_SCORE_FILE.getAbsoluteFile());
+        try (Scanner reader = new Scanner(HIGH_SCORE_FILE.getAbsoluteFile())) {
+            if (reader.hasNext()) {
+                try {
+                    highS = Integer.parseInt(reader.next());
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    throw new IllegalArgumentException("highscore unreadable");
+                }
+            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
-//            System.out.println(HIGH_SCORE_URL.getPath());
-//            System.out.println(HIGH_SCORE_FILE.getPath());
-//            throw new IllegalArgumentException("no such filepath for High scores");
-        }
-        if (reader.hasNext()) {
-            try {
-                highS = Integer.parseInt(reader.next());
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-                throw new IllegalArgumentException("highscore unreadable");
-            }
+
         }
         return highS;
     }

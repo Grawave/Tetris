@@ -55,7 +55,6 @@ public class ContentPanel extends JPanel {
      */
     public ContentPanel(Communicator communicator) {
         super();
-        System.out.println(PIC_URL.getPath());
         this.communicator = communicator;
         createLayout();
         createScoreBoard();

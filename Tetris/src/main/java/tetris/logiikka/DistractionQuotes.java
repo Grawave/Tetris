@@ -20,7 +20,7 @@ import javax.swing.JTextArea;
 public class DistractionQuotes {
 
     private final URL QUOTES_URL = getClass().getClassLoader().getResource("file/quotes.txt");
-    
+
     private String[] quotes;
 
     public DistractionQuotes() {
@@ -29,16 +29,16 @@ public class DistractionQuotes {
     }
 
     public String[] readQuotes() {
-        Scanner reader;
         ArrayList<String> quoteList = new ArrayList<>();
         try {
-            reader = new Scanner(new File(QUOTES_URL.getPath()));
+            Scanner reader = new Scanner(new File(QUOTES_URL.getPath()));
+            while (reader.hasNextLine()) {
+                quoteList.add(reader.nextLine());
+            }
         } catch (Exception e) {
-            throw new IllegalArgumentException("no such filepath for quotes");
+            System.out.println(e.getMessage());
         }
-        while (reader.hasNext()) {
-            quoteList.add(reader.nextLine());
-        }
+
         String[] quotes = new String[quoteList.size()];
         for (int i = 0; i < quotes.length; i++) {
             quotes[i] = quoteList.get(i);
