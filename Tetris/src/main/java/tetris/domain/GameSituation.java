@@ -134,7 +134,7 @@ public class GameSituation {
         return blocks;
     }
 
-    private Block[][] copyBlocks(Block[][] original, int width, int height) {
+    public Block[][] copyBlocks(Block[][] original, int width, int height) {
         Block[][] copy = new Block[height][width];
         for (int row = 0; row < height; row++) {
             for (int column = 0; column < width; column++) {

@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Describes how the blocks of given formation should be in relationship to each
@@ -64,6 +65,7 @@ public enum Formation {
      * The color unique to the blocks of this formation.
      */
     public Color color;
+    private static List<Formation> forms;
 
     private Formation(int[] x, int[] y, int p, Color color) {
         this.xVal = x;
@@ -73,13 +75,18 @@ public enum Formation {
     }
 
     /**
-     * Generates and returns a random object from the pool of all possible formations.
+     * Generates and returns a random object from the pool of all possible
+     * formations.
+     *
      * @return A random Formation
      */
     public static Formation getRandom() {
-        List<Formation> forms = new ArrayList<>();
-        Collections.addAll(forms, Formation.values());
-        Collections.shuffle(forms);
-        return forms.get(0);
+        if (forms == null) {
+            forms = new ArrayList<>();
+            Collections.addAll(forms, Formation.values());
+        }
+        Random random = new Random();
+        int randomIndex = random.nextInt(forms.size());
+        return forms.get(randomIndex);
     }
 }
