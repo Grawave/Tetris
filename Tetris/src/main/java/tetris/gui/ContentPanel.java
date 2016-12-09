@@ -10,8 +10,13 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.Random;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
 import javax.swing.ImageIcon;
@@ -55,6 +60,7 @@ public class ContentPanel extends JPanel {
      */
     public ContentPanel(Communicator communicator) {
         super();
+        System.out.println(PIC_URL.getPath());
         this.communicator = communicator;
         createLayout();
         createScoreBoard();

@@ -6,10 +6,14 @@
 package tetris.logiikka;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.apache.commons.io.IOUtils;
 
 /**
  *
@@ -18,29 +22,35 @@ import java.util.Scanner;
 public class ScoreRecorder {
 
     private int highScore;
-    private final URL HIGH_SCORE_URL = getClass().getClassLoader().getResource("file/highscore.txt");
-    private final File HIGH_SCORE_FILE = new File(getClass().getClassLoader().getResource("file/highscore.txt").getFile());
+    private final String HIGH_SCORE_FILENAME = "highscore.txt";
 
     public ScoreRecorder() {
         this.highScore = readHighScore();
     }
 
-    private int readHighScore() {
-        int highS = 0;
-        try (Scanner reader = new Scanner(HIGH_SCORE_FILE.getAbsoluteFile())) {
-            if (reader.hasNext()) {
-                try {
-                    highS = Integer.parseInt(reader.next());
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                    throw new IllegalArgumentException("highscore unreadable");
-                }
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-
+    private int readHighScoreWithUtil() {
+        String result = "0";
+        try {
+            result = IOUtils.toString(getClass().getClassLoader().getResourceAsStream(HIGH_SCORE_FILENAME));
+        } catch (IOException ex) {
+            Logger.getLogger(ScoreRecorder.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return highS;
+        if (result.contains("\n")) {
+            result = result.substring(0, result.length() - 1);
+        }
+        System.out.println(result);
+        return Integer.parseInt(result);
+    }
+    
+    private int readHighScore() {
+        int result = 0;
+        try {
+            Scanner scanner = new Scanner(new File(HIGH_SCORE_FILENAME));
+            result = Integer.parseInt(scanner.nextLine());
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ScoreRecorder.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
     }
 
     public int getHighScore() {
@@ -50,12 +60,12 @@ public class ScoreRecorder {
     public void update(int newScore) {
         if (newScore > highScore) {
             try {
-                PrintWriter writer = new PrintWriter(HIGH_SCORE_URL.getPath(), "UTF-8");
+                PrintWriter writer = new PrintWriter(HIGH_SCORE_FILENAME);
                 writer.println(newScore);
                 writer.close();
                 this.highScore = newScore;
-            } catch (IOException e) {
-                throw new IllegalStateException("unable to write highscore.txt");
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(ScoreRecorder.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

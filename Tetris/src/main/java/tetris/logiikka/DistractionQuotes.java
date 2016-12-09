@@ -8,10 +8,16 @@ package tetris.logiikka;
 import java.awt.Color;
 import java.awt.Font;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTextArea;
+import org.apache.commons.io.IOUtils;
 
 /**
  *
@@ -19,31 +25,36 @@ import javax.swing.JTextArea;
  */
 public class DistractionQuotes {
 
-    private final URL QUOTES_URL = getClass().getClassLoader().getResource("file/quotes.txt");
-
-    private String[] quotes;
+    private final String QUOTES_FILENAME = "quotes.txt";
+    private final String[] quotes;
 
     public DistractionQuotes() {
-        System.out.println(QUOTES_URL.getPath());
         quotes = readQuotes();
     }
 
-    public String[] readQuotes() {
-        ArrayList<String> quoteList = new ArrayList<>();
+    /**
+     * Reads quotes from the running location.
+     *
+     * @return quotes as a table.
+     */
+    private String[] readQuotes() {
+        List<String> utilList = new ArrayList<>();
         try {
-            Scanner reader = new Scanner(new File(QUOTES_URL.getPath()));
-            while (reader.hasNextLine()) {
-                quoteList.add(reader.nextLine());
+            Scanner scanner = new Scanner(new File(QUOTES_FILENAME));
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                if (!line.isEmpty()) {
+                    utilList.add(line);
+                }
             }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DistractionQuotes.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        String[] quotes = new String[quoteList.size()];
-        for (int i = 0; i < quotes.length; i++) {
-            quotes[i] = quoteList.get(i);
+        String[] result = new String[utilList.size()];
+        for (int i = 0; i < utilList.size(); i++) {
+            result[i] = utilList.get(i);
         }
-        return quotes;
+        return result;
     }
 
     public String[] getQuotes() {
