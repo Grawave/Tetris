@@ -14,7 +14,7 @@ Pause - P
 Näppäimien toiminnot näkyvät myös pelin aikana peliruudun vasemmalla puolella.
 
 ##Todellista pelikuvaa!
-![Pelinakyma](Dokumentaatio/pelinakyma.png)
+![Pelinakyma](/Dokumentaatio/pelinakyma.png)
 
 ##Pelin eteneminen
 Sinun tulee ohjata ja asetella palikoita peliruudukkoon. Käytössäsi on yksi palanen kerrallaan. Tuhoat rivin ja tiputat sen yllä olevat palaset kun saat rivin täyteen. 
