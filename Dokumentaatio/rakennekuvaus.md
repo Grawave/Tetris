@@ -13,7 +13,7 @@ Yllä huomattiin, että Logiikka ja Domain eivät tiedä GUIta, ja että GUI ei 
 CommunicationPlatform tietää GameSituationin ja keskeisimmän GUI luokan TetrisFramen. GUI tuntee myös CommunicationPlatformin, jotta pystyy viestimään käyttäjän napinpainalluksiin pohjautuvan toiminnan eteenpäin.
 
 CommunicationPlatform käskyttää GameSituationia kahdessa tapauksessa.
-		      -PieceDropper kutsuu metodia movePiece(DOWN)
-		      -Käyttäjän syötteen perusteella keybindings pakettiin kuuluva luokka kutsuu rotatePiece() tai movePiece()
+-		      PieceDropper kutsuu metodia movePiece(DOWN)
+-		      Käyttäjän syötteen perusteella keybindings pakettiin kuuluva luokka kutsuu rotatePiece() tai movePiece()
 
 Jokaisen kerran kun GameSituationia käskytetään, kerrotaan Guille päivityksen tarpeesta.
