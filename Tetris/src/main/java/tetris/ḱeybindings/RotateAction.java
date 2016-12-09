@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tetris.gui;
+package tetris.ḱeybindings;
 
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
-import tetris.logiikka.Communicator;
+import tetris.communication.Communicator;
 import tetris.logiikka.Rotation;
 
 /**

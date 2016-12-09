@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
-import tetris.logiikka.Communicator;
+import tetris.communication.Communicator;
 
 /**
  * This frame is to be displayed as the game ends.

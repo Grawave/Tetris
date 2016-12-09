@@ -3,13 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tetris.logiikka;
+package main;
 
+import tetris.communication.Communicator;
+import tetris.communication.CommunicationPlatform;
 import tetris.domain.Piece;
 import tetris.domain.Formation;
 import tetris.domain.Field;
 import tetris.domain.GameSituation;
 import tetris.gui.TetrisFrame;
+import tetris.timer.PieceDropper;
 
 /**
  * This class is the heart of the application. Engine is the source from where

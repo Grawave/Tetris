@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tetris.logiikka;
+package tetris.timer;
 
+import tetris.communication.Communicator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import tetris.logiikka.Direction;
 
 /**
  * PieceDropper is a separate thread. It tells the Communicator to move the

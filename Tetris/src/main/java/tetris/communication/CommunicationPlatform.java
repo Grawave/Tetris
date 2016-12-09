@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tetris.logiikka;
+package tetris.communication;
 
 import java.awt.Color;
 import java.io.IOException;
@@ -13,6 +13,12 @@ import tetris.domain.MoveResult;
 import tetris.domain.GameSituation;
 import tetris.gui.EndFrame;
 import tetris.gui.TetrisFrame;
+import tetris.logiikka.Direction;
+import tetris.logiikka.DistractionQuotes;
+import main.Engine;
+import tetris.timer.PieceDropper;
+import tetris.logiikka.Rotation;
+import tetris.logiikka.ScoreRecorder;
 
 /**
  * This class receives messages from threads and acts upon GameSituation (based

@@ -5,6 +5,9 @@
  */
 package tetris.gui;
 
+import tetris.ḱeybindings.RotateAction;
+import tetris.ḱeybindings.PauseAction;
+import tetris.ḱeybindings.MoveAction;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -27,7 +30,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
-import tetris.logiikka.Communicator;
+import tetris.communication.Communicator;
 import tetris.logiikka.Direction;
 import tetris.logiikka.Rotation;
 

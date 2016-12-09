@@ -10,7 +10,7 @@ import java.awt.Dimension;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
-import tetris.logiikka.Communicator;
+import tetris.communication.Communicator;
 
 /**
  * The frame for all the content displayed during the game.
