@@ -79,6 +79,9 @@ public class CommunicationPlatform implements Communicator {
      * {@inheritDoc}
      */
     public synchronized void rotatePiece(Rotation rotation) {
+        if (paused || !gs.gameIsActive) {
+            return;
+        }
         gs.rotatePiece(rotation);
         Color[][] colorTable = blockTableToColorTable(gs.getFieldAndPieceBlocks());
         rePaintSituation(colorTable);

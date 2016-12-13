@@ -136,6 +136,7 @@ public class ContentPanel extends JPanel {
         quoteArea.setFont(new Font("Serif", Font.PLAIN, 18));
         quoteArea.setOpaque(false);
         quoteArea.setForeground(Color.white);
+        quoteArea.setFocusable(false);
     }
 
     private void createScoreBoard() {

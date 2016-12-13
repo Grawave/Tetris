@@ -30,6 +30,7 @@ public class PieceDropper extends Thread {
         this.cP = cP;
     }
 
+    
     /**
      * Tells the communicator to move the piece at a standard time interval.
      */
