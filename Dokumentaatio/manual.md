@@ -1,6 +1,6 @@
 #Käyttöohjeet
 ##Käynnistys
-Käynnistä ohjelma jar tiedostosta.
+Käynnistä ohjelma jar tiedostosta. jar tiedoston tulee olla samassa kansiossa tiedostojen 'freeBackground.jpg', 'highscore.txt' ja 'quotes.txt' kanssa.
 Peli käynnistyy heti ohjelman käynnistyessä.
 
 ##Näppäimet

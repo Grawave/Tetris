@@ -53,6 +53,18 @@ public class GameSituationTest {
         }
         assertEquals(8, counter);
     }
+    @Test 
+    public void resetWorks() {
+        assertEquals(0,gs.getScore());
+        gs.createActivePiece();
+        MoveResult mR = gs.movePiece(Direction.DOWN);
+        while(mR.pieceWasMoved) {
+            mR = gs.movePiece(Direction.DOWN);
+        }
+        assertEquals(2,gs.getScore());
+        gs.reset();
+        assertEquals(0,gs.getScore());
+    }
 
     @Test
     public void copyBlocksWorks() {
@@ -70,15 +82,6 @@ public class GameSituationTest {
         }
         assertTrue(copyWorked);
     }
-//        private Block[][] copyBlocks(Block[][] original, int width, int height) {
-//        Block[][] copy = new Block[height][width];
-//        for (int row = 0; row < height; row++) {
-//            for (int column = 0; column < width; column++) {
-//                copy[row][column] = original[row][column];
-//            }
-//        }
-//        return copy;
-//    }
 
     @Test
     public void rotatePieceAndBack() {
