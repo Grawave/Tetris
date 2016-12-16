@@ -36,6 +36,7 @@ Seuraava kaavio näyttää miten peli päättyy pieceDropperin käskystä movePi
 -	EndFramessa on nappula josta klikkaamalla käsketään Communicatorin luoda uusi peli
 -	Communicator luo uuden pelin. 
 ![newGameSequence] (/Dokumentaatio/Sekvenssikaaviot/newGameSequence.png)
+
 ##Piecedropper, onnistunut palan siirtäminen
 ![PieceDropper] (/Dokumentaatio/Sekvenssikaaviot/PieceDropperDropsPieceSuccesfully.png)
 
