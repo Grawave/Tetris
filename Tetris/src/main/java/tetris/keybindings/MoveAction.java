@@ -15,8 +15,13 @@ import tetris.logiikka.Direction;
  * @author jani
  */
 public class MoveAction extends AbstractAction {
-
+    /**
+     * Direction of movement.
+     */
     private Direction dir;
+    /**
+     * Communicator to be notified when actions are performed.
+     */
     private Communicator communicator;
     /**
      * Creates a new instance of move action that communicates with

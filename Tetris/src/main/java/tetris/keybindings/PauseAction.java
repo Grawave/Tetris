@@ -14,7 +14,9 @@ import tetris.communication.Communicator;
  * @author jani
  */
 public class PauseAction extends AbstractAction {
-
+    /**
+     * Communicator to be notified when action is performed.
+     */
     private Communicator communicator;
     /**
      * Creates a new instance of pause action that communicates with

@@ -5,13 +5,17 @@
  */
 package tetris.logiikka;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTextArea;
 
 /**
  * This class contains the quotes to be displayed.
@@ -19,8 +23,11 @@ import java.util.logging.Logger;
  * @author isjani
  */
 public class DistractionQuotes {
-
+    
     private final String QUOTES_FILENAME = "quotes.txt";
+    /**
+     * Array containing all the quotes.
+     */
     private final String[] quotes;
 
     /**
@@ -63,5 +70,48 @@ public class DistractionQuotes {
      */
     public String[] getQuotes() {
         return this.quotes;
+    }
+
+    private void quoteSettings(JTextArea quoteArea) {
+        quoteArea.setBounds(0, 0, 600, 1000);
+        quoteArea.setFont(new Font("Serif", Font.PLAIN, 18));
+        quoteArea.setOpaque(false);
+        quoteArea.setForeground(Color.white);
+        quoteArea.setFocusable(false);
+    }
+    /**
+     * Creates a JTextArea containing a random quote.
+     * @return JTextArea containing a random quote.
+     */
+    public JTextArea newRandomQuoteArea() {
+        JTextArea quoteArea = new JTextArea(newRandomQuote());
+        quoteSettings(quoteArea);
+        return quoteArea;
+    }
+
+    private String newRandomQuote() {
+        Random random = new Random();
+        int index = random.nextInt(quotes.length - 1);
+        String quote = quotes[index];
+        return modifyToFitLines(quote);
+    }
+
+    private String modifyToFitLines(String string) {
+        String modified = "Distractions for your mind.. \n  \n";
+        boolean lineChange = false;
+        int i = 0;
+        while (i < string.length()) {
+            char ch = string.charAt(i);
+            if (i % 30 == 0 && i != 0) {
+                lineChange = true;
+            }
+            if (lineChange && ch == ' ') {
+                lineChange = false;
+                modified += "\n";
+            }
+            modified += ch;
+            i++;
+        }
+        return modified;
     }
 }

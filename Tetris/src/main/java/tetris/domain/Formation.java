@@ -65,6 +65,7 @@ public enum Formation {
      * The color unique to the blocks of this formation.
      */
     public Color color;
+
     private static List<Formation> forms;
 
     private Formation(int[] x, int[] y, int p, Color color) {

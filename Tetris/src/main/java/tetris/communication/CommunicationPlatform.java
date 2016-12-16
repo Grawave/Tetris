@@ -6,8 +6,6 @@
 package tetris.communication;
 
 import java.awt.Color;
-import java.io.IOException;
-import java.io.PrintWriter;
 import tetris.domain.Block;
 import tetris.domain.MoveResult;
 import tetris.domain.GameSituation;
@@ -15,7 +13,6 @@ import tetris.gui.EndFrame;
 import tetris.gui.TetrisFrame;
 import tetris.logiikka.Direction;
 import tetris.logiikka.DistractionQuotes;
-import main.Engine;
 import tetris.timer.PieceDropper;
 import tetris.logiikka.Rotation;
 import tetris.logiikka.ScoreRecorder;
@@ -28,11 +25,24 @@ import tetris.logiikka.ScoreRecorder;
  */
 public class CommunicationPlatform implements Communicator {
 
+    /**
+     * GameSituation that receives orders from pieceDropper and keyboard.
+     */
     private GameSituation gs;
+    /**
+     * Frame for the gui. All the communication to gui goes by the Frame.
+     */
     private TetrisFrame frame;
+    /**
+     * The timer-thread that tells this communicator to move pieces. This class
+     * has to know the pieceDropper. When a game ends and a new one is started,
+     * the pieceDropper needs to be interrupted.
+     */
     private PieceDropper pieceDropper;
+    /**
+     * Indicates whether the game is paused or not.
+     */
     private boolean paused;
-    private Engine engine;
     private ScoreRecorder scoreRecorder;
 
     /**
@@ -181,7 +191,7 @@ public class CommunicationPlatform implements Communicator {
     @Override
     public void setDistractionBoard() {
         DistractionQuotes dQ = new DistractionQuotes();
-        frame.setDistractionBoard(dQ.getQuotes());
+        frame.setDistractionBoard(dQ);
     }
 
     /**
@@ -195,13 +205,5 @@ public class CommunicationPlatform implements Communicator {
         pieceDropper.start();
         frame.updateBoards();
         frame.updateHighScore(this.scoreRecorder.getHighScore());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setEngine(Engine engine) {
-        this.engine = engine;
     }
 }

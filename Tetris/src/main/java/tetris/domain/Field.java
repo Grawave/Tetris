@@ -5,8 +5,6 @@
  */
 package tetris.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -16,8 +14,18 @@ import java.util.List;
  */
 public class Field {
 
+    /**
+     * A 2x2 matrix that contains all the frozen blocks. If no block is present
+     * in a element of the matrix, it has a value NULL.
+     */
     private Block[][] frozenBlocks;
+    /**
+     * Width of the field.
+     */
     private final int width;
+    /**
+     * Height of the field.
+     */
     private final int height;
 
     /**
@@ -169,7 +177,7 @@ public class Field {
     public int getHeight() {
         return this.height;
     }
-    
+
     /**
      * Resets the field, so that all elements in matrix point to NULL.
      */

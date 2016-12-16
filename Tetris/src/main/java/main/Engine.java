@@ -22,18 +22,21 @@ import tetris.timer.PieceDropper;
  */
 public class Engine {
 
+    /**
+     * Width of the gamefield to be created.
+     */
     private final int width = 10;
+    /**
+     * Height of the gamefield to be created.
+     */
     private final int height = 20;
 
-    private Communicator cP;
-    private PieceDropper pieceDropper;
-    
     /**
      * creates a new instance of engine.
      */
     public Engine() {
     }
-    
+
     /**
      * Let the game begin!
      */
@@ -52,28 +55,18 @@ public class Engine {
         GameSituation gs = new GameSituation(field);
         gs.createActivePiece();
 
-        cP = new CommunicationPlatform();
+        Communicator cP = new CommunicationPlatform();
         cP.setGameSituation(gs);
 
         TetrisFrame frame = new TetrisFrame(cP, width, height);
         cP.setFrame(frame);
 
-        pieceDropper = new PieceDropper(cP);
+        PieceDropper pieceDropper = new PieceDropper(cP);
         cP.setPieceDropper(pieceDropper);
-//        
 
         frame.run();
         cP.setHighScore();
         cP.setDistractionBoard();
-        cP.setEngine(this);
         pieceDropper.start();
-    }
-
-    /**
-     * Attempts to restart and start a new game. Not working.
-     */
-    public void reStart() {
-        pieceDropper.interrupt();
-        initialize();
     }
 }

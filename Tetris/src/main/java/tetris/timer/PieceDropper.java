@@ -17,7 +17,9 @@ import tetris.logiikka.Direction;
  * @author isjani
  */
 public class PieceDropper extends Thread {
-
+    /**
+     * Commands to drop the piece go through this communicator.
+     */
     private Communicator cP;
     
     /**

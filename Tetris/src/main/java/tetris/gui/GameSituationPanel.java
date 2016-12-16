@@ -21,11 +21,26 @@ import javax.swing.JPanel;
  */
 public class GameSituationPanel extends JPanel {
 
+    /**
+     * 2x2 matrix containing all the components to be displayed.
+     */
     private Component[][] components;
+    /**
+     * Width of the field and columns of the components matrix.
+     */
     private int width;
+    /**
+     * Height of the field and rows of the components matrix.
+     */
     private int height;
+    /**
+     * Color of an empty square.
+     */
     private final Color BACKGROUND_COLOR = Color.BLACK;
-    private final Color BORDER_COLOR = Color.GRAY;
+    /**
+     * Color of the borders between components.
+     */
+    private final Color BORDER_COLOR = Color.pink;
     private GridLayout layout;
 
     /**

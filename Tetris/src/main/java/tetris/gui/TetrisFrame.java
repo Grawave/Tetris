@@ -11,6 +11,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import tetris.communication.Communicator;
+import tetris.logiikka.DistractionQuotes;
 
 /**
  * The frame for all the content displayed during the game.
@@ -20,10 +21,22 @@ import tetris.communication.Communicator;
 public class TetrisFrame implements Runnable {
 
     private JFrame frame;
+    /**
+     * Communication between user pressable keybindings and game logic goes
+     * through this communicator.
+     */
     private Communicator communicator;
-    private GameSituationPanel gameSituationPanel;
+    /**
+     * width of the GameSituationPanel to be created.
+     */
     private int gridWidth;
+    /**
+     * height of the GameSituationPanel to be created.
+     */
     private int gridHeight;
+    /**
+     * Panel that has all the content.
+     */
     private ContentPanel contentPanel;
 
     /**
@@ -50,24 +63,16 @@ public class TetrisFrame implements Runnable {
         frame.setPreferredSize(new Dimension(1400, 1000));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         createContentPane();
-        createComponents();
-        assemble();
         frame.pack();
         frame.setVisible(true);
     }
 
     private void createContentPane() {
         contentPanel = new ContentPanel(communicator);
+        GameSituationPanel gsp = new GameSituationPanel(gridWidth, gridHeight);
+        gsp.initialize();
+        contentPanel.addGS(gsp);
         frame.getContentPane().add(contentPanel);
-    }
-
-    private void createComponents() {
-        this.gameSituationPanel = new GameSituationPanel(gridWidth, gridHeight);
-        this.gameSituationPanel.initialize();
-    }
-
-    private void assemble() {
-        contentPanel.addGS(this.gameSituationPanel);
     }
 
     /**
@@ -76,7 +81,7 @@ public class TetrisFrame implements Runnable {
      * @param colorTable the given colorTable
      */
     public void rePaintSituation(Color[][] colorTable) {
-        gameSituationPanel.rePaintSituation(colorTable);
+        contentPanel.repaintSituation(colorTable);
     }
 
     /**
@@ -107,7 +112,7 @@ public class TetrisFrame implements Runnable {
      *
      * @param quotes given quotes.
      */
-    public void setDistractionBoard(String[] quotes) {
+    public void setDistractionBoard(DistractionQuotes quotes) {
         contentPanel.createDistractionBoard(quotes);
     }
 

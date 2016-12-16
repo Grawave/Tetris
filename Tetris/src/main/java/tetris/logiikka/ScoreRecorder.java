@@ -14,20 +14,25 @@ import java.util.logging.Logger;
 
 /**
  * This class holds connection to highscore file and communicates with it.
+ *
  * @author isjani
  */
 public class ScoreRecorder {
 
+    /**
+     * Current highScore.
+     */
     private int highScore;
     private final String HIGH_SCORE_FILENAME = "highscore.txt";
-    
+
     /**
-     * Creates a new instance of this class. Loads the current highscore from the file.
+     * Creates a new instance of this class. Loads the current highscore from
+     * the file.
      */
     public ScoreRecorder() {
         this.highScore = readHighScore();
     }
-    
+
     private int readHighScore() {
         int result = 0;
         try {
@@ -41,6 +46,7 @@ public class ScoreRecorder {
 
     /**
      * Returns the current highscore.
+     *
      * @return current highscore.
      */
     public int getHighScore() {
@@ -48,7 +54,9 @@ public class ScoreRecorder {
     }
 
     /**
-     * If new Score is higher than current highscore, opens the highscore file and rewrites it. 
+     * If new Score is higher than current highscore, opens the highscore file
+     * and rewrites it.
+     *
      * @param newScore to be set as highscore.
      */
     public void update(int newScore) {

@@ -27,14 +27,6 @@ public interface Communicator {
     public void newGame();
 
     /**
-     * Sets the engine to communicate with. (for creation of a rematch
-     * purposes).
-     *
-     * @param engine engine to communicate with.
-     */
-    public void setEngine(Engine engine);
-
-    /**
      * Reads quotes from a source and tells the frame to use them for a
      * distraction board.
      */

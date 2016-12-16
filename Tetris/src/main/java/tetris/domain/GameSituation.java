@@ -17,13 +17,25 @@ import static tetris.logiikka.Rotation.reverseRotation;
  */
 public class GameSituation {
 
+    /**
+     * The field in which all the pieces will be frozen.
+     */
     private Field field;
+    /**
+     * The piece that is currently active and dropping towards the bottom.
+     */
     private Piece activePiece;
+    /**
+     * The current score.
+     */
     private int score;
     /**
      * True indicates that game is active and has not ended.
      */
     public boolean gameIsActive;
+    /**
+     * Number of blocks per piece.
+     */
     private final int BLOCK_COUNT = 4;
 
     /**
@@ -53,7 +65,7 @@ public class GameSituation {
         List<Block> blocks = activePiece.getBlocks();
         for (int i = 0; i < BLOCK_COUNT; i++) {
             Block b = blocks.get(i);
-            if (!field.spotIsVacant(b.getX() + direction.x, b.getY() + direction.y)) {
+            if (!field.spotIsVacant(b.getX() + direction.moveX, b.getY() + direction.moveY)) {
                 if (direction == Direction.DOWN) {
                     moveResult = field.freezePiece(activePiece);
                     score += moveResult.pointsGained;

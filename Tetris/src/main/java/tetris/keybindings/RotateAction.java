@@ -17,8 +17,13 @@ import tetris.logiikka.Rotation;
  * @author jani
  */
 public class RotateAction extends AbstractAction {
-
+    /**
+     * Direction of rotation.
+     */
     private Rotation rot;
+    /**
+     * Communicator to be notified when action is performed.
+     */
     private Communicator communicator;
 
     /**
