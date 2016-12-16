@@ -26,15 +26,15 @@ public class BackgroundImage {
     /**
      * Creates a new instance of BackgroundImage. Makes two JLabels that display
      * the image in the given URL.
-     * @param PIC_URL given URL for the image.
+     * @param PIC_FILEPATH given URL for the image.
      */
-    public BackgroundImage(URL PIC_URL) {
-        ImageIcon leftImage = new ImageIcon(PIC_URL);
+    public BackgroundImage(String PIC_FILEPATH) {
+        ImageIcon leftImage = new ImageIcon(PIC_FILEPATH);
         leftImageHolder = new JLabel();
         leftImageHolder.setIcon(leftImage);
         leftImageHolder.setBounds(0, 0, 800, 1200);
         
-        ImageIcon rightImage = new ImageIcon(PIC_URL);
+        ImageIcon rightImage = new ImageIcon(PIC_FILEPATH);
         rightImageHolder = new JLabel();
         rightImageHolder.setIcon(rightImage);
         rightImageHolder.setBounds(0, 0, 800, 1200);

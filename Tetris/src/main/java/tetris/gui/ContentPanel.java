@@ -12,6 +12,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.net.MalformedURLException;
+import java.net.URL;
 import javax.swing.ActionMap;
 import javax.swing.InputMap;
 import javax.swing.JLabel;
@@ -79,7 +81,8 @@ public class ContentPanel extends JPanel {
      */
     public ContentPanel(Communicator communicator) {
         super();
-        bImage = new BackgroundImage(getClass().getClassLoader().getResource("freeBackground.jpg"));
+//        bImage = new BackgroundImage(getClass().getClassLoader().getResource("freeBackground.png"));
+        bImage = new BackgroundImage("freeBackground.jpg");
         this.communicator = communicator;
         createLayout();
         createScoreBoard();
