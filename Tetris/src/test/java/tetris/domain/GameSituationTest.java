@@ -41,6 +41,8 @@ public class GameSituationTest {
         }
         gs.createActivePiece();
         gs.movePiece(Direction.DOWN);
+        gs.movePiece(Direction.DOWN);
+        gs.movePiece(Direction.DOWN);
         Block[][] b = gs.getFieldAndPieceBlocks();
 
         int counter = 0;
