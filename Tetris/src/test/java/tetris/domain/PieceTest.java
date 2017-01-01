@@ -5,10 +5,6 @@
  */
 package tetris.domain;
 
-import tetris.domain.Piece;
-import tetris.domain.Formation;
-import tetris.domain.Block;
-import tetris.logiikka.Direction;
 import java.util.List;
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
@@ -320,7 +316,7 @@ public class PieceTest {
             int x = list.get(i).getX();
             int y = list.get(i).getY();
             for (int j = 0; j < 4; j++) {
-                if (creationLocationX[j] + (many * dir.x) == x && creationLocationY[j] + (many * dir.y) == y) {
+                if (creationLocationX[j] + (many * dir.moveX) == x && creationLocationY[j] + (many * dir.moveY) == y) {
                     hits++;
                     creationLocationX[j] = -9;
                     creationLocationY[j] = -9;

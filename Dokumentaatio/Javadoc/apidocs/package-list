@@ -1,4 +1,7 @@
-
+main
+tetris.communication
 tetris.domain
 tetris.gui
+tetris.keybindings
 tetris.logiikka
+tetris.timer

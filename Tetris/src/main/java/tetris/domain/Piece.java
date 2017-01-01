@@ -19,8 +19,17 @@ import tetris.logiikka.Rotation;
  */
 public class Piece {
 
+    /**
+     * Number of blocks in the piece.
+     */
     private final int BLOCK_COUNT = 4;
+    /**
+     * List of blocks in the piece.
+     */
     private List<Block> blocks;
+    /**
+     * The block around which the piece rotates.
+     */
     private Block pivot;
 
     /**
@@ -101,7 +110,6 @@ public class Piece {
         }
     }
 
-  
     public List<Block> getBlocks() {
         return this.blocks;
     }

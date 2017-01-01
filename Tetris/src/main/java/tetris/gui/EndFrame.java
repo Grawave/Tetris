@@ -11,21 +11,26 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
-import tetris.logiikka.Communicator;
+import tetris.communication.Communicator;
 
 /**
  * This frame is to be displayed as the game ends.
+ *
  * @author isjani
  */
 public class EndFrame implements Runnable {
 
     private JFrame frame;
+    /**
+     * If player chooses to play a new game, communicator will be acknowledged.
+     */
     private Communicator communicator;
     private boolean gameWon;
 
     /**
-     * Creates a new instance of EndFrame. The end result varies according
-     * to gameWon status.
+     * Creates a new instance of EndFrame. The end result varies according to
+     * gameWon status.
+     *
      * @param gameWon indicates if the game was won.
      * @param communicator is told to create a new game if the player wants to.
      */
@@ -51,9 +56,9 @@ public class EndFrame implements Runnable {
     private void createComponents() {
         String condition;
         if (gameWon) {
-            condition = "You won the game! Amazing! ";
+            condition = "You won the game! Amazing! New game?";
         } else {
-            condition = "You lost the game.. Maybe next time!";
+            condition = "You lost the game.. Maybe next time! New game?";
         }
         JButton button = new JButton(condition);
         button.addActionListener(new NewGameListener(communicator, frame));
@@ -66,20 +71,22 @@ public class EndFrame implements Runnable {
 
         private Communicator communicator;
         private JFrame frame;
-        
+
         /**
-         * Creates a listener that upon activation will ask the communicator
-         * to create a new game.
+         * Creates a listener that upon activation will ask the communicator to
+         * create a new game.
+         *
          * @param communicator
-         * @param frame 
+         * @param frame
          */
         public NewGameListener(Communicator communicator, JFrame frame) {
             this.communicator = communicator;
             this.frame = frame;
         }
-        
+
         /**
-         * Asks the communicator to create a  new game upon activation.
+         * Asks the communicator to create a new game upon activation.
+         *
          * @param e actionEvent.
          */
         @Override

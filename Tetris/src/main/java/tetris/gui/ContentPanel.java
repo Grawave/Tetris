@@ -5,24 +5,25 @@
  */
 package tetris.gui;
 
+import tetris.keybindings.RotateAction;
+import tetris.keybindings.PauseAction;
+import tetris.keybindings.MoveAction;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.util.Random;
-import javax.swing.AbstractAction;
+import java.net.MalformedURLException;
+import java.net.URL;
 import javax.swing.ActionMap;
-import javax.swing.ImageIcon;
 import javax.swing.InputMap;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
-import tetris.logiikka.Communicator;
+import tetris.communication.Communicator;
 import tetris.logiikka.Direction;
+import tetris.logiikka.DistractionQuotes;
 import tetris.logiikka.Rotation;
 
 /**
@@ -35,16 +36,43 @@ public class ContentPanel extends JPanel {
     private final Dimension GS_MIN = new Dimension(300, 600);
     private final Dimension GS_PREF = new Dimension(400, 800);
     private final Dimension GS_MAX = new Dimension(500, 1100);
+    /**
+     * This communicator is used to communicate when user presses keybindings.
+     */
     private Communicator communicator;
+    /**
+     * Label that contains the current score.
+     */
     private JLabel scoreLabel;
+    /**
+     * quoteArea contains the currently displayed quote.
+     */
     private JTextArea quoteArea;
+    /**
+     * The panel left of gamesituation panel.Contains scores, manual,background.
+     */
     private JLayeredPane leftLayeredPane;
+    /**
+     * The panel right of gamesituation panel. Contains quotes and background.
+     */
     private JLayeredPane rightLayeredPane;
-    private String[] quotes;
-
-    private final String PIC_URL = "freeBackground.jpg";
-
+    /**
+     * Contains all the distraction quotes.
+     */
+    private DistractionQuotes quotes;
+    /**
+     * Label that contains the current highscore.
+     */
+    private JLabel highScoreLabel;
+    private final BackgroundImage bImage;
+    /**
+     * Layout used to display GameSituationPanel and the two layered panels.
+     */
     private GridLayout layout;
+    /**
+     * GameSituationPanel that displays the game situation to the user.
+     */
+    private GameSituationPanel gameSituationpanel;
 
     /**
      * Initializes the panel with a ScoreBoard and sets up keybindings.
@@ -53,12 +81,15 @@ public class ContentPanel extends JPanel {
      */
     public ContentPanel(Communicator communicator) {
         super();
+//        bImage = new BackgroundImage(getClass().getClassLoader().getResource("freeBackground.png"));
+        bImage = new BackgroundImage("freeBackground.jpg");
         this.communicator = communicator;
         createLayout();
         createScoreBoard();
         createKeyBindings();
         rightLayeredPane = new JLayeredPane();
         add(rightLayeredPane);
+
     }
 
     /**
@@ -67,63 +98,21 @@ public class ContentPanel extends JPanel {
      *
      * @param quotes quotes to be displayed.
      */
-    public void createDistractionBoard(String[] quotes) {
+    public void createDistractionBoard(DistractionQuotes quotes) {
         rightLayeredPane.setLayout(null);
         rightLayeredPane.setPreferredSize(GS_PREF);
-
         this.quotes = quotes;
-        quoteSettings();
-
-        ImageIcon image = new ImageIcon(PIC_URL);
-        JLabel imageHolder = new JLabel();
-        imageHolder.setIcon(image);
-        imageHolder.setBounds(0, 0, 800, 1200);
-
-        rightLayeredPane.add(imageHolder, 0, 0);
+        quoteArea = quotes.newRandomQuoteArea();
+        rightLayeredPane.add(bImage.getRightImageHolder(), 0, 0);
         rightLayeredPane.add(quoteArea, 4, 4);
 
     }
 
-    private String newRandomQuote() {
-        Random random = new Random();
-        int index = random.nextInt(quotes.length - 1);
-        String quote = quotes[index];
-        return modifyToLines(quote);
-    }
-
-    private String modifyToLines(String string) {
-        String modified = "Distractions for your mind.. \n  \n";
-        boolean lineChange = false;
-        int i = 0;
-        while (i < string.length()) {
-            char ch = string.charAt(i);
-            if (i % 30 == 0 && i != 0) {
-                lineChange = true;
-            }
-            if (lineChange && ch == ' ') {
-                lineChange = false;
-                modified += "\n";
-            }
-            modified += ch;
-            i++;
-        }
-        return modified;
-    }
-
     private void updateQuote() {
         rightLayeredPane.remove(quoteArea);
-        quoteSettings();
-
+        quoteArea = quotes.newRandomQuoteArea();
         rightLayeredPane.add(quoteArea, 1, 1);
         rightLayeredPane.repaint();
-    }
-
-    private void quoteSettings() {
-        quoteArea = new JTextArea(newRandomQuote());
-        quoteArea.setBounds(0, 0, 600, 1000);
-        quoteArea.setFont(new Font("Serif", Font.PLAIN, 18));
-        quoteArea.setOpaque(false);
-        quoteArea.setForeground(Color.white);
     }
 
     private void createScoreBoard() {
@@ -131,21 +120,22 @@ public class ContentPanel extends JPanel {
         leftLayeredPane.setLayout(null);
         leftLayeredPane.setPreferredSize(GS_PREF);
 
-        ImageIcon image = new ImageIcon(PIC_URL);
-        JLabel imageHolder = new JLabel();
-        imageHolder.setIcon(image);
-        imageHolder.setBounds(0, 0, 800, 1200);
+        leftLayeredPane.add(bImage.getLeftImageHolder(), 0, 0);
 
-        leftLayeredPane.add(imageHolder, 0, 0);
+        Manual manual = new Manual();
+        leftLayeredPane.add(manual.getManual(), 4, 4);
+        updateScore();
+        add(leftLayeredPane);
+    }
 
+    private void updateScore() {
         scoreLabel = new JLabel("<html>SCORE<br>" + communicator.getScore() + "</html>");
         scoreLabel.setForeground(Color.WHITE);
         scoreLabel.setFont(new Font("Serif", Font.PLAIN, 30));
         scoreLabel.setBounds(100, 10, 300, 300);
 
         leftLayeredPane.add(scoreLabel, 1, 1);
-
-        add(leftLayeredPane);
+        leftLayeredPane.repaint();
     }
 
     /**
@@ -153,20 +143,8 @@ public class ContentPanel extends JPanel {
      * board.
      */
     public void updateBoards() {
-        int score = communicator.getScore();
-        if (score == 0) {
-            return;
-        }
         leftLayeredPane.remove(scoreLabel);
-        leftLayeredPane.repaint();
-
-        scoreLabel = new JLabel("<html>SCORE<br>" + score + "</html>");
-        scoreLabel.setForeground(Color.WHITE);
-        scoreLabel.setFont(new Font("Serif", Font.PLAIN, 30));
-        scoreLabel.setBounds(100, 10, 300, 300);
-
-        leftLayeredPane.add(scoreLabel, 1, 1);
-        leftLayeredPane.repaint();
+        updateScore();
         updateQuote();
     }
 
@@ -200,10 +178,12 @@ public class ContentPanel extends JPanel {
 
     /**
      * Adds the GameSituationPanel to this ContentPanel. Sets it's dimensions
+     * and location in the layout.
      *
      * @param gs GameSituationPanel to be added.
      */
     public void addGS(GameSituationPanel gs) {
+        this.gameSituationpanel = gs;
         add(gs, 1);
         gs.setPreferredSize(GS_PREF);
         gs.setMinimumSize(GS_MIN);
@@ -216,11 +196,30 @@ public class ContentPanel extends JPanel {
      * @param highScore to be displayed.
      */
     public void setHighScore(int highScore) {
-        JLabel highScoreLabel = new JLabel("<html>HIGHSCORE<br>" + highScore + "</html>");
+        highScoreLabel = new JLabel("<html>HIGHSCORE<br>" + highScore + "</html>");
         highScoreLabel.setFont(new Font("Serif", Font.PLAIN, 30));
         highScoreLabel.setForeground(Color.WHITE);
         highScoreLabel.setBounds(100, 100, 300, 300);
         leftLayeredPane.add(highScoreLabel, 3, 3);
+        leftLayeredPane.repaint();
     }
 
+    /**
+     * Updates the highscore to given value.
+     *
+     * @param highScore new highscore.
+     */
+    public void updateHighScore(int highScore) {
+        leftLayeredPane.remove(highScoreLabel);
+        setHighScore(highScore);
+    }
+
+    /**
+     * Updates the GameSituationPanel.
+     *
+     * @param colortable 2x2 matrix of colors.
+     */
+    public void repaintSituation(Color[][] colortable) {
+        this.gameSituationpanel.rePaintSituation(colortable);
+    }
 }

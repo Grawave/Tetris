@@ -17,13 +17,19 @@ public enum Direction {
     DOWN(0, 1),
     LEFT(-1, 0),
     RIGHT(1, 0);
-
-    public int x;
-    public int y;
+    
+    /**
+     * Amount to be moved in X direction.
+     */
+    public int moveX;
+    /**
+     * Amount to be moved in Y direction.
+     */
+    public int moveY;
 
     private Direction(int x, int y) {
-        this.x = x;
-        this.y = y;
+        this.moveX = x;
+        this.moveY = y;
     }
 
 }

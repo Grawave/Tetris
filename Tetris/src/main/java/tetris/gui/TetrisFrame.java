@@ -10,7 +10,8 @@ import java.awt.Dimension;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
-import tetris.logiikka.Communicator;
+import tetris.communication.Communicator;
+import tetris.logiikka.DistractionQuotes;
 
 /**
  * The frame for all the content displayed during the game.
@@ -20,15 +21,28 @@ import tetris.logiikka.Communicator;
 public class TetrisFrame implements Runnable {
 
     private JFrame frame;
-    private Communicator communicator;
-    private GameSituationPanel gameSituationPanel;
-    private int gridWidth;
-    private int gridHeight;
-    private ContentPanel contentPanel;
-    
     /**
-     * Creates a new instance of main game frame that communicates with the given
-     * communicator. 
+     * Communication between user pressable keybindings and game logic goes
+     * through this communicator.
+     */
+    private Communicator communicator;
+    /**
+     * width of the GameSituationPanel to be created.
+     */
+    private int gridWidth;
+    /**
+     * height of the GameSituationPanel to be created.
+     */
+    private int gridHeight;
+    /**
+     * Panel that has all the content.
+     */
+    private ContentPanel contentPanel;
+
+    /**
+     * Creates a new instance of main game frame that communicates with the
+     * given communicator.
+     *
      * @param communicator to communicate with.
      * @param width for the game grid.
      * @param height for the game grid.
@@ -49,24 +63,16 @@ public class TetrisFrame implements Runnable {
         frame.setPreferredSize(new Dimension(1400, 1000));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         createContentPane();
-        createComponents();
-        assemble();
         frame.pack();
         frame.setVisible(true);
     }
 
     private void createContentPane() {
         contentPanel = new ContentPanel(communicator);
+        GameSituationPanel gsp = new GameSituationPanel(gridWidth, gridHeight);
+        gsp.initialize();
+        contentPanel.addGS(gsp);
         frame.getContentPane().add(contentPanel);
-    }
-
-    private void createComponents() {
-        this.gameSituationPanel = new GameSituationPanel(gridWidth, gridHeight);
-        this.gameSituationPanel.initialize();
-    }
-
-    private void assemble() {
-        contentPanel.addGS(this.gameSituationPanel);
     }
 
     /**
@@ -75,9 +81,9 @@ public class TetrisFrame implements Runnable {
      * @param colorTable the given colorTable
      */
     public void rePaintSituation(Color[][] colorTable) {
-        gameSituationPanel.rePaintSituation(colorTable);
+        contentPanel.repaintSituation(colorTable);
     }
-    
+
     /**
      * Closes this particular frame without shutting down the program.
      */
@@ -106,7 +112,7 @@ public class TetrisFrame implements Runnable {
      *
      * @param quotes given quotes.
      */
-    public void setDistractionBoard(String[] quotes) {
+    public void setDistractionBoard(DistractionQuotes quotes) {
         contentPanel.createDistractionBoard(quotes);
     }
 
@@ -115,6 +121,15 @@ public class TetrisFrame implements Runnable {
      */
     public void dispose() {
         frame.dispose();
+    }
+
+    /**
+     * updates the highScore board.
+     *
+     * @param newScore new highScore.
+     */
+    public void updateHighScore(int newScore) {
+        contentPanel.updateHighScore(newScore);
     }
 
 }

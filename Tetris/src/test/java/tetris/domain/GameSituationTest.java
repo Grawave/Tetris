@@ -5,6 +5,7 @@
  */
 package tetris.domain;
 
+import java.awt.Color;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -29,6 +30,59 @@ public class GameSituationTest {
     public GameSituationTest() {
         field = new Field(width, height);
         gs = new GameSituation(field);
+    }
+
+    @Test
+    public void getFieldAndPieceBlocksWorks() {
+        gs.createActivePiece(Formation.O);
+        MoveResult mR = gs.movePiece(Direction.DOWN);
+        while (mR.pieceWasMoved) {
+            mR = gs.movePiece(Direction.DOWN);
+        }
+        gs.createActivePiece();
+        gs.movePiece(Direction.DOWN);
+        gs.movePiece(Direction.DOWN);
+        gs.movePiece(Direction.DOWN);
+        Block[][] b = gs.getFieldAndPieceBlocks();
+
+        int counter = 0;
+        for (int i = 0; i < b.length; i++) {
+            for (int j = 0; j < b[0].length; j++) {
+                if (b[i][j] != null) {
+                    counter++;
+                }
+            }
+        }
+        assertEquals(8, counter);
+    }
+    @Test 
+    public void resetWorks() {
+        assertEquals(0,gs.getScore());
+        gs.createActivePiece();
+        MoveResult mR = gs.movePiece(Direction.DOWN);
+        while(mR.pieceWasMoved) {
+            mR = gs.movePiece(Direction.DOWN);
+        }
+        assertEquals(2,gs.getScore());
+        gs.reset();
+        assertEquals(0,gs.getScore());
+    }
+
+    @Test
+    public void copyBlocksWorks() {
+        Block[][] b = new Block[5][5];
+        b[1][4] = new Block(3, 4, Color.BLACK);
+
+        Block[][] copy = gs.copyBlocks(b, 5, 5);
+        boolean copyWorked = true;
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                if (b[i][j] != copy[i][j]) {
+                    copyWorked = false;
+                }
+            }
+        }
+        assertTrue(copyWorked);
     }
 
     @Test

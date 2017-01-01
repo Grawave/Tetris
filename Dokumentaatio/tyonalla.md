@@ -1,3 +1,4 @@
 ### Work under progress
 
-    -Kun peli loppuu häviöön tai voittoon, pelaajalle tarjotaan mahdollisuutta aloittaa uusi peli. Uuden pelin aloittaminen ei kuitenkaan toimi.
+-   Dokumentoinnin hiomista. Pientä joulusiivousta sieltä täältä.
+-   Sekvenssikaavioiden parantamista. Jonkin pidemmän sekvenssin kuvaus.   

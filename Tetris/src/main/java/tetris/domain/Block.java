@@ -17,8 +17,17 @@ import tetris.logiikka.Direction;
  */
 public class Block {
 
+    /**
+     * Blocks location on the x-axis.
+     */
     private int x;
+    /**
+     * Blocks location on the y-axis.
+     */
     private int y;
+    /**
+     * The color of this block.
+     */
     private Color color;
 
     /**
@@ -41,19 +50,17 @@ public class Block {
      * @param direction of movement
      */
     public void move(Direction direction) {
-        this.x += direction.x;
-        this.y += direction.y;
+        this.x += direction.moveX;
+        this.y += direction.moveY;
     }
 
     public int getX() {
         return x;
     }
 
-
     public int getY() {
         return y;
     }
-
 
     public Color getColor() {
         return this.color;
